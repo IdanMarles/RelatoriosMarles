@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Marles Têxtil</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#f8f9fc; font-family:'DM Sans',sans-serif; font-size:13px; color:#0f1117; }
+.topbar { background:#fff; border-bottom:3px solid #0f1117; display:flex; align-items:center; justify-content:space-between; padding:0 32px; height:56px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
+.topbar-brand { font-family:'Playfair Display',serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; }
+.topbar-right { display:flex; gap:16px; align-items:center; }
+.btn-back { font-size:11px; font-weight:600; color:#7b8099; text-decoration:none; }
+.btn-back:hover { color:#0f1117; }
+.btn-logout { font-size:11px; font-weight:600; color:#7b8099; background:none; border:none; cursor:pointer; }
+.btn-logout:hover { color:#c8291a; }
+
+.page { max-width:900px; margin:0 auto; padding:40px 32px; }
+.page-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:36px; padding-bottom:20px; border-bottom:2px solid #0f1117; }
+.page-title { font-family:'Playfair Display',serif; font-size:22px; }
+.page-sub { font-size:11px; color:#7b8099; margin-top:4px; }
+
+.btn-primary { padding:10px 20px; background:#0f1117; color:#fff; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; border:none; cursor:pointer; transition:background .15s; }
+.btn-primary:hover { background:#1d4ed8; }
+.btn-sm { padding:6px 14px; font-size:11px; font-weight:600; border:1px solid #e2e5ef; background:#fff; cursor:pointer; color:#7b8099; transition:all .15s; }
+.btn-sm:hover { background:#0f1117; color:#fff; border-color:#0f1117; }
+.btn-sm.danger:hover { background:#c8291a; border-color:#c8291a; }
+.btn-sm.success { background:#059669; color:#fff; border-color:#059669; }
+
+/* TABS */
+.tabs { display:flex; gap:0; border-bottom:2px solid #e2e5ef; margin-bottom:28px; }
+.tab { padding:10px 20px; font-size:12px; font-weight:600; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-2px; color:#7b8099; }
+.tab.active { color:#1d4ed8; border-bottom-color:#1d4ed8; }
+
+/* SECTION */
+.sec { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#7b8099; margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid #e2e5ef; }
+
+/* CATEGORY BLOCK */
+.cat-block { border:1px solid #e2e5ef; margin-bottom:16px; background:#fff; }
+.cat-head { display:flex; align-items:center; gap:10px; padding:12px 16px; background:#fafbfd; border-bottom:1px solid #e2e5ef; }
+.cat-head-info { flex:1; display:flex; gap:10px; align-items:center; }
+.emoji-in { width:36px; font-size:16px; text-align:center; border:1px solid #e2e5ef; padding:4px; background:#fff; }
+.text-in { flex:1; padding:7px 10px; border:1px solid #e2e5ef; font-family:'DM Sans',sans-serif; font-size:12px; background:#fff; }
+.text-in:focus { outline:none; border-color:#1d4ed8; }
+.cat-actions { display:flex; gap:6px; }
+
+/* REPORTS */
+.reports-area { padding:10px 16px; }
+.report-row { display:grid; grid-template-columns:28px 1fr 1fr 1fr 28px 90px 28px; gap:8px; align-items:center; margin-bottom:6px; }
+.report-row input[type=text] { padding:6px 8px; border:1px solid #e2e5ef; font-family:'DM Sans',sans-serif; font-size:11px; }
+.report-row input[type=text]:focus { outline:none; border-color:#1d4ed8; }
+.color-in { width:28px; height:28px; padding:2px; border:1px solid #e2e5ef; cursor:pointer; }
+.del-btn { width:26px; height:26px; background:none; border:1px solid #e2e5ef; cursor:pointer; color:#9ca3af; font-size:13px; }
+.del-btn:hover { background:#fff4f3; border-color:#c8291a; color:#c8291a; }
+.soon-chk { display:flex; align-items:center; gap:5px; font-size:10px; color:#7b8099; }
+.add-report { width:100%; padding:7px; font-size:11px; border:1px dashed #e2e5ef; background:#fafbfd; cursor:pointer; color:#7b8099; margin-top:4px; text-align:left; }
+.add-report:hover { border-color:#1d4ed8; color:#1d4ed8; }
+
+/* USERS */
+.user-row { display:flex; align-items:center; gap:12px; padding:12px 16px; border:1px solid #e2e5ef; background:#fff; margin-bottom:8px; }
+.user-email { flex:1; font-size:12px; }
+.user-role { font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; border-radius:2px; }
+.role-master { background:#dbeafe; color:#1d4ed8; }
+.role-viewer { background:#f3f4f6; color:#6b7280; }
+.add-user-form { display:flex; gap:10px; margin-top:16px; }
+.add-user-form input { flex:1; padding:10px 14px; border:1px solid #e2e5ef; font-family:'DM Sans',sans-serif; font-size:12px; }
+.add-user-form input:focus { outline:none; border-color:#1d4ed8; }
+.add-user-form select { padding:10px 14px; border:1px solid #e2e5ef; font-family:'DM Sans',sans-serif; font-size:12px; background:#fff; }
+
+.msg { padding:10px 14px; font-size:12px; margin-bottom:16px; display:none; }
+.msg.success { background:#f0fdf4; border-left:3px solid #059669; color:#166534; }
+.msg.error { background:#fff4f3; border-left:3px solid #c8291a; color:#c8291a; }
+
+#accessDenied { min-height:100vh; display:flex; align-items:center; justify-content:center; font-size:14px; color:#7b8099; }
+</style>
+</head>
+<body>
+
+<div id="accessDenied" style="display:none">Acesso negado. Apenas o master pode acessar esta página. <a href="index.html" style="color:#1d4ed8;margin-left:8px;">Voltar</a></div>
+
+<div id="adminPanel" style="display:none">
+<div class="topbar">
+  <div class="topbar-brand">Marles · Admin</div>
+  <div class="topbar-right">
+    <a href="index.html" class="btn-back">← Voltar ao Hub</a>
+    <button class="btn-logout" onclick="logout()">Sair</button>
+  </div>
+</div>
+
+<div class="page">
+  <div class="page-header">
+    <div><div class="page-title">Painel Administrativo</div><div class="page-sub">Gerencie categorias, relatórios e usuários</div></div>
+    <button class="btn-primary" onclick="saveAll()">💾 Salvar Tudo</button>
+  </div>
+
+  <div class="msg" id="msg"></div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('cats')">📁 Categorias & Relatórios</div>
+    <div class="tab" onclick="showTab('users')">👤 Usuários</div>
+  </div>
+
+  <!-- TAB: CATEGORIAS -->
+  <div id="tabCats">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <div class="sec" style="margin:0;border:none;padding:0;">Categorias</div>
+      <button class="btn-sm" onclick="addCat()">＋ Nova Categoria</button>
+    </div>
+    <div id="catsContainer"></div>
+  </div>
+
+  <!-- TAB: USUÁRIOS -->
+  <div id="tabUsers" style="display:none">
+    <div class="sec">Usuários Cadastrados</div>
+    <div id="usersContainer"><div style="color:#9ca3af;padding:20px;">Carregando...</div></div>
+    <div class="sec" style="margin-top:24px;">Convidar Novo Usuário</div>
+    <div class="add-user-form">
+      <input type="email" id="newEmail" placeholder="email@exemplo.com">
+      <input type="password" id="newPwd" placeholder="Senha inicial">
+      <select id="newRole">
+        <option value="viewer">Viewer</option>
+        <option value="master">Master</option>
+      </select>
+      <button class="btn-primary" onclick="addUser()">Adicionar</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const SURL = 'https://ihlrzanoirwbhftaytbh.supabase.co';
+const SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlobHJ6YW5vaXJ3YmhmdGF5dGJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxMjQ4MTEsImV4cCI6MjA5NDcwMDgxMX0.GuVTLZV-Xlc7YbSslex9Q8lcta0ZBgHfLynFaqOHV5M';
+const sb = supabase.createClient(SURL, SKEY);
+
+let cats = []; // local state
+
+// Init
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { window.location.href = 'index.html'; return; }
+  const { data: profile } = await sb.from('profiles').select('role').eq('id', session.user.id).single();
+  if (profile?.role !== 'master') {
+    document.getElementById('accessDenied').style.display = 'flex';
+    return;
+  }
+  document.getElementById('adminPanel').style.display = 'block';
+  await loadCats();
+  await loadUsers();
+})();
+
+async function loadCats() {
+  const { data } = await sb.from('categories').select('*, reports(*)').order('position');
+  cats = (data || []).map(c => ({
+    ...c,
+    reports: (c.reports || []).sort((a,b) => a.position - b.position)
+  }));
+  renderCats();
+}
+
+function renderCats() {
+  const container = document.getElementById('catsContainer');
+  container.innerHTML = cats.map((cat, ci) => `
+    <div class="cat-block" id="cat-${ci}">
+      <div class="cat-head">
+        <div class="cat-head-info">
+          <input class="emoji-in" value="${cat.icon}" oninput="cats[${ci}].icon=this.value" placeholder="📁">
+          <input class="text-in" value="${cat.title}" oninput="cats[${ci}].title=this.value" placeholder="Nome da categoria" style="flex:2">
+          <input class="text-in" value="${cat.description}" oninput="cats[${ci}].description=this.value" placeholder="Descrição / período">
+        </div>
+        <div class="cat-actions">
+          <button class="btn-sm" onclick="moveCat(${ci},-1)" ${ci===0?'disabled':''}>↑</button>
+          <button class="btn-sm" onclick="moveCat(${ci},1)" ${ci===cats.length-1?'disabled':''}>↓</button>
+          <button class="btn-sm danger" onclick="deleteCat(${ci})">Remover</button>
+        </div>
+      </div>
+      <div class="reports-area">
+        <div style="display:grid;grid-template-columns:28px 1fr 1fr 1fr 28px 90px 28px;gap:8px;margin-bottom:6px;">
+          <div></div>
+          <div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Nome</div>
+          <div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Descrição</div>
+          <div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;">Arquivo</div>
+          <div></div>
+          <div style="font-size:9px;color:#9ca3af;text-transform:uppercase;letter-spacing:1px;text-align:center;">Em breve</div>
+          <div></div>
+        </div>
+        ${cat.reports.map((r, ri) => `
+          <div class="report-row">
+            <input type="color" class="color-in" value="${r.color}" oninput="cats[${ci}].reports[${ri}].color=this.value">
+            <input type="text" value="${r.label}" oninput="cats[${ci}].reports[${ri}].label=this.value" placeholder="Nome">
+            <input type="text" value="${r.description}" oninput="cats[${ci}].reports[${ri}].description=this.value" placeholder="Descrição">
+            <input type="text" value="${r.file_url}" oninput="cats[${ci}].reports[${ri}].file_url=this.value" placeholder="arquivo.html">
+            <div></div>
+            <div class="soon-chk"><input type="checkbox" ${r.coming_soon?'checked':''} onchange="cats[${ci}].reports[${ri}].coming_soon=this.checked"> Em breve</div>
+            <button class="del-btn" onclick="deleteReport(${ci},${ri})">×</button>
+          </div>
+        `).join('')}
+        <button class="add-report" onclick="addReport(${ci})">＋ Adicionar relatório</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function addCat() {
+  cats.push({ id: null, icon:'📁', title:'Nova Categoria', description:'', position: cats.length, active:true, reports:[] });
+  renderCats();
+}
+
+function moveCat(i, dir) {
+  const j = i+dir;
+  if (j<0||j>=cats.length) return;
+  [cats[i],cats[j]] = [cats[j],cats[i]];
+  renderCats();
+}
+
+async function deleteCat(i) {
+  if (!confirm(`Remover a categoria "${cats[i].title}" e todos os seus relatórios?`)) return;
+  if (cats[i].id) await sb.from('categories').delete().eq('id', cats[i].id);
+  cats.splice(i,1);
+  renderCats();
+}
+
+function addReport(ci) {
+  cats[ci].reports.push({ id:null, label:'Novo', description:'', file_url:'', color:'#6b7280', coming_soon:false, position: cats[ci].reports.length, active:true });
+  renderCats();
+}
+
+async function deleteReport(ci, ri) {
+  const r = cats[ci].reports[ri];
+  if (r.id) await sb.from('reports').delete().eq('id', r.id);
+  cats[ci].reports.splice(ri,1);
+  renderCats();
+}
+
+async function saveAll() {
+  showMsg('Salvando...', '');
+  try {
+    for (let i=0; i<cats.length; i++) {
+      const cat = cats[i];
+      let catId = cat.id;
+      const catData = { title:cat.title, icon:cat.icon, description:cat.description, position:i, active:true };
+
+      if (catId) {
+        await sb.from('categories').update(catData).eq('id', catId);
+      } else {
+        const { data } = await sb.from('categories').insert(catData).select().single();
+        catId = data.id;
+        cats[i].id = catId;
+      }
+
+      for (let j=0; j<cat.reports.length; j++) {
+        const r = cat.reports[j];
+        const rData = { category_id:catId, label:r.label, description:r.description, file_url:r.file_url, color:r.color, coming_soon:r.coming_soon, position:j, active:true };
+        if (r.id) {
+          await sb.from('reports').update(rData).eq('id', r.id);
+        } else {
+          const { data } = await sb.from('reports').insert(rData).select().single();
+          cats[i].reports[j].id = data.id;
+        }
+      }
+    }
+    showMsg('✅ Salvo com sucesso! O hub foi atualizado.', 'success');
+  } catch(e) {
+    showMsg('❌ Erro ao salvar: ' + e.message, 'error');
+  }
+}
+
+// USERS
+async function loadUsers() {
+  const { data } = await sb.from('profiles').select('*').order('created_at');
+  const container = document.getElementById('usersContainer');
+  if (!data?.length) { container.innerHTML = '<div style="color:#9ca3af;padding:20px;">Nenhum usuário.</div>'; return; }
+  container.innerHTML = data.map(u => `
+    <div class="user-row">
+      <div class="user-email">${u.email}</div>
+      <span class="user-role ${u.role==='master'?'role-master':'role-viewer'}">${u.role}</span>
+      ${u.role !== 'master' ? `<button class="btn-sm danger" onclick="deleteUser('${u.id}')">Remover</button>` : ''}
+    </div>
+  `).join('');
+}
+
+async function addUser() {
+  const email = document.getElementById('newEmail').value.trim();
+  const pwd   = document.getElementById('newPwd').value;
+  const role  = document.getElementById('newRole').value;
+  if (!email || !pwd) { showMsg('Preencha e-mail e senha.', 'error'); return; }
+
+  // Create user via Supabase Admin (via signUp — user gets email)
+  const { data, error } = await sb.auth.signUp({ email, password: pwd });
+  if (error) { showMsg('Erro: ' + error.message, 'error'); return; }
+
+  // Update role if master
+  if (role === 'master' && data.user) {
+    await sb.from('profiles').update({ role: 'master' }).eq('id', data.user.id);
+  }
+
+  showMsg(`✅ Usuário ${email} criado! Ele receberá um e-mail de confirmação.`, 'success');
+  document.getElementById('newEmail').value = '';
+  document.getElementById('newPwd').value = '';
+  await loadUsers();
+}
+
+async function deleteUser(id) {
+  if (!confirm('Remover este usuário?')) return;
+  await sb.from('profiles').delete().eq('id', id);
+  await loadUsers();
+}
+
+function showTab(t) {
+  document.querySelectorAll('.tab').forEach((el,i) => el.classList.toggle('active', (i===0&&t==='cats')||(i===1&&t==='users')));
+  document.getElementById('tabCats').style.display   = t==='cats'  ? 'block' : 'none';
+  document.getElementById('tabUsers').style.display  = t==='users' ? 'block' : 'none';
+}
+
+function showMsg(text, type) {
+  const el = document.getElementById('msg');
+  el.textContent = text;
+  el.className = 'msg ' + type;
+  el.style.display = 'block';
+  if (type === 'success') setTimeout(() => el.style.display='none', 4000);
+}
+
+async function logout() {
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>
