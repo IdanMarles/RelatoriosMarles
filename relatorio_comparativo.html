@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparativo 2024–2026 — Marles Têxtil</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--ink:#0f1117;--ink2:#2d3142;--muted:#7b8099;--line:#e2e5ef;--bg:#f8f9fc;--white:#fff;--blue:#1d4ed8;--blue-lt:#eff4ff;--red:#c8291a;--red-lt:#fff4f3;--green:#166534;--green-lt:#f0fdf4;--amber:#92400e;--amber-lt:#fffbeb;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5}
+.page{max-width:980px;margin:0 auto;background:var(--white);padding:56px 60px 80px;box-shadow:0 0 60px rgba(0,0,0,.06)}
+
+/* HEADER */
+.rh{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:28px;border-bottom:2px solid var(--ink);margin-bottom:40px}
+.rb{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase}
+.rs{font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:4px}
+.rt{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:right;line-height:1.25}
+.rm{font-size:11px;color:var(--muted);text-align:right;margin-top:4px}
+
+/* KPIs */
+.k4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+.kc{background:var(--white);padding:18px 16px;display:flex;flex-direction:column;gap:4px}
+.km{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.kv{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);line-height:1}
+.ksm{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);line-height:1}
+.ku{font-size:11px;color:var(--muted)}
+.kd{font-size:11px;color:var(--muted)}
+.kd span{color:var(--ink2);font-weight:500}
+
+/* PART / SEC */
+.pd{display:flex;align-items:center;gap:16px;margin:40px 0 28px}
+.pl{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--white);background:var(--ink);padding:6px 18px;white-space:nowrap}
+.pline{flex:1;height:2px;background:var(--ink)}
+.ps{font-size:12px;color:var(--muted);white-space:nowrap}
+.sec{font-family:'Playfair Display',serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+
+/* BAR CHART */
+.barchart{display:flex;align-items:flex-end;gap:6px;height:150px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.bc{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px}
+.bv{font-size:8px;font-weight:600;color:var(--ink);text-align:center}
+.bb{width:100%;border-radius:2px 2px 0 0}
+.bls{display:flex;margin-bottom:28px}
+.bl{flex:1;text-align:center;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:5px}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:28px}
+thead th{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tbody td{padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis}
+tbody tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600;color:var(--ink);background:#fafbfd}
+tbody tr:hover td{background:#f9fafb}
+.tr{text-align:right;font-variant-numeric:tabular-nums} .tc{text-align:center} .b{font-weight:600;color:var(--ink)}
+.tag{display:inline-block;padding:2px 7px;border-radius:2px;font-size:9px;font-weight:600}
+.tag-red{background:var(--red-lt);color:var(--red)} .tag-green{background:var(--green-lt);color:var(--green)}
+.tag-amber{background:var(--amber-lt);color:var(--amber)} .tag-blue{background:var(--blue-lt);color:var(--blue)}
+
+/* HBAR */
+.hbar{display:flex;flex-direction:column;gap:9px}
+.hbr{display:flex;flex-direction:column;gap:3px}
+.hbt{display:flex;justify-content:space-between;align-items:baseline}
+.hbn{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+.hbv{font-size:11px;font-weight:600;color:var(--ink);text-align:right}
+.hbtr{height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden}
+.hbf{height:100%;border-radius:3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.card{border:1px solid var(--line);padding:18px 20px}
+.ct{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:12px}
+
+/* ALERTS */
+.alerts{display:flex;flex-direction:column}
+.ar{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.ar:last-child{border-bottom:none}
+.ai{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.ig{background:var(--green-lt)} .ir{background:var(--red-lt)} .ia{background:var(--amber-lt)} .ib{background:var(--blue-lt)}
+.ab{flex:1;line-height:1.6}
+.at{font-weight:600;color:var(--ink);margin-bottom:2px;font-size:12px}
+.ad{font-size:11px;color:var(--muted)}
+.ad b{color:var(--ink2);font-weight:600}
+
+/* INTERACTIVE TABLE */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:16px}
+.tab{padding:9px 18px;font-size:11px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--muted);transition:all .15s}
+.tab:hover{color:var(--ink)} .tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.scrl{overflow-x:auto;margin-bottom:8px}
+.scrl::-webkit-scrollbar{height:5px}
+.scrl::-webkit-scrollbar-thumb{background:#c0c8d8;border-radius:3px}
+.ttbl{border-collapse:collapse;min-width:1300px;width:100%}
+.ttbl th{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);padding:8px 7px;text-align:right;border-bottom:2px solid var(--ink);background:var(--white);white-space:nowrap;position:sticky;top:0;z-index:10}
+.ttbl th.lft{text-align:left;position:sticky;left:0;background:var(--white);z-index:20}
+.ttbl th.acm{background:#f0f4ff;color:var(--blue);border-left:2px solid var(--blue-lt)}
+.rc td{padding:9px 7px;border-bottom:1px solid var(--line);font-weight:600;font-size:11px;background:#fafbfd;color:var(--ink);text-align:right;white-space:nowrap}
+.rc td.lft{text-align:left;position:sticky;left:0;background:#fafbfd;z-index:5;min-width:180px;max-width:240px;white-space:normal}
+.rc{cursor:pointer;user-select:none} .rc:hover td{background:#f3f4f6} .rc:hover td.lft{background:#f3f4f6}
+.rt2 td{padding:8px 7px;border-bottom:1px solid #f0f1f5;font-size:11px;color:var(--ink2);background:var(--white);text-align:right;white-space:nowrap}
+.rt2 td.lft{text-align:left;position:sticky;left:0;background:var(--white);z-index:5;padding-left:20px;min-width:180px;max-width:240px;white-space:normal}
+.rt2{cursor:pointer;user-select:none} .rt2:hover td{background:#f9fafb} .rt2:hover td.lft{background:#f9fafb}
+.rf td{padding:6px 7px;border-bottom:1px solid #f5f6f9;font-size:10px;color:var(--muted);background:#fdfeff;text-align:right;white-space:nowrap}
+.rf td.lft{text-align:left;position:sticky;left:0;background:#fdfeff;z-index:5;padding-left:36px;min-width:180px;max-width:240px;white-space:normal}
+.fcc{font-size:9px;color:#adb5cc;display:block;margin-top:1px}
+.rtot td{padding:10px 7px;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);font-weight:700;font-size:12px;background:#f0f4ff;color:var(--ink);text-align:right;white-space:nowrap}
+.rtot td.lft{text-align:left;position:sticky;left:0;background:#f0f4ff;z-index:5}
+.acmc{background:#f8faff!important;font-weight:700;border-left:1px solid var(--blue-lt)}
+.cbst{background:#f0fdf4!important} .cwst{background:#fff9f9!important}
+.ei{display:inline-block;width:12px;height:12px;line-height:12px;text-align:center;font-size:9px;margin-right:5px;color:var(--muted);transition:transform .15s;flex-shrink:0}
+.expanded .ei{transform:rotate(90deg)}
+.nc{display:flex;align-items:flex-start}
+.hdn{display:none}
+.neg{color:var(--green);font-weight:500} .pos{color:var(--ink)}
+.legend{display:flex;gap:14px;font-size:10px;color:var(--muted);margin-bottom:12px;align-items:center;flex-wrap:wrap}
+.ld{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+
+.footer{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:28px}
+@media print{
+  body{background:#fff}.page{box-shadow:none;padding:32px 40px}
+  .tabs{display:none}.hdn{display:table-row!important}
+  .scrl{overflow:visible}.ttbl{min-width:unset}
+  .ttbl th.lft,.rc td.lft,.rt2 td.lft,.rf td.lft,.rtot td.lft{position:static}
+  .sec{page-break-after:avoid}.pd{page-break-after:avoid;page-break-before:always}
+}
+
+/* extras for comparativo */
+.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+.yr24{border-top:3px solid #93c5fd}
+.yr25{border-top:3px solid #1d4ed8}
+.yr26{border-top:3px solid #c8291a}
+.cmp-chart{display:flex;align-items:flex-end;gap:8px;height:160px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.cmp-grp{flex:1;display:flex;align-items:flex-end;gap:3px;height:100%}
+.cmp-bar{flex:1;border-radius:2px 2px 0 0}
+.legend-line{display:flex;gap:20px;font-size:10px;color:var(--muted);margin-bottom:28px;flex-wrap:wrap;align-items:center}
+.lg-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* Comparativo table column coloring */
+.cmp-tbl tbody tr td:nth-child(2),
+.cmp-tbl tbody tr td:nth-child(3),
+.cmp-tbl tbody tr td:nth-child(4) { background:#eef4ff; }
+.cmp-tbl tbody tr td:nth-child(5),
+.cmp-tbl tbody tr td:nth-child(6),
+.cmp-tbl tbody tr td:nth-child(7) { background:#e4edff; }
+.cmp-tbl tbody tr td:nth-child(8),
+.cmp-tbl tbody tr td:nth-child(9),
+.cmp-tbl tbody tr td:nth-child(10) { background:#fff0f0; }
+.cmp-tbl tbody tr:last-child td:nth-child(2),
+.cmp-tbl tbody tr:last-child td:nth-child(3),
+.cmp-tbl tbody tr:last-child td:nth-child(4) { background:#dbeafe; }
+.cmp-tbl tbody tr:last-child td:nth-child(5),
+.cmp-tbl tbody tr:last-child td:nth-child(6),
+.cmp-tbl tbody tr:last-child td:nth-child(7) { background:#bfdbfe; }
+.cmp-tbl tbody tr:last-child td:nth-child(8),
+.cmp-tbl tbody tr:last-child td:nth-child(9),
+.cmp-tbl tbody tr:last-child td:nth-child(10) { background:#fecaca; }
+</style>
+</head>
+<body>
+<style id="navstyle">
+.topnav{position:sticky;top:0;z-index:999;background:#fff;border-bottom:3px solid #0f1117;display:flex;gap:0;box-shadow:0 2px 8px rgba(0,0,0,.07);font-family:'DM Sans',sans-serif;}
+.topnav a{padding:14px 24px;font-size:12px;font-weight:600;color:#7b8099;text-decoration:none;border-bottom:3px solid transparent;margin-bottom:-3px;white-space:nowrap;transition:color .15s;}
+.topnav a:hover{color:#0f1117;background:#f9fafb;}
+.topnav a.active{color:#1d4ed8;border-bottom-color:#1d4ed8;}
+</style>
+<div class="topnav">
+  <a href="relatorio_2024.html">📅 2024</a>
+  <a href="relatorio_2025.html">📅 2025</a>
+  <a href="relatorio_2026.html">📅 2026 — 1ºTri</a>
+  <a href="relatorio_comparativo.html" class="active">📊 Comparativo</a>
+</div><div class="page">
+
+<div class="rh">
+  <div><div class="rb">Marles Têxtil</div><div class="rs">Matriz · Produção · Análise Comparativa</div></div>
+  <div><div class="rt">Comparativo de Custos<br>2024 · 2025 · 2026</div><div class="rm">2024 e 2025 completos · 2026 = 1º Trimestre · Uso interno</div></div>
+</div>
+
+<!-- SUMMARY KPIs -->
+<div class="k3">
+  <div class="kc yr24">
+    <div class="km">2024 — Ano Completo</div>
+    <div class="kv" style="color:#1d4ed8">R$ 6,25<span style="font-size:14px;font-weight:400;color:var(--muted)">/kg</span></div>
+    <div class="ku">Custo total: R$ 5,03M</div>
+    <div class="kd">Volume: <span>804.940 kg</span></div>
+    <div class="kd">% do preço: <span>6,5%</span></div>
+    <div class="kd" style="margin-top:4px;color:var(--green);font-weight:600">✅ Melhor ano</div>
+  </div>
+  <div class="kc yr25">
+    <div class="km">2025 — Ano Completo</div>
+    <div class="kv" style="color:#1d4ed8">R$ 7,80<span style="font-size:14px;font-weight:400;color:var(--muted)">/kg</span></div>
+    <div class="ku">Custo total: R$ 5,11M</div>
+    <div class="kd">Volume: <span>654.855 kg</span></div>
+    <div class="kd">% do preço: <span>7,8%</span></div>
+    <div class="kd" style="margin-top:4px;color:var(--red);font-weight:600">▲ +24,8% vs. 2024</div>
+  </div>
+  <div class="kc yr26">
+    <div class="km">2026 — 1º Trimestre</div>
+    <div class="kv" style="color:#1d4ed8">R$ 8,06<span style="font-size:14px;font-weight:400;color:var(--muted)">/kg</span></div>
+    <div class="ku">Custo total: R$ 1,42M</div>
+    <div class="kd">Volume: <span>176.110 kg</span></div>
+    <div class="kd">% do preço: <span>8,3%</span></div>
+    <div class="kd" style="margin-top:4px;color:var(--red);font-weight:600">▲ +3,3% vs. 1ºTri/25</div>
+  </div>
+</div>
+
+<!-- PARTE 1 -->
+<div class="pd" style="margin-top:0;"><div class="pl">Parte 1</div><div class="pline"></div><div class="ps">Custo/kg Mensal — 2024 vs. 2025 vs. 2026</div></div>
+
+<div class="sec">Gráfico Comparativo — Custo/kg por Mês</div>
+<div class="cmp-chart" id="cmpChart"></div>
+<div style="display:flex;margin-bottom:8px;" id="cmpLabels"></div>
+<div class="legend-line">
+  <div style="display:flex;align-items:center;gap:6px;"><div class="lg-dot" style="background:#93c5fd"></div><span>2024</span></div>
+  <div style="display:flex;align-items:center;gap:6px;"><div class="lg-dot" style="background:#1d4ed8"></div><span>2025</span></div>
+  <div style="display:flex;align-items:center;gap:6px;"><div class="lg-dot" style="background:#c8291a"></div><span>2026 (Jan–Mar)</span></div>
+</div>
+
+<div class="sec">Custo/kg e Volume — Tabela Comparativa</div>
+<table class="cmp-tbl" style="table-layout:fixed;width:100%">
+  <thead>
+    <tr>
+      <th style="width:7%" rowspan="2">Mês</th>
+      <th class="tr" colspan="3" style="background:#dbeafe;color:#1d4ed8;padding:8px;font-size:10px;letter-spacing:1px;">2024</th>
+      <th class="tr" colspan="3" style="background:#bfdbfe;color:#1e40af;padding:8px;font-size:10px;letter-spacing:1px;">2025</th>
+      <th class="tr" colspan="3" style="background:#fecaca;color:#c8291a;padding:8px;font-size:10px;letter-spacing:1px;">2026</th>
+    </tr>
+    <tr>
+      <th class="tr" style="width:9%;background:#eef4ff;font-size:8px;color:#6b7280;">Volume (kg)</th>
+      <th class="tr" style="width:9%;background:#eef4ff;font-size:8px;color:#6b7280;">Custo Total</th>
+      <th class="tr" style="width:9%;background:#eef4ff;font-size:8px;color:#6b7280;">Custo/kg</th>
+      <th class="tr" style="width:9%;background:#e4edff;font-size:8px;color:#6b7280;">Volume (kg)</th>
+      <th class="tr" style="width:9%;background:#e4edff;font-size:8px;color:#6b7280;">Custo Total</th>
+      <th class="tr" style="width:9%;background:#e4edff;font-size:8px;color:#6b7280;">Custo/kg</th>
+      <th class="tr" style="width:9%;background:#fff0f0;font-size:8px;color:#6b7280;">Volume (kg)</th>
+      <th class="tr" style="width:9%;background:#fff0f0;font-size:8px;color:#6b7280;">Custo Total</th>
+      <th class="tr" style="width:9%;background:#fff0f0;font-size:8px;color:#6b7280;">Custo/kg</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+      <td class="b" style="font-size:12px;">Jan</td>
+      <td class="tr">58,803</td>
+      <td class="tr">R$ 343k</td>
+      <td class="tr">R$ 5.83</td>
+      <td class="tr">51,970 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼11.6%</span></td>
+      <td class="tr">R$ 419k <span style="color:#c8291a;font-size:9px;font-weight:600;">▲22.3%</span></td>
+      <td class="tr">R$ 8.07 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲38.4%</span></td>
+      <td class="tr">48,088 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼7.5%</span></td>
+      <td class="tr">R$ 453k <span style="color:#c8291a;font-size:9px;font-weight:600;">▲8.1%</span></td>
+      <td class="tr">R$ 9.42 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲16.7%</span></td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Fev</td>
+      <td class="tr">82,766</td>
+      <td class="tr">R$ 438k</td>
+      <td class="tr">R$ 5.29</td>
+      <td class="tr">68,632 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼17.1%</span></td>
+      <td class="tr">R$ 424k <span style="color:#166534;font-size:9px;font-weight:600;">▼3.1%</span></td>
+      <td class="tr">R$ 6.18 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲16.8%</span></td>
+      <td class="tr">64,483 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼6.0%</span></td>
+      <td class="tr">R$ 447k <span style="color:#c8291a;font-size:9px;font-weight:600;">▲5.5%</span></td>
+      <td class="tr">R$ 6.94 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲12.3%</span></td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Mar</td>
+      <td class="tr">80,389</td>
+      <td class="tr">R$ 465k</td>
+      <td class="tr">R$ 5.79</td>
+      <td class="tr">57,228 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼28.8%</span></td>
+      <td class="tr">R$ 458k <span style="color:#166534;font-size:9px;font-weight:600;">▼1.7%</span></td>
+      <td class="tr">R$ 8.00 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲38.2%</span></td>
+      <td class="tr">63,539 <span style="color:#166534;font-size:9px;font-weight:600;">▲11.0%</span></td>
+      <td class="tr">R$ 518k <span style="color:#c8291a;font-size:9px;font-weight:600;">▲13.3%</span></td>
+      <td class="tr">R$ 8.16 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲2.0%</span></td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Abr</td>
+      <td class="tr">47,105</td>
+      <td class="tr">R$ 348k</td>
+      <td class="tr">R$ 7.38</td>
+      <td class="tr">54,588 <span style="color:#166534;font-size:9px;font-weight:600;">▲15.9%</span></td>
+      <td class="tr">R$ 407k <span style="color:#c8291a;font-size:9px;font-weight:600;">▲17.1%</span></td>
+      <td class="tr">R$ 7.46 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲1.1%</span></td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Mai</td>
+      <td class="tr">73,582</td>
+      <td class="tr">R$ 445k</td>
+      <td class="tr">R$ 6.04</td>
+      <td class="tr">47,734 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼35.1%</span></td>
+      <td class="tr">R$ 431k <span style="color:#166534;font-size:9px;font-weight:600;">▼3.0%</span></td>
+      <td class="tr">R$ 9.03 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲49.5%</span></td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Jun</td>
+      <td class="tr">53,490</td>
+      <td class="tr">R$ 412k</td>
+      <td class="tr">R$ 7.73</td>
+      <td class="tr">45,261 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼15.4%</span></td>
+      <td class="tr">R$ 415k <span style="color:#c8291a;font-size:9px;font-weight:600;">▲0.7%</span></td>
+      <td class="tr">R$ 8.82 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲14.1%</span></td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Jul</td>
+      <td class="tr">72,681</td>
+      <td class="tr">R$ 500k</td>
+      <td class="tr">R$ 6.89</td>
+      <td class="tr">58,632 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼19.3%</span></td>
+      <td class="tr">R$ 478k <span style="color:#166534;font-size:9px;font-weight:600;">▼4.2%</span></td>
+      <td class="tr">R$ 8.16 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲18.4%</span></td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Ago</td>
+      <td class="tr">65,752</td>
+      <td class="tr">R$ 457k</td>
+      <td class="tr">R$ 6.95</td>
+      <td class="tr">57,948 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼11.9%</span></td>
+      <td class="tr">R$ 468k <span style="color:#c8291a;font-size:9px;font-weight:600;">▲2.4%</span></td>
+      <td class="tr">R$ 8.04 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲15.7%</span></td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Set</td>
+      <td class="tr">74,866</td>
+      <td class="tr">R$ 456k</td>
+      <td class="tr">R$ 6.09</td>
+      <td class="tr">55,007 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼26.5%</span></td>
+      <td class="tr">R$ 448k <span style="color:#166534;font-size:9px;font-weight:600;">▼1.8%</span></td>
+      <td class="tr">R$ 8.09 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲32.8%</span></td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Out</td>
+      <td class="tr">63,042</td>
+      <td class="tr">R$ 414k</td>
+      <td class="tr">R$ 6.57</td>
+      <td class="tr">46,217 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼26.7%</span></td>
+      <td class="tr">R$ 397k <span style="color:#166534;font-size:9px;font-weight:600;">▼4.0%</span></td>
+      <td class="tr">R$ 8.59 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲30.7%</span></td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Nov</td>
+      <td class="tr">90,503</td>
+      <td class="tr">R$ 414k</td>
+      <td class="tr">R$ 4.58</td>
+      <td class="tr">71,455 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼21.0%</span></td>
+      <td class="tr">R$ 412k <span style="color:#166534;font-size:9px;font-weight:600;">▼0.7%</span></td>
+      <td class="tr">R$ 5.73 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲25.1%</span></td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+    </tr><tr>
+      <td class="b" style="font-size:12px;">Dez</td>
+      <td class="tr">41,959</td>
+      <td class="tr">R$ 336k</td>
+      <td class="tr">R$ 7.99</td>
+      <td class="tr">40,183 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼4.2%</span></td>
+      <td class="tr">R$ 442k <span style="color:#c8291a;font-size:9px;font-weight:600;">▲31.7%</span></td>
+      <td class="tr">R$ 9.34 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲16.9%</span></td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+      <td class="tr">—</td>
+    </tr><tr>
+  <td class="b">Média/Total</td>
+  <td class="tr">67.078</td>
+  <td class="tr">R$ 5,03M</td>
+  <td class="tr">R$ 6,25</td>
+  <td class="tr">54.571 <span style="color:#c8291a;font-size:9px;font-weight:600;">▼18.6%</span></td>
+  <td class="tr">R$ 5,11M <span style="color:#c8291a;font-size:9px;font-weight:600;">▲1.6%</span></td>
+  <td class="tr">R$ 7,80 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲24.8%</span></td>
+  <td class="tr">58.703 <span style="font-size:9px;color:#9ca3af;">1ºTri</span></td>
+  <td class="tr">R$ 1,42M <span style="font-size:9px;color:#9ca3af;">1ºTri</span></td>
+  <td class="tr">R$ 8,06 <span style="color:#c8291a;font-size:9px;font-weight:600;">▲3.3%</span></td>
+</tr></tbody>
+</table>
+
+<!-- PARTE 2 -->
+<div class="pd"><div class="pl">Parte 2</div><div class="pline"></div><div class="ps">Volume · Custo Total · Estrutura</div></div>
+
+<div class="sec">Volume Produzido e Custo Total</div>
+<div class="g2">
+  <div class="card"><div class="ct">Volume Produzido (kg)</div><div class="hbar">
+    <div class="hbr"><div class="hbt"><span class="hbn">2024</span><span class="hbv">804.940 kg</span></div><div class="hbtr"><div class="hbf" style="width:100%;background:#93c5fd;"></div></div></div>
+    <div class="hbr"><div class="hbt"><span class="hbn">2025</span><span class="hbv">654.855 kg <span style="color:#c8291a;font-size:10px;font-weight:600;">−18,6%</span></span></div><div class="hbtr"><div class="hbf" style="width:81.4%;background:#1d4ed8;"></div></div></div>
+    <div class="hbr"><div class="hbt"><span class="hbn">2026 (1ºTri)</span><span class="hbv">176.110 kg</span></div><div class="hbtr"><div class="hbf" style="width:21.9%;background:#c8291a;"></div></div></div>
+  </div></div>
+  <div class="card"><div class="ct">% Custo no Preço de Venda</div><div class="hbar">
+    <div class="hbr"><div class="hbt"><span class="hbn">2024 — R$ 6,25/kg</span><span class="hbv" style="color:var(--green);">6,5%</span></div><div class="hbtr"><div class="hbf" style="width:65%;background:#93c5fd;"></div></div></div>
+    <div class="hbr"><div class="hbt"><span class="hbn">2025 — R$ 7,80/kg</span><span class="hbv" style="color:var(--amber);">7,8%</span></div><div class="hbtr"><div class="hbf" style="width:78%;background:#1d4ed8;"></div></div></div>
+    <div class="hbr"><div class="hbt"><span class="hbn">2026 1ºTri — R$ 8,06/kg</span><span class="hbv" style="color:var(--red);">8,3%</span></div><div class="hbtr"><div class="hbf" style="width:83%;background:#c8291a;"></div></div></div>
+  </div></div>
+</div>
+
+<div class="sec">1º Trimestre — Comparativo Direto</div>
+<div class="k3" style="margin-bottom:28px;">
+  <div class="kc yr24">
+    <div class="km">1ºTri 2024</div>
+    <div class="ksm">R$ 5,61/kg</div>
+    <div class="ku">R$ 1,25M · 221.958 kg</div>
+  </div>
+  <div class="kc yr25">
+    <div class="km">1ºTri 2025</div>
+    <div class="ksm">R$ 7,32/kg <span style="font-size:11px;color:var(--red);font-weight:600;">+30,5%</span></div>
+    <div class="ku">R$ 1,30M · 177.831 kg</div>
+  </div>
+  <div class="kc yr26">
+    <div class="km">1ºTri 2026</div>
+    <div class="ksm">R$ 8,06/kg <span style="font-size:11px;color:var(--red);font-weight:600;">+10,1%</span></div>
+    <div class="ku">R$ 1,42M · 176.110 kg</div>
+  </div>
+</div>
+
+<!-- PARTE 3 -->
+<div class="pd"><div class="pl">Parte 3</div><div class="pline"></div><div class="ps">Evolução dos Principais Tipos de Despesa</div></div>
+
+<div class="sec">Crescimento Ano a Ano por Tipo de Despesa</div>
+<table style="table-layout:fixed;width:100%">
+  <thead><tr>
+    <th style="width:28%">Tipo de Despesa</th>
+    <th class="tr" style="width:16%">2024 (anual)</th>
+    <th class="tr" style="width:20%">2025 (anual)</th>
+    <th class="tr" style="width:14%">2026 (1ºTri)</th>
+    <th class="tr" style="width:22%">2026 anualizado</th>
+  </tr></thead>
+  <tbody><tr><td class="b" style="font-size:11px;">SALÁRIOS E ORDENADOS</td><td class="tr">R$ 1.84M</td><td class="tr">R$ 1.90M <span style="color:#7b8099;font-size:10px;font-weight:600;">+2.9%</span></td><td class="tr">R$ 507k</td><td class="tr">~R$ 2.03M <span style="color:#7b8099;font-size:10px;font-weight:600;">+6.8%</span></td></tr><tr><td class="b" style="font-size:11px;">MANUTENÇÃO DE MÁQUINAS</td><td class="tr">R$ 498k</td><td class="tr">R$ 675k <span style="color:#c8291a;font-size:10px;font-weight:600;">+35.6%</span></td><td class="tr">R$ 194k</td><td class="tr">~R$ 774k <span style="color:#c8291a;font-size:10px;font-weight:600;">+14.6%</span></td></tr><tr><td class="b" style="font-size:11px;">INSS</td><td class="tr">R$ 585k</td><td class="tr">R$ 595k <span style="color:#7b8099;font-size:10px;font-weight:600;">+1.7%</span></td><td class="tr">R$ 165k</td><td class="tr">~R$ 658k <span style="color:#c8291a;font-size:10px;font-weight:600;">+10.7%</span></td></tr><tr><td class="b" style="font-size:11px;">ENERGIA ELÉTRICA</td><td class="tr">R$ 493k</td><td class="tr">R$ 478k <span style="color:#7b8099;font-size:10px;font-weight:600;">-3.1%</span></td><td class="tr">R$ 171k</td><td class="tr">~R$ 685k <span style="color:#c8291a;font-size:10px;font-weight:600;">+43.4%</span></td></tr><tr><td class="b" style="font-size:11px;">ASSISTÊNCIA MÉDICA</td><td class="tr">R$ 367k</td><td class="tr">R$ 413k <span style="color:#c8291a;font-size:10px;font-weight:600;">+12.5%</span></td><td class="tr">R$ 107k</td><td class="tr">~R$ 428k <span style="color:#7b8099;font-size:10px;font-weight:600;">+3.5%</span></td></tr><tr><td class="b" style="font-size:11px;">FÉRIAS</td><td class="tr">R$ 223k</td><td class="tr">R$ 213k <span style="color:#7b8099;font-size:10px;font-weight:600;">-4.4%</span></td><td class="tr">R$ 55k</td><td class="tr">~R$ 219k <span style="color:#7b8099;font-size:10px;font-weight:600;">+2.7%</span></td></tr><tr><td class="b" style="font-size:11px;">FGTS</td><td class="tr">R$ 172k</td><td class="tr">R$ 175k <span style="color:#7b8099;font-size:10px;font-weight:600;">+2.1%</span></td><td class="tr">R$ 45k</td><td class="tr">~R$ 178k <span style="color:#7b8099;font-size:10px;font-weight:600;">+1.7%</span></td></tr><tr><td class="b" style="font-size:11px;">13º SALÁRIO</td><td class="tr">R$ 166k</td><td class="tr">R$ 168k <span style="color:#7b8099;font-size:10px;font-weight:600;">+0.8%</span></td><td class="tr">R$ 40k</td><td class="tr">~R$ 162k <span style="color:#7b8099;font-size:10px;font-weight:600;">-3.5%</span></td></tr><tr><td class="b" style="font-size:11px;">CESTAS BÁSICAS</td><td class="tr">R$ 128k</td><td class="tr">R$ 132k <span style="color:#7b8099;font-size:10px;font-weight:600;">+3.3%</span></td><td class="tr">R$ 33k</td><td class="tr">~R$ 132k <span style="color:#7b8099;font-size:10px;font-weight:600;">-0.2%</span></td></tr><tr><td class="b" style="font-size:11px;">VALE TRANSPORTE</td><td class="tr">R$ 115k</td><td class="tr">R$ 116k <span style="color:#7b8099;font-size:10px;font-weight:600;">+1.1%</span></td><td class="tr">R$ 30k</td><td class="tr">~R$ 121k <span style="color:#7b8099;font-size:10px;font-weight:600;">+3.8%</span></td></tr><tr><td class="b" style="font-size:11px;">EMBALAGEM</td><td class="tr">R$ 157k</td><td class="tr">R$ 109k <span style="color:#166534;font-size:10px;font-weight:600;">-30.5%</span></td><td class="tr">R$ 26k</td><td class="tr">~R$ 104k <span style="color:#7b8099;font-size:10px;font-weight:600;">-4.3%</span></td></tr><tr><td class="b" style="font-size:11px;">ÁGUA</td><td class="tr">R$ 80k</td><td class="tr">R$ 78k <span style="color:#7b8099;font-size:10px;font-weight:600;">-2.9%</span></td><td class="tr">R$ 16k</td><td class="tr">~R$ 65k <span style="color:#166534;font-size:10px;font-weight:600;">-17.0%</span></td></tr>
+<tr style="border-top:2px solid #0f1117;background:#f0f4ff;"><td class="b" style="font-size:11px;">TOTAL GERAL (planilha)</td><td class="tr"><strong>R$ 5.03M</strong></td><td class="tr"><strong>R$ 5.11M</strong> <span style="color:#c8291a;font-size:10px;font-weight:600;">+1.6%</span></td><td class="tr"><strong>R$ 1.42M</strong></td><td class="tr"><strong>~R$ 5.67M</strong> <span style="color:#c8291a;font-size:10px;font-weight:600;">+11.0%</span></td></tr></tbody>
+</table>
+
+<!-- PARTE 4 -->
+<div class="pd"><div class="pl">Parte 4</div><div class="pline"></div><div class="ps">Análise Executiva</div></div>
+
+<div class="sec">Conclusões e Recomendações</div>
+<div class="card" style="margin-bottom:0;"><div class="alerts"><div class="ar"><div class="ai ir">📈</div><div class="ab"><div class="at">Custo/kg cresceu +24,8% de 2024 para 2025 — causa principal: queda de volume</div><div class="ad">Custo total variou apenas <b>+1,6%</b> (R$ 5,03M → R$ 5,11M), mas o volume caiu <b>−18,6%</b> (804.940 → 654.855 kg). O custo/kg foi de R$ 6,25 para R$ 7,80. <b>O problema não é o custo crescendo — é a produção caindo com estrutura de custo fixo mantida.</b></div></div></div><div class="ar"><div class="ai ir">🔧</div><div class="ab"><div class="at">Manutenção de Máquinas — único item com crescimento real expressivo (+35,6%)</div><div class="ad">Passou de R$ 498k (2024) para R$ 675k (2025), adicionando +R$ 177k/ano. No 1ºTri/26 já são R$ 193k — anualizado ~R$ 774k. É o custo que mais cresceu em valor absoluto. <b>Plano preventivo estruturado é a maior alavanca de corte disponível.</b></div></div></div><div class="ar"><div class="ai ig">✅</div><div class="ab"><div class="at">Manutenção em 2026 mostra desaceleração no 1ºTri — sinal positivo</div><div class="ad">Comparando o 1ºTri/25 (R$ ~175k de manutenção) com 1ºTri/26 (R$ 193k): alta de ~10%, bem abaixo dos +35,6% de 2024→2025. Se o ritmo se mantiver, 2026 pode encerrar com manutenção próxima a 2025.</div></div></div><div class="ar"><div class="ai ia">👥</div><div class="ab"><div class="at">Pessoal: custo estável, volume caiu — impacto direto no custo/kg</div><div class="ad">Pessoal foi de R$ 3,82M (2024) → R$ 3,84M (2025): variação de apenas +0,5%. Mas com 150.085 kg a menos produzidos, o custo de pessoal/kg subiu de <b>R$ 4,75 → R$ 5,86</b>. Em 2026 o 1ºTri já aponta custo de pessoal de ~R$ 1,0M (anualizado R$ 4,1M).</div></div></div><div class="ar"><div class="ai ib">💡</div><div class="ab"><div class="at">O efeito escala explica tudo — Novembro é sempre o melhor mês</div><div class="ad">Nov/24: R$ 4,58/kg (90.503 kg) · Nov/25: R$ 5,73/kg (71.455 kg). Fev/26: R$ 6,94/kg (64.483 kg). Em todos os anos, os meses de maior volume têm o menor custo/kg. <b>Meta sugerida: 65.000 kg+/mês</b> para manter custo abaixo de R$ 7,50/kg.</div></div></div><div class="ar"><div class="ai ia">📉</div><div class="ab"><div class="at">Volume caindo ano a ano — 1ºTri comparativo</div><div class="ad">1ºTri/24: <b>221.958 kg</b> · 1ºTri/25: <b>177.831 kg</b> · 1ºTri/26: <b>176.110 kg</b>. A queda de 2024→2025 foi de 44.127 kg. De 2025→2026 praticamente estabilizou (−1.721 kg). Se o volume se recuperar ao patamar de 2024, o custo/kg volta para a faixa de R$ 5,50–6,00.</div></div></div><div class="ar"><div class="ai ig">💰</div><div class="ab"><div class="at">Custo de produção continua saudável: 6,5% → 7,8% → 8,3% do preço</div><div class="ad">Mesmo com o aumento do custo/kg, a produção representa menos de 9% do preço de venda nos 3 anos. A operação fabril não é o gargalo de rentabilidade. <b>Despesas comerciais, financeiras e administrativas</b> é onde mora o impacto mais relevante no resultado final.</div></div></div><div class="ar"><div class="ai ir">📊</div><div class="ab"><div class="at">Projeção de custo/kg para 2026 completo: entre R$ 7,80 e R$ 8,50/kg</div><div class="ad">Com base no 1ºTri/26 (R$ 8,06/kg) e no padrão histórico de sazonalidade, 2026 deve fechar entre R$ 7,80 e R$ 8,50/kg dependendo de: (1) recuperação de volume no 2º semestre, (2) controle da manutenção e (3) comportamento dos custos de pessoal.</div></div></div></div></div>
+
+<div class="footer">
+  <span>Marles Têxtil · Comparativo 2024–2025–2026 · Uso interno</span>
+  <span>Fontes: Anal_Matriz_Prod24.xlsx · Anal_Matriz_Prod25.xlsx · Anal_Matriz_Prod_1tri26.xlsx</span>
+</div>
+</div>
+
+<script>
+const C24 = [5.83, 5.29, 5.79, 7.38, 6.04, 7.73, 6.89, 6.95, 6.09, 6.57, 4.58, 7.99];
+const C25 = [8.07, 6.18, 8.0, 7.46, 9.03, 8.82, 8.16, 8.04, 8.09, 8.59, 5.73, 9.34];
+const C26 = [9.42, 6.94, 8.16, null, null, null, null, null, null, null, null, null];
+const ML  = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+const MAX_V = 9.42;
+
+const chart  = document.getElementById('cmpChart');
+const lblDiv = document.getElementById('cmpLabels');
+
+ML.forEach((m, i) => {
+  const grp = document.createElement('div');
+  grp.className = 'cmp-grp';
+  grp.style.flexDirection = 'column';
+  grp.style.justifyContent = 'flex-end';
+
+  const bars = document.createElement('div');
+  bars.style.cssText = 'display:flex;align-items:flex-end;gap:3px;width:100%;flex:1';
+
+  [
+    {val: C24[i], color: '#93c5fd'},
+    {val: C25[i], color: '#1d4ed8'},
+    {val: C26[i], color: '#c8291a'},
+  ].forEach(b => {
+    const bar = document.createElement('div');
+    bar.className = 'cmp-bar';
+    if (b.val !== null) {
+      bar.style.cssText = `flex:1;height:${Math.round(b.val/MAX_V*100)}%;background:${b.color};border-radius:2px 2px 0 0;`;
+      bar.title = `R$ ${b.val.toFixed(2)}/kg`;
+    } else {
+      bar.style.cssText = 'flex:1;';
+    }
+    bars.appendChild(bar);
+  });
+
+  grp.appendChild(bars);
+  chart.appendChild(grp);
+
+  const lbl = document.createElement('div');
+  lbl.style.cssText = 'flex:1;text-align:center;font-size:9px;color:#7b8099;text-transform:uppercase;letter-spacing:.5px;margin-top:5px;';
+  lbl.textContent = m;
+  lblDiv.appendChild(lbl);
+});
+
+
+</script>
+</body></html>

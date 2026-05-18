@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marles Têxtil — Relatórios</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#f8f9fc; font-family:'DM Sans',sans-serif; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 16px; }
+
+  /* ── LOGIN ── */
+  #login {
+    text-align:center;
+    padding:48px 36px;
+    background:#fff;
+    border:1px solid #e2e5ef;
+    max-width:380px;
+    width:100%;
+    box-shadow:0 4px 24px rgba(0,0,0,.06);
+  }
+  .brand { font-family:'Playfair Display',serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:#7b8099; margin-bottom:10px; }
+  .login-title { font-family:'Playfair Display',serif; font-size:22px; color:#0f1117; margin-bottom:6px; }
+  .login-sub { font-size:12px; color:#9ca3af; margin-bottom:32px; }
+  input[type=password] { width:100%; padding:13px 16px; border:1px solid #e2e5ef; font-family:'DM Sans',sans-serif; font-size:13px; color:#0f1117; outline:none; margin-bottom:12px; transition:border .15s; }
+  input[type=password]:focus { border-color:#1d4ed8; }
+  input[type=password]::placeholder { color:#9ca3af; }
+  .btn-login { width:100%; padding:13px; background:#0f1117; color:#fff; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; border:none; cursor:pointer; letter-spacing:.5px; transition:background .15s; }
+  .btn-login:hover { background:#1d4ed8; }
+  .err { font-size:11px; color:#c8291a; margin-top:10px; min-height:16px; }
+
+  /* ── HUB ── */
+  #hub { display:none; width:100%; max-width:760px; }
+
+  .hub-header { text-align:center; margin-bottom:40px; }
+  .hub-header h1 { font-family:'Playfair Display',serif; font-size:26px; color:#0f1117; margin-bottom:6px; }
+  .hub-header p { font-size:12px; color:#9ca3af; }
+
+  /* Category section */
+  .category { margin-bottom:32px; }
+  .category-header {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+    padding-bottom:10px;
+    border-bottom:2px solid #0f1117;
+  }
+  .category-icon { font-size:18px; }
+  .category-title { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:#0f1117; }
+  .category-desc { font-size:11px; color:#9ca3af; margin-left:auto; }
+
+  /* Report cards inside category */
+  .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+  .cards.two { grid-template-columns:repeat(2,1fr); }
+
+  .card {
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    padding:18px 20px;
+    background:#fff;
+    border:1px solid #e2e5ef;
+    text-decoration:none;
+    color:#0f1117;
+    transition:all .15s;
+  }
+  .card:hover { border-color:#1d4ed8; background:#eff4ff; transform:translateY(-1px); box-shadow:0 4px 12px rgba(29,78,216,.08); }
+  .card-dot { width:8px; height:8px; border-radius:2px; }
+  .card-label { font-size:13px; font-weight:600; color:#0f1117; }
+  .card-sub { font-size:10px; color:#9ca3af; }
+  .card:hover .card-label { color:#1d4ed8; }
+
+  /* Coming soon card */
+  .card.soon {
+    opacity:.45;
+    cursor:default;
+    pointer-events:none;
+    background:#fafbfd;
+  }
+  .soon-badge {
+    display:inline-block;
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    background:#f3f4f6;
+    color:#9ca3af;
+    padding:2px 7px;
+    border-radius:2px;
+    margin-top:2px;
+  }
+
+  .logout { text-align:center; margin-top:32px; font-size:11px; color:#9ca3af; cursor:pointer; }
+  .logout:hover { color:#c8291a; text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<!-- TELA DE LOGIN -->
+<div id="login">
+  <div class="brand">Marles Têxtil</div>
+  <div class="login-title">Relatórios Internos</div>
+  <p class="login-sub">Acesso restrito · Uso interno</p>
+  <input type="password" id="pwd" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')check()">
+  <button class="btn-login" onclick="check()">Entrar</button>
+  <div class="err" id="err"></div>
+</div>
+
+<!-- HUB DE RELATÓRIOS -->
+<div id="hub">
+
+  <div class="hub-header">
+    <div class="brand">Marles Têxtil · Matriz</div>
+    <h1>Central de Relatórios</h1>
+    <p>Selecione a área que deseja analisar</p>
+  </div>
+
+  <!-- PRODUÇÃO: CUSTO POR KG MALHARIA -->
+  <div class="category">
+    <div class="category-header">
+      <span class="category-icon">🏭</span>
+      <span class="category-title">Produção — Custo por Kg · Malharia</span>
+      <span class="category-desc">Atualizado: Mar/2026</span>
+    </div>
+    <div class="cards">
+      <a class="card" href="relatorio_comparativo.html">
+        <div class="card-dot" style="background:#6b7280;"></div>
+        <div class="card-label">Comparativo</div>
+        <div class="card-sub">2024 · 2025 · 2026</div>
+      </a>
+      <a class="card" href="relatorio_2026.html">
+        <div class="card-dot" style="background:#c8291a;"></div>
+        <div class="card-label">2026</div>
+        <div class="card-sub">1º Trimestre</div>
+      </a>
+      <a class="card" href="relatorio_2025.html">
+        <div class="card-dot" style="background:#1d4ed8;"></div>
+        <div class="card-label">2025</div>
+        <div class="card-sub">Ano completo</div>
+      </a>
+      <a class="card" href="relatorio_2024.html">
+        <div class="card-dot" style="background:#93c5fd;"></div>
+        <div class="card-label">2024</div>
+        <div class="card-sub">Ano completo</div>
+      </a>
+    </div>
+  </div>
+  <!-- DESPESAS ADMINISTRATIVAS -->
+  <div class="category">
+    <div class="category-header">
+      <span class="category-icon">💼</span>
+      <span class="category-title">Despesas Administrativas</span>
+      <span class="category-desc">Em breve</span>
+    </div>
+    <div class="cards two">
+      <div class="card soon">
+        <div class="card-dot" style="background:#d1d5db;"></div>
+        <div class="card-label">Comparativo</div>
+        <div class="card-sub">2024 · 2025 · 2026</div>
+        <span class="soon-badge">Em breve</span>
+      </div>
+      <div class="card soon">
+        <div class="card-dot" style="background:#d1d5db;"></div>
+        <div class="card-label">2026</div>
+        <div class="card-sub">A ser publicado</div>
+        <span class="soon-badge">Em breve</span>
+      </div>
+    </div>
+  </div>
+  <!-- DESPESAS COMERCIAIS -->
+  <div class="category">
+    <div class="category-header">
+      <span class="category-icon">📦</span>
+      <span class="category-title">Despesas Comerciais</span>
+      <span class="category-desc">Em breve</span>
+    </div>
+    <div class="cards two">
+      <div class="card soon">
+        <div class="card-dot" style="background:#d1d5db;"></div>
+        <div class="card-label">Comparativo</div>
+        <div class="card-sub">2024 · 2025 · 2026</div>
+        <span class="soon-badge">Em breve</span>
+      </div>
+      <div class="card soon">
+        <div class="card-dot" style="background:#d1d5db;"></div>
+        <div class="card-label">2026</div>
+        <div class="card-sub">A ser publicado</div>
+        <span class="soon-badge">Em breve</span>
+      </div>
+    </div>
+  </div>
+  <!-- DESPESAS PESSOAIS -->
+  <div class="category">
+    <div class="category-header">
+      <span class="category-icon">👤</span>
+      <span class="category-title">Despesas Pessoais</span>
+      <span class="category-desc">Atualizado: Abr/2026</span>
+    </div>
+    <div class="cards">
+      <a class="card" href="michpa_zero.html">
+        <div class="card-dot" style="background:#0891b2;"></div>
+        <div class="card-label">Michpa Zero</div>
+        <div class="card-sub">Jan · Fev · Mar · Abr 2026</div>
+      </a>
+      <a class="card" href="donativos.html">
+        <div class="card-dot" style="background:#059669;"></div>
+        <div class="card-label">Donativos</div>
+        <div class="card-sub">Jan · Fev · Mar · Abr 2026</div>
+      </a>
+      <div class="card soon">
+        <div class="card-dot" style="background:#d1d5db;"></div>
+        <div class="card-label">Michpa 3</div>
+        <div class="card-sub">A ser publicado</div>
+        <span class="soon-badge">Em breve</span>
+      </div>
+      <div class="card soon">
+        <div class="card-dot" style="background:#d1d5db;"></div>
+        <div class="card-label">Michpa 4</div>
+        <div class="card-sub">A ser publicado</div>
+        <span class="soon-badge">Em breve</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="logout" onclick="logout()">Sair da sessão</div>
+
+</div>
+
+<script>
+  const PASS = atob('TWFybGVzMjAyNg==');
+
+  function check() {
+    const val = document.getElementById('pwd').value;
+    const err = document.getElementById('err');
+    if (val === PASS) {
+      sessionStorage.setItem('marles_auth', '1');
+      err.textContent = '';
+      show();
+    } else {
+      err.textContent = 'Senha incorreta. Tente novamente.';
+      document.getElementById('pwd').value = '';
+      document.getElementById('pwd').focus();
+    }
+  }
+
+  function show() {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('hub').style.display = 'block';
+  }
+
+  function logout() {
+    sessionStorage.removeItem('marles_auth');
+    document.getElementById('hub').style.display = 'none';
+    document.getElementById('login').style.display = 'block';
+    document.getElementById('pwd').value = '';
+  }
+
+  if (sessionStorage.getItem('marles_auth') === '1') show();
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Donativos 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--ink:#0f1117;--ink2:#2d3142;--muted:#7b8099;--line:#e2e5ef;--bg:#f8f9fc;--white:#fff;--blue:#1d4ed8;--blue-lt:#eff4ff;--red:#c8291a;--red-lt:#fff4f3;--green:#166534;--green-lt:#f0fdf4;--amber:#92400e;--amber-lt:#fffbeb;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5}
+.page{max-width:980px;margin:0 auto;background:var(--white);padding:56px 60px 80px;box-shadow:0 0 60px rgba(0,0,0,.06)}
+
+/* HEADER */
+.rh{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:28px;border-bottom:2px solid var(--ink);margin-bottom:40px}
+.rb{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase}
+.rs{font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:4px}
+.rt{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:right;line-height:1.25}
+.rm{font-size:11px;color:var(--muted);text-align:right;margin-top:4px}
+
+/* KPIs */
+.k4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+.kc{background:var(--white);padding:18px 16px;display:flex;flex-direction:column;gap:4px}
+.km{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.kv{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);line-height:1}
+.ksm{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);line-height:1}
+.ku{font-size:11px;color:var(--muted)}
+.kd{font-size:11px;color:var(--muted)}
+.kd span{color:var(--ink2);font-weight:500}
+
+/* PART / SEC */
+.pd{display:flex;align-items:center;gap:16px;margin:40px 0 28px}
+.pl{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--white);background:var(--ink);padding:6px 18px;white-space:nowrap}
+.pline{flex:1;height:2px;background:var(--ink)}
+.ps{font-size:12px;color:var(--muted);white-space:nowrap}
+.sec{font-family:'Playfair Display',serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+
+/* BAR CHART */
+.barchart{display:flex;align-items:flex-end;gap:6px;height:150px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.bc{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px}
+.bv{font-size:8px;font-weight:600;color:var(--ink);text-align:center}
+.bb{width:100%;border-radius:2px 2px 0 0}
+.bls{display:flex;margin-bottom:28px}
+.bl{flex:1;text-align:center;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:5px}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:28px}
+thead th{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tbody td{padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis}
+tbody tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600;color:var(--ink);background:#fafbfd}
+tbody tr:hover td{background:#f9fafb}
+.tr{text-align:right;font-variant-numeric:tabular-nums} .tc{text-align:center} .b{font-weight:600;color:var(--ink)}
+.tag{display:inline-block;padding:2px 7px;border-radius:2px;font-size:9px;font-weight:600}
+.tag-red{background:var(--red-lt);color:var(--red)} .tag-green{background:var(--green-lt);color:var(--green)}
+.tag-amber{background:var(--amber-lt);color:var(--amber)} .tag-blue{background:var(--blue-lt);color:var(--blue)}
+
+/* HBAR */
+.hbar{display:flex;flex-direction:column;gap:9px}
+.hbr{display:flex;flex-direction:column;gap:3px}
+.hbt{display:flex;justify-content:space-between;align-items:baseline}
+.hbn{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+.hbv{font-size:11px;font-weight:600;color:var(--ink);text-align:right}
+.hbtr{height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden}
+.hbf{height:100%;border-radius:3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.card{border:1px solid var(--line);padding:18px 20px}
+.ct{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:12px}
+
+/* ALERTS */
+.alerts{display:flex;flex-direction:column}
+.ar{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.ar:last-child{border-bottom:none}
+.ai{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.ig{background:var(--green-lt)} .ir{background:var(--red-lt)} .ia{background:var(--amber-lt)} .ib{background:var(--blue-lt)}
+.ab{flex:1;line-height:1.6}
+.at{font-weight:600;color:var(--ink);margin-bottom:2px;font-size:12px}
+.ad{font-size:11px;color:var(--muted)}
+.ad b{color:var(--ink2);font-weight:600}
+
+/* INTERACTIVE TABLE */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:16px}
+.tab{padding:9px 18px;font-size:11px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--muted);transition:all .15s}
+.tab:hover{color:var(--ink)} .tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.scrl{overflow-x:auto;margin-bottom:8px}
+.scrl::-webkit-scrollbar{height:5px}
+.scrl::-webkit-scrollbar-thumb{background:#c0c8d8;border-radius:3px}
+.ttbl{border-collapse:collapse;min-width:1300px;width:100%}
+.ttbl th{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);padding:8px 7px;text-align:right;border-bottom:2px solid var(--ink);background:var(--white);white-space:nowrap;position:sticky;top:0;z-index:10}
+.ttbl th.lft{text-align:left;position:sticky;left:0;background:var(--white);z-index:20}
+.ttbl th.acm{background:#f0f4ff;color:var(--blue);border-left:2px solid var(--blue-lt)}
+.rc td{padding:9px 7px;border-bottom:1px solid var(--line);font-weight:600;font-size:11px;background:#fafbfd;color:var(--ink);text-align:right;white-space:nowrap}
+.rc td.lft{text-align:left;position:sticky;left:0;background:#fafbfd;z-index:5;min-width:180px;max-width:240px;white-space:normal}
+.rc{cursor:pointer;user-select:none} .rc:hover td{background:#f3f4f6} .rc:hover td.lft{background:#f3f4f6}
+.rt2 td{padding:8px 7px;border-bottom:1px solid #f0f1f5;font-size:11px;color:var(--ink2);background:var(--white);text-align:right;white-space:nowrap}
+.rt2 td.lft{text-align:left;position:sticky;left:0;background:var(--white);z-index:5;padding-left:20px;min-width:180px;max-width:240px;white-space:normal}
+.rt2{cursor:pointer;user-select:none} .rt2:hover td{background:#f9fafb} .rt2:hover td.lft{background:#f9fafb}
+.rf td{padding:6px 7px;border-bottom:1px solid #f5f6f9;font-size:10px;color:var(--muted);background:#fdfeff;text-align:right;white-space:nowrap}
+.rf td.lft{text-align:left;position:sticky;left:0;background:#fdfeff;z-index:5;padding-left:36px;min-width:180px;max-width:240px;white-space:normal}
+.fcc{font-size:9px;color:#adb5cc;display:block;margin-top:1px}
+.rtot td{padding:10px 7px;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);font-weight:700;font-size:12px;background:#f0f4ff;color:var(--ink);text-align:right;white-space:nowrap}
+.rtot td.lft{text-align:left;position:sticky;left:0;background:#f0f4ff;z-index:5}
+.acmc{background:#f8faff!important;font-weight:700;border-left:1px solid var(--blue-lt)}
+.cbst{background:#f0fdf4!important} .cwst{background:#fff9f9!important}
+.ei{display:inline-block;width:12px;height:12px;line-height:12px;text-align:center;font-size:9px;margin-right:5px;color:var(--muted);transition:transform .15s;flex-shrink:0}
+.expanded .ei{transform:rotate(90deg)}
+.nc{display:flex;align-items:flex-start}
+.hdn{display:none}
+.neg{color:var(--green);font-weight:500} .pos{color:var(--ink)}
+.legend{display:flex;gap:14px;font-size:10px;color:var(--muted);margin-bottom:12px;align-items:center;flex-wrap:wrap}
+.ld{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+
+.footer{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:28px}
+@media print{
+  body{background:#fff}.page{box-shadow:none;padding:32px 40px}
+  .tabs{display:none}.hdn{display:table-row!important}
+  .scrl{overflow:visible}.ttbl{min-width:unset}
+  .ttbl th.lft,.rc td.lft,.rt2 td.lft,.rf td.lft,.rtot td.lft{position:static}
+  .sec{page-break-after:avoid}.pd{page-break-after:avoid;page-break-before:always}
+}
+
+.mtabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:24px;flex-wrap:wrap;}
+.mtab{padding:10px 20px;font-size:12px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--muted);transition:all .15s;user-select:none;}
+.mtab:hover{color:var(--ink);}
+.mtab.active{color:var(--blue);border-bottom-color:var(--blue);}
+.tx-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+.tx-table th{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);}
+.tx-table td{padding:10px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink2);}
+.tx-table tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600;color:var(--ink);background:#fafbfd;}
+.tx-table tr:hover td{background:#f9fafb;}
+.tx-table tr:last-child:hover td{background:#fafbfd;}
+.date-badge{display:inline-block;font-size:10px;color:var(--muted);background:#f3f4f6;padding:2px 7px;border-radius:2px;font-variant-numeric:tabular-nums;}
+.empty-msg{text-align:center;padding:48px;color:var(--muted);font-size:13px;border:1px dashed var(--line);}
+</style>
+</head>
+<body>
+<style id="navstyle">
+.topnav{position:sticky;top:0;z-index:999;background:#fff;border-bottom:3px solid #0f1117;display:flex;gap:0;box-shadow:0 2px 8px rgba(0,0,0,.07);font-family:'DM Sans',sans-serif;}
+.topnav a{padding:14px 24px;font-size:12px;font-weight:600;color:#7b8099;text-decoration:none;border-bottom:3px solid transparent;margin-bottom:-3px;white-space:nowrap;transition:color .15s;}
+.topnav a:hover{color:#0f1117;background:#f9fafb;}
+.topnav a.active{color:#1d4ed8;border-bottom-color:#1d4ed8;}
+</style>
+<div class="topnav">
+  <a href="michpa_zero.html">Michpa Zero</a>
+  <a href="donativos.html" class="active">Donativos</a>
+  <a href="michpa_3.html">Michpa 3</a>
+  <a href="michpa_4.html">Michpa 4</a>
+</div>
+
+<div class="page">
+<div class="rh">
+  <div><div class="rb">Donativos</div><div class="rs">Contribuições e Doações · 2026</div></div>
+  <div><div class="rt">Controle de Donativos<br>2026</div><div class="rm">Janeiro · Fevereiro · Março · Abril · Uso interno</div></div>
+</div>
+
+<div class="k4">
+  <div class="kc"><div class="km">Total Jan–Abr</div><div class="kv">R$ 131.9k</div><div class="ku">acumulado</div></div>
+  <div class="kc"><div class="km">Maior Mês</div><div class="kv">Mar</div><div class="ku">R$ 78.7k · 59.6%</div></div>
+  <div class="kc"><div class="km">Média Mensal</div><div class="kv">R$ 44.0k</div><div class="ku">meses com donativos</div></div>
+  <div class="kc"><div class="km">Nº de Donativos</div><div class="kv">9</div><div class="ku">lançamentos no período</div></div>
+</div>
+
+<div class="pd" style="margin-top:0;"><div class="pl">Parte 1</div><div class="pline"></div><div class="ps">Visão do Período</div></div>
+
+<div class="sec">Evolução Mensal dos Donativos</div>
+<div class="barchart" id="bc"></div>
+<div class="bls" id="bl"></div>
+
+<div class="sec">Resumo por Mês</div>
+<table>
+  <thead><tr>
+    <th style="width:15%">Mês</th>
+    <th class="tr" style="width:25%">Donativos</th>
+    <th class="tr" style="width:35%">Valor Total</th>
+    <th class="tr" style="width:25%">% do Período</th>
+  </tr></thead>
+  <tbody><tr><td class="b">Jan</td><td class="tr">2 donativos</td><td class="tr">R$ 23.3k</td><td class="tr" style="color:var(--muted)">17.6%</td></tr><tr><td class="b">Fev</td><td class="tr" style="color:#ddd">—</td><td class="tr" style="color:#ddd">—</td><td class="tr" style="color:#ddd">—</td></tr><tr><td class="b">Mar</td><td class="tr">5 donativos</td><td class="tr">R$ 78.7k</td><td class="tr" style="color:var(--muted)">59.6%</td></tr><tr><td class="b">Abr</td><td class="tr">2 donativos</td><td class="tr">R$ 30.0k</td><td class="tr" style="color:var(--muted)">22.7%</td></tr><tr><td class="b">TOTAL Jan–Abr</td><td class="tr">9 donativos</td><td class="tr b">R$ 131.9k</td><td class="tr">100%</td></tr></tbody>
+</table>
+
+<div class="pd"><div class="pl">Detalhe</div><div class="pline"></div><div class="ps">Lançamentos por Mês</div></div>
+<div class="mtabs"><div class="mtab active" onclick="showMonth('Janeiro')">Jan<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 23.3k</span></div><div class="mtab" onclick="showMonth('Marco')">Mar<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 78.7k</span></div><div class="mtab" onclick="showMonth('Abril')">Abr<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 30.0k</span></div></div>
+<div id="month-content"></div>
+
+<div class="footer">
+  <span>Donativos · Janeiro–Abril 2026 · Uso interno</span>
+  <span>Fonte: Donativos_2026.xls</span>
+</div>
+</div>
+
+<script>
+const DATA = {"Janeiro":{"rows":[{"date":"06/01","desc":"Avoda 3274 Ref A Dep 8319","val":3274.0},{"date":"08/01","desc":"Sinag Assoc Kehilas","val":20000.0}],"total":23274.0},"Fevereiro":{"rows":[],"total":0},"Marco":{"rows":[{"date":"05/03","desc":"Ten Yad Purim","val":15000.0},{"date":"12/03","desc":"Sinag Kehilas","val":20000.0},{"date":"17/03","desc":"Donativos Gerais  .Talmud Tor","val":3667.3},{"date":"25/03","desc":"D Berta / Mazal Tov / Vales Pe","val":20000.0},{"date":"30/03","desc":"Sinag Kehilas Eitz","val":20000.0}],"total":78667.3},"Abril":{"rows":[{"date":"10/04","desc":"Sinag  Kehilas Eitz","val":15000.0},{"date":"23/04","desc":"Kehilas Eitz Sigago","val":15000.0}],"total":30000.0}};
+const MONTHS = ["Janeiro", "Fevereiro", "Marco", "Abril"];
+const ML = ["Jan", "Fev", "Mar", "Abr"];
+const BAR_H = [29.6, 0.0, 100.0, 38.1];
+const BAR_C = ["#60a5fa", "#60a5fa", "#1d4ed8", "#60a5fa"];
+const BAR_VALS = [23274.0, 0, 78667.3, 30000.0];
+let curMonth = 'Janeiro';
+
+// Bar chart
+const bwrap=document.getElementById('bc');
+const blwrap=document.getElementById('bl');
+ML.forEach((m,i)=>{
+  const col=document.createElement('div');col.className='bc';
+  col.innerHTML=BAR_VALS[i]>0
+    ?`<div class="bv">${(BAR_VALS[i]/1000).toFixed(1)}k</div><div style="width:100%;display:flex;align-items:flex-end;flex:1"><div class="bb" style="width:100%;height:${BAR_H[i]}%;background:${BAR_C[i]};"></div></div>`
+    :`<div class="bv" style="color:#ddd">—</div><div style="width:100%;display:flex;align-items:flex-end;flex:1"><div style="width:100%;height:2%;background:#f3f4f6;border-radius:2px;"></div></div>`;
+  bwrap.appendChild(col);
+  const lbl=document.createElement('div');lbl.className='bl';lbl.textContent=m;blwrap.appendChild(lbl);
+});
+
+function fmtBR(v){
+  if(!v||v===0) return '—';
+  return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function buildMonth(m){
+  const md=DATA[m];
+  if(!md||!md.rows||md.rows.length===0)
+    return '<div class="empty-msg">Sem lançamentos registrados neste mês.</div>';
+  const rows=md.rows;
+  let html=`<table class="tx-table"><thead><tr>
+    <th style="width:12%">Data</th>
+    <th style="width:64%">Descrição</th>
+    <th style="width:24%;text-align:right;">Valor</th>
+  </tr></thead><tbody>`;
+  rows.forEach(r=>{
+    html+=`<tr>
+      <td><span class="date-badge">${r.date}</span></td>
+      <td>${r.desc}</td>
+      <td style="text-align:right;font-variant-numeric:tabular-nums;">${fmtBR(r.val)}</td>
+    </tr>`;
+  });
+  html+=`<tr>
+    <td colspan="2"><strong>TOTAL DO MÊS</strong></td>
+    <td style="text-align:right;"><strong>${fmtBR(md.total)}</strong></td>
+  </tr></tbody></table>`;
+  return html;
+}
+
+function showMonth(m){
+  curMonth=m;
+  const active=MONTHS.filter(mk=>DATA[mk]&&DATA[mk].total>0);
+  document.querySelectorAll('.mtab').forEach((t,i)=>t.classList.toggle('active',active[i]===m));
+  document.getElementById('month-content').innerHTML=buildMonth(m);
+}
+
+showMonth(curMonth);
+</script>
+</body>
+</html>
