@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Malha e Arte | Tecidos da Gabi — Abril 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--ink:#0f1117;--ink2:#2d3142;--muted:#7b8099;--line:#e2e5ef;--bg:#f8f9fc;--white:#fff;--blue:#1d4ed8;--blue-lt:#eff4ff;--red:#c8291a;--red-lt:#fff4f3;--green:#166534;--green-lt:#f0fdf4;--amber:#92400e;--amber-lt:#fffbeb;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5}
+.page{max-width:980px;margin:0 auto;background:var(--white);padding:56px 60px 80px;box-shadow:0 0 60px rgba(0,0,0,.06)}
+
+/* HEADER */
+.rh{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:28px;border-bottom:2px solid var(--ink);margin-bottom:40px}
+.rb{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase}
+.rs{font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:4px}
+.rt{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:right;line-height:1.25}
+.rm{font-size:11px;color:var(--muted);text-align:right;margin-top:4px}
+
+/* KPIs */
+.k4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+.kc{background:var(--white);padding:18px 16px;display:flex;flex-direction:column;gap:4px}
+.km{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.kv{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);line-height:1}
+.ksm{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);line-height:1}
+.ku{font-size:11px;color:var(--muted)}
+.kd{font-size:11px;color:var(--muted)}
+.kd span{color:var(--ink2);font-weight:500}
+
+/* PART / SEC */
+.pd{display:flex;align-items:center;gap:16px;margin:40px 0 28px}
+.pl{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--white);background:var(--ink);padding:6px 18px;white-space:nowrap}
+.pline{flex:1;height:2px;background:var(--ink)}
+.ps{font-size:12px;color:var(--muted);white-space:nowrap}
+.sec{font-family:'Playfair Display',serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+
+/* BAR CHART */
+.barchart{display:flex;align-items:flex-end;gap:6px;height:150px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.bc{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px}
+.bv{font-size:8px;font-weight:600;color:var(--ink);text-align:center}
+.bb{width:100%;border-radius:2px 2px 0 0}
+.bls{display:flex;margin-bottom:28px}
+.bl{flex:1;text-align:center;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:5px}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:28px}
+thead th{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tbody td{padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis}
+tbody tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600;color:var(--ink);background:#fafbfd}
+tbody tr:hover td{background:#f9fafb}
+.tr{text-align:right;font-variant-numeric:tabular-nums} .tc{text-align:center} .b{font-weight:600;color:var(--ink)}
+.tag{display:inline-block;padding:2px 7px;border-radius:2px;font-size:9px;font-weight:600}
+.tag-red{background:var(--red-lt);color:var(--red)} .tag-green{background:var(--green-lt);color:var(--green)}
+.tag-amber{background:var(--amber-lt);color:var(--amber)} .tag-blue{background:var(--blue-lt);color:var(--blue)}
+
+/* HBAR */
+.hbar{display:flex;flex-direction:column;gap:9px}
+.hbr{display:flex;flex-direction:column;gap:3px}
+.hbt{display:flex;justify-content:space-between;align-items:baseline}
+.hbn{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+.hbv{font-size:11px;font-weight:600;color:var(--ink);text-align:right}
+.hbtr{height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden}
+.hbf{height:100%;border-radius:3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.card{border:1px solid var(--line);padding:18px 20px}
+.ct{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:12px}
+
+/* ALERTS */
+.alerts{display:flex;flex-direction:column}
+.ar{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.ar:last-child{border-bottom:none}
+.ai{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.ig{background:var(--green-lt)} .ir{background:var(--red-lt)} .ia{background:var(--amber-lt)} .ib{background:var(--blue-lt)}
+.ab{flex:1;line-height:1.6}
+.at{font-weight:600;color:var(--ink);margin-bottom:2px;font-size:12px}
+.ad{font-size:11px;color:var(--muted)}
+.ad b{color:var(--ink2);font-weight:600}
+
+/* INTERACTIVE TABLE */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:16px}
+.tab{padding:9px 18px;font-size:11px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--muted);transition:all .15s}
+.tab:hover{color:var(--ink)} .tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.scrl{overflow-x:auto;margin-bottom:8px}
+.scrl::-webkit-scrollbar{height:5px}
+.scrl::-webkit-scrollbar-thumb{background:#c0c8d8;border-radius:3px}
+.ttbl{border-collapse:collapse;min-width:1300px;width:100%}
+.ttbl th{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);padding:8px 7px;text-align:right;border-bottom:2px solid var(--ink);background:var(--white);white-space:nowrap;position:sticky;top:0;z-index:10}
+.ttbl th.lft{text-align:left;position:sticky;left:0;background:var(--white);z-index:20}
+.ttbl th.acm{background:#f0f4ff;color:var(--blue);border-left:2px solid var(--blue-lt)}
+.rc td{padding:9px 7px;border-bottom:1px solid var(--line);font-weight:600;font-size:11px;background:#fafbfd;color:var(--ink);text-align:right;white-space:nowrap}
+.rc td.lft{text-align:left;position:sticky;left:0;background:#fafbfd;z-index:5;min-width:180px;max-width:240px;white-space:normal}
+.rc{cursor:pointer;user-select:none} .rc:hover td{background:#f3f4f6} .rc:hover td.lft{background:#f3f4f6}
+.rt2 td{padding:8px 7px;border-bottom:1px solid #f0f1f5;font-size:11px;color:var(--ink2);background:var(--white);text-align:right;white-space:nowrap}
+.rt2 td.lft{text-align:left;position:sticky;left:0;background:var(--white);z-index:5;padding-left:20px;min-width:180px;max-width:240px;white-space:normal}
+.rt2{cursor:pointer;user-select:none} .rt2:hover td{background:#f9fafb} .rt2:hover td.lft{background:#f9fafb}
+.rf td{padding:6px 7px;border-bottom:1px solid #f5f6f9;font-size:10px;color:var(--muted);background:#fdfeff;text-align:right;white-space:nowrap}
+.rf td.lft{text-align:left;position:sticky;left:0;background:#fdfeff;z-index:5;padding-left:36px;min-width:180px;max-width:240px;white-space:normal}
+.fcc{font-size:9px;color:#adb5cc;display:block;margin-top:1px}
+.rtot td{padding:10px 7px;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);font-weight:700;font-size:12px;background:#f0f4ff;color:var(--ink);text-align:right;white-space:nowrap}
+.rtot td.lft{text-align:left;position:sticky;left:0;background:#f0f4ff;z-index:5}
+.acmc{background:#f8faff!important;font-weight:700;border-left:1px solid var(--blue-lt)}
+.cbst{background:#f0fdf4!important} .cwst{background:#fff9f9!important}
+.ei{display:inline-block;width:12px;height:12px;line-height:12px;text-align:center;font-size:9px;margin-right:5px;color:var(--muted);transition:transform .15s;flex-shrink:0}
+.expanded .ei{transform:rotate(90deg)}
+.nc{display:flex;align-items:flex-start}
+.hdn{display:none}
+.neg{color:var(--green);font-weight:500} .pos{color:var(--ink)}
+.legend{display:flex;gap:14px;font-size:10px;color:var(--muted);margin-bottom:12px;align-items:center;flex-wrap:wrap}
+.ld{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+
+.footer{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:28px}
+@media print{
+  body{background:#fff}.page{box-shadow:none;padding:32px 40px}
+  .tabs{display:none}.hdn{display:table-row!important}
+  .scrl{overflow:visible}.ttbl{min-width:unset}
+  .ttbl th.lft,.rc td.lft,.rt2 td.lft,.rf td.lft,.rtot td.lft{position:static}
+  .sec{page-break-after:avoid}.pd{page-break-after:avoid;page-break-before:always}
+}
+
+.mtabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:24px;flex-wrap:wrap;}
+.mtab{padding:10px 20px;font-size:12px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--muted);transition:all .15s;user-select:none;}
+.mtab:hover{color:var(--ink);}
+.mtab.active{color:var(--blue);border-bottom-color:var(--blue);}
+.mpanel{display:none;}.mpanel.active{display:block;}
+.status-pago{background:#f0fdf4;color:#166534;font-size:9px;font-weight:600;padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.5px;}
+.status-aberto{background:#fffbeb;color:#92400e;font-size:9px;font-weight:600;padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.5px;}
+.status-vencido{background:#fff4f3;color:#c8291a;font-size:9px;font-weight:600;padding:2px 7px;border-radius:2px;text-transform:uppercase;letter-spacing:.5px;}
+.dre-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+.det-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+.det-table th{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);}
+.det-table td{padding:9px 10px;border-bottom:1px solid #f5f6f9;font-size:11px;color:var(--ink2);}
+.det-table tr:hover td{background:#f9fafb;}
+.cat-group-header td{background:#fafbfd;font-weight:600;font-size:12px;color:var(--ink);border-bottom:1px solid var(--line);padding:10px 10px;}
+</style>
+</head>
+<body>
+
+<!-- Botão voltar ao Hub -->
+<div style="position:fixed;bottom:24px;left:24px;z-index:9999;">
+  <a href="index.html" style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:#0f1117;color:#fff;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;text-decoration:none;border-radius:2px;box-shadow:0 4px 16px rgba(0,0,0,.2);">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
+    Hub
+  </a>
+</div>
+
+<div class="page">
+<div class="rh">
+  <div><div class="rb">Malha e Arte · Tecidos da Gabi</div><div class="rs">DRE · Despesas · Abril 2026</div></div>
+  <div><div class="rt">Relatório Financeiro<br>Abril 2026</div><div class="rm">Uso interno · Dados reais</div></div>
+</div>
+
+<!-- KPIs -->
+<div class="k4">
+  <div class="kc"><div class="km">Receita Bruta</div><div class="kv">R$ 41.9k</div><div class="ku">abril 2026</div></div>
+  <div class="kc"><div class="km">Lucro Bruto</div><div class="kv">R$ 21.1k</div><div class="ku">margem 50.4%</div></div>
+  <div class="kc"><div class="km">Resultado Líquido</div><div class="kv" style="color:#166534">R$ 2.5k</div><div class="ku">margem 6.0%</div></div>
+  <div class="kc"><div class="km">Total Despesas</div><div class="kv">R$ 51.7k</div><div class="ku">pago + em aberto</div></div>
+</div>
+
+<!-- ABAS -->
+<div class="mtabs">
+  <div class="mtab active" onclick="swTab('dre')">📊 DRE</div>
+  <div class="mtab" onclick="swTab('fluxo')">💰 Fluxo de Caixa</div>
+  <div class="mtab" onclick="swTab('desp')">📋 Despesas Detalhadas</div>
+</div>
+
+<!-- ABA DRE -->
+<div id="tab-dre" class="mpanel active">
+  <div class="sec">Demonstração do Resultado — Abril 2026</div>
+  <table class="dre-table">
+    <thead><tr>
+      <th style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);width:70%;">Descrição</th>
+      <th style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:8px 10px;text-align:right;border-bottom:2px solid var(--ink);width:30%;">Abr 2026</th>
+    </tr></thead>
+    <tbody>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">RECEITA BRUTA</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">R$ 41.917,49</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Vendas de Produtos</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 39.670,50</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Frete Cobrado do Cliente</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 2.246,99</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">(-) Deduções / Devoluções</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">—</td></tr>
+<tr><td colspan="2" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(=) RECEITA LÍQUIDA</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">R$ 41.917,49</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">(-) CMV — Custo das Mercadorias</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 20.794,05</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 50px;font-size:12px;border-bottom:1px solid #f0f1f5;">Custo dos Produtos Vendidos</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 19.690,05</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 50px;font-size:12px;border-bottom:1px solid #f0f1f5;">Embalagens (CMV)</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 1.104,00</td></tr>
+<tr><td colspan="2" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style="background:#f0fdf4;"><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(=) LUCRO BRUTO</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;color:#166534;">R$ 21.123,44</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Margem Bruta</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">50.4%</td></tr>
+<tr><td colspan="2" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(-) DESPESAS OPERACIONAIS</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">R$ 3.235,71</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Frete Empresa (Melhor Envio)</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 2.010,00</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Taxa Cartão de Crédito</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 1.056,18</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Comissões Vendedores</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 169,53</td></tr>
+<tr><td colspan="2" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(-) DESPESAS COM PESSOAL</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">R$ 13.532,92</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Salários</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 3.692,02</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Encargos Sociais (FGTS/INSS)</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 528,90</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Vale Transporte</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 812,00</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Pró-labore</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 8.500,00</td></tr>
+<tr><td colspan="2" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(-) DESPESAS ADMINISTRATIVAS</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">R$ 930,24</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Sistemas (Tray / Agilize)</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 330,24</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Contador / Contabilidade</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 600,00</td></tr>
+<tr><td colspan="2" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(-) MARKETING</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">R$ 3.424,57</td></tr>
+<tr><td colspan="2" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(-) DESPESAS FINANCEIRAS / IMPOSTOS</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">R$ 892,88</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">DAS — Simples Nacional</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">R$ 892,88</td></tr>
+<tr><td colspan="2" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style="background:#f0fdf4;"><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(=) RESULTADO LÍQUIDO</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;color:#166534;">R$ 2.531,69</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Margem Líquida</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">6.0%</td></tr>
+</tbody>
+  </table>
+</div>
+
+<!-- ABA FLUXO -->
+<div id="tab-fluxo" class="mpanel">
+  <div style="background:#fffbeb;border-left:3px solid #d97706;padding:12px 16px;margin-bottom:20px;font-size:12px;color:#92400e;">
+    ⚠️ Fluxo de caixa parcialmente preenchido — apenas saídas registradas. Entradas e alguns itens de pessoal ainda não foram lançados neste mês.
+  </div>
+  <div class="k3" style="margin-bottom:24px;">
+    <div class="kc"><div class="km">Entradas Registradas</div><div class="kv" style="color:#9ca3af">—</div><div class="ku">não preenchido</div></div>
+    <div class="kc"><div class="km">Saídas Registradas</div><div class="kv">R$ 4,1k</div><div class="ku">operacional + admin</div></div>
+    <div class="kc"><div class="km">Fluxo Líquido</div><div class="kv" style="color:#c8291a">− R$ 4,1k</div><div class="ku">saldo final</div></div>
+  </div>
+  <div class="sec">Demonstração do Fluxo de Caixa — Abril 2026</div>
+  <table style="width:100%;border-collapse:collapse;table-layout:fixed;">
+    <thead><tr>
+      <th style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);width:60%;">Descrição</th>
+      <th style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:8px 10px;text-align:right;border-bottom:2px solid var(--ink);width:20%;">Real</th>
+      <th style="font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:8px 10px;text-align:right;border-bottom:2px solid var(--ink);width:20%;">Previsto</th>
+    </tr></thead>
+    <tbody>
+<tr style="background:#fafbfd;"><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">SALDO INICIAL</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">—</td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr><td colspan="3" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(+) ENTRADAS</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">—</td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Recebimentos à Vista (PIX/Dinheiro)</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">—</td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Recebimentos Cartão de Crédito</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">—</td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Outras Entradas</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">—</td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr><td colspan="3" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(−) SAÍDAS OPERACIONAIS</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;"><span style="color:#166534;">R$ 3.114,00</span></td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Frete Empresa (Melhor Envio)</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;"><span style="color:#166534;">R$ 2.010,00</span></td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Embalagens</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;"><span style="color:#166534;">R$ 1.104,00</span></td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr><td colspan="3" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(−) SAÍDAS COM PESSOAL</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;"><span style="color:#166534;">R$ 812,00</span></td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Vale Transporte</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;"><span style="color:#166534;">R$ 812,00</span></td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr><td colspan="3" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(−) SAÍDAS ADMINISTRATIVAS</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;"><span style="color:#166534;">R$ 197,86</span></td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">Sistemas (Tray / Agilize)</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;"><span style="color:#166534;">R$ 197,86</span></td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr><td colspan="3" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style=""><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(−) IMPOSTOS</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;">—</td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">DAS — Simples Nacional</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">—</td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr><td colspan="3" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style="background:#fff4f3;"><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(=) FLUXO LÍQUIDO DO MÊS</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;"><span style="color:#c8291a;">− R$ 4.123,86</span></td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr style=""><td style="padding:9px 10px 9px 30px;font-size:12px;border-bottom:1px solid #f0f1f5;">(−) Distribuição de Resultados</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;">—</td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+<tr><td colspan="3" style="padding:4px 0;border-bottom:2px solid #e2e5ef;"></td></tr>
+<tr style="background:#fff4f3;"><td style="padding:9px 10px 9px 10px;font-size:12px;border-bottom:1px solid #f0f1f5;font-weight:700;">(=) SALDO FINAL</td><td style="padding:9px 10px;text-align:right;font-size:12px;border-bottom:1px solid #f0f1f5;font-variant-numeric:tabular-nums;font-weight:700;"><span style="color:#c8291a;">− R$ 4.123,86</span></td><td style="padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid #f0f1f5;color:#9ca3af;">Previsto</td></tr>
+</tbody>
+  </table>
+</div>
+
+<!-- ABA DESPESAS -->
+<div id="tab-desp" class="mpanel">
+  <div class="k3" style="margin-bottom:24px;">
+    <div class="kc"><div class="km">Total Pago</div><div class="kv" style="color:#166534">R$ 28.0k</div></div>
+    <div class="kc"><div class="km">Total em Aberto</div><div class="kv" style="color:#92400e">R$ 23.7k</div></div>
+    <div class="kc"><div class="km">Total Geral</div><div class="kv">R$ 51.7k</div></div>
+  </div>
+
+  <div class="sec">Distribuição por Categoria</div>
+  <div class="card" style="margin-bottom:28px;padding:20px 24px;"><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Compras</span><span style="font-size:11px;font-weight:600;">R$ 24.560,41 <span style="color:#9ca3af;font-weight:400;font-size:10px;">47.5%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:100.0%;height:100%;background:#1d4ed8;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Antecipação de Lucros</span><span style="font-size:11px;font-weight:600;">R$ 8.500,00 <span style="color:#9ca3af;font-weight:400;font-size:10px;">16.4%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:34.6%;height:100%;background:#7c3aed;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Pró-labore</span><span style="font-size:11px;font-weight:600;">R$ 8.500,00 <span style="color:#9ca3af;font-weight:400;font-size:10px;">16.4%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:34.6%;height:100%;background:#7c3aed;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Salário</span><span style="font-size:11px;font-weight:600;">R$ 3.692,02 <span style="color:#9ca3af;font-weight:400;font-size:10px;">7.1%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:15.0%;height:100%;background:#0891b2;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Melhor Envio</span><span style="font-size:11px;font-weight:600;">R$ 1.900,00 <span style="color:#9ca3af;font-weight:400;font-size:10px;">3.7%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:7.7%;height:100%;background:#d97706;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Embalagem</span><span style="font-size:11px;font-weight:600;">R$ 1.104,00 <span style="color:#9ca3af;font-weight:400;font-size:10px;">2.1%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:4.5%;height:100%;background:#059669;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">DAS</span><span style="font-size:11px;font-weight:600;">R$ 892,88 <span style="color:#9ca3af;font-weight:400;font-size:10px;">1.7%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:3.6%;height:100%;background:#b45309;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Vale Transporte</span><span style="font-size:11px;font-weight:600;">R$ 812,00 <span style="color:#9ca3af;font-weight:400;font-size:10px;">1.6%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:3.3%;height:100%;background:#6b7280;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Marketing</span><span style="font-size:11px;font-weight:600;">R$ 600,00 <span style="color:#9ca3af;font-weight:400;font-size:10px;">1.2%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:2.4%;height:100%;background:#dc2626;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Encargos FGTS</span><span style="font-size:11px;font-weight:600;">R$ 528,90 <span style="color:#9ca3af;font-weight:400;font-size:10px;">1.0%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:2.2%;height:100%;background:#6b7280;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Sistemas</span><span style="font-size:11px;font-weight:600;">R$ 330,24 <span style="color:#9ca3af;font-weight:400;font-size:10px;">0.6%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:1.3%;height:100%;background:#0284c7;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Comissão</span><span style="font-size:11px;font-weight:600;">R$ 169,53 <span style="color:#9ca3af;font-weight:400;font-size:10px;">0.3%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:0.7%;height:100%;background:#9ca3af;border-radius:3px;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px;"><span style="font-size:11px;color:#2d3142;">Motoboy</span><span style="font-size:11px;font-weight:600;">R$ 110,00 <span style="color:#9ca3af;font-weight:400;font-size:10px;">0.2%</span></span></div><div style="height:5px;background:#f3f4f6;border-radius:3px;"><div style="width:0.4%;height:100%;background:#9ca3af;border-radius:3px;"></div></div></div></div>
+
+  <div class="sec">Lançamentos Detalhados</div>
+  <div style="overflow-x:auto;">
+  <table class="det-table">
+    <thead><tr>
+      <th style="width:16%">Categoria</th>
+      <th style="width:10%">Emissão</th>
+      <th style="width:10%">Venc.</th>
+      <th style="width:20%">Fornecedor</th>
+      <th style="width:28%">Descrição</th>
+      <th style="width:10%;text-align:right;">Valor</th>
+      <th style="width:6%;text-align:center;">Status</th>
+    </tr></thead>
+    <tbody id="detBody"></tbody>
+  </table>
+  </div>
+</div>
+
+<div class="footer" style="border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:28px;">
+  <span>Malha e Arte | Tecidos da Gabi · Abril 2026 · Uso interno</span>
+  <span>Fonte: Malha_Arte_DRE_Fluxo_2026_v2.xlsx</span>
+</div>
+</div>
+
+<script>
+const DATA = {"detalhe":[{"cat":"Antecipação de Lucros","emissao":"30/04","venc":"11/05","forn":"Gabriela dos Santos","desc":"Antecipação de lucros","val":8500.0,"status":"pago"},{"cat":"Comissão","emissao":"30/04","venc":"05/05","forn":"Flavia","desc":"Comissão de vendas","val":89.17,"status":"pago"},{"cat":"Comissão","emissao":"30/04","venc":"05/05","forn":"Ayanne","desc":"Comissão de vendas","val":80.36,"status":"pago"},{"cat":"Compras","emissao":"24/04","venc":"23/05","forn":"Marles Ind. Têxtil","desc":"NF 320423 parcela 1/5","val":851.25,"status":"pago"},{"cat":"Compras","emissao":"24/04","venc":"22/06","forn":"Marles Ind. Têxtil","desc":"NF 320423 parcela 2/5","val":850.0,"status":"aberto"},{"cat":"Compras","emissao":"01/04","venc":"04/07","forn":"Marles Ind. Têxtil","desc":"NF 23057 parcela 1/1","val":4812.75,"status":"aberto"},{"cat":"Compras","emissao":"01/04","venc":"04/07","forn":"Marles Ind. Têxtil","desc":"NF 23055 parcela 1/1","val":13261.38,"status":"aberto"},{"cat":"Compras","emissao":"24/04","venc":"12/07","forn":"Marles Ind. Têxtil","desc":"NF 23086 parcela 1/1","val":2235.03,"status":"aberto"},{"cat":"Compras","emissao":"24/04","venc":"22/07","forn":"Marles Ind. Têxtil","desc":"NF 320423 parcela 3/5","val":850.0,"status":"aberto"},{"cat":"Compras","emissao":"24/04","venc":"21/08","forn":"Marles Ind. Têxtil","desc":"NF 320423 parcela 4/5","val":850.0,"status":"aberto"},{"cat":"Compras","emissao":"24/04","venc":"20/09","forn":"Marles Ind. Têxtil","desc":"NF 320423 parcela 5/5","val":850.0,"status":"aberto"},{"cat":"DAS","emissao":"30/04","venc":"20/05","forn":"Receita Federal","desc":"DAS Simples Nacional","val":892.88,"status":"pago"},{"cat":"Embalagem","emissao":"22/04","venc":"23/04","forn":"Jin Qiaoping","desc":"Envelopes","val":209.0,"status":"pago"},{"cat":"Embalagem","emissao":"22/04","venc":"23/04","forn":"Jin Qiaoping","desc":"Etiquetas","val":360.0,"status":"pago"},{"cat":"Embalagem","emissao":"22/04","venc":"23/04","forn":"Jin Qiaoping","desc":"Fita durex","val":535.0,"status":"pago"},{"cat":"Encargos FGTS","emissao":"30/04","venc":"20/05","forn":"FGTS","desc":"Ayanne","val":175.76,"status":"pago"},{"cat":"Encargos FGTS","emissao":"30/04","venc":"20/05","forn":"FGTS","desc":"Rosane + James","val":353.14,"status":"pago"},{"cat":"Marketing","emissao":"30/04","venc":"06/05","forn":"Amanda Marketing","desc":"Serviço de marketing","val":600.0,"status":"pago"},{"cat":"Melhor Envio","emissao":"24/04","venc":"24/04","forn":"Melhor Envio","desc":"Saldo para frete","val":500.0,"status":"pago"},{"cat":"Melhor Envio","emissao":"27/04","venc":"27/04","forn":"Melhor Envio","desc":"Saldo para frete","val":500.0,"status":"pago"},{"cat":"Melhor Envio","emissao":"28/04","venc":"28/04","forn":"Melhor Envio","desc":"Saldo para frete","val":500.0,"status":"pago"},{"cat":"Melhor Envio","emissao":"29/04","venc":"29/04","forn":"Melhor Envio","desc":"Saldo para frete","val":400.0,"status":"pago"},{"cat":"Motoboy","emissao":"23/04","venc":"24/04","forn":"Motoboy","desc":"Pedido 56835","val":40.0,"status":"pago"},{"cat":"Motoboy","emissao":"27/04","venc":"28/04","forn":"Motoboy","desc":"Entrega","val":40.0,"status":"pago"},{"cat":"Motoboy","emissao":"29/04","venc":"29/04","forn":"Motoboy","desc":"Angelica / Shopping Azulão","val":30.0,"status":"pago"},{"cat":"Pró-labore","emissao":"30/04","venc":"11/05","forn":"Gabriela dos Santos","desc":"Pró-labore","val":8500.0,"status":"pago"},{"cat":"Salário","emissao":"30/04","venc":"05/05","forn":"Ayanne","desc":"Salário","val":1027.24,"status":"pago"},{"cat":"Salário","emissao":"30/04","venc":"05/05","forn":"James Santos","desc":"Salário","val":1007.72,"status":"pago"},{"cat":"Salário","emissao":"30/04","venc":"05/05","forn":"Rosane Carvalho","desc":"Salário","val":957.06,"status":"pago"},{"cat":"Salário","emissao":"30/04","venc":"08/05","forn":"Luciana (cadastros)","desc":"Salário","val":700.0,"status":"pago"},{"cat":"Sistemas","emissao":"13/04","venc":"13/04","forn":"Agilize","desc":"Contabilidade","val":125.65,"status":"pago"},{"cat":"Sistemas","emissao":"24/04","venc":"24/04","forn":"Tray","desc":"Mensalidade plataforma","val":72.21,"status":"pago"},{"cat":"Sistemas","emissao":"24/04","venc":"07/05","forn":"Tray","desc":"Mensalidade fatura 4961714","val":132.38,"status":"pago"},{"cat":"Vale Transporte","emissao":"30/04","venc":"30/04","forn":"Rosane Carvalho","desc":"Vale transporte","val":380.0,"status":"pago"},{"cat":"Vale Transporte","emissao":"30/04","venc":"30/04","forn":"James Santos","desc":"Vale transporte","val":216.0,"status":"pago"},{"cat":"Vale Transporte","emissao":"30/04","venc":"30/04","forn":"Ayanne","desc":"Vale transporte","val":216.0,"status":"pago"}]};
+
+function fmtBR(v){
+  return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function buildDetail(){
+  const body = document.getElementById('detBody');
+  const rows = DATA.detalhe;
+  
+  // Group by category
+  const groups = {};
+  rows.forEach(r=>{
+    if(!groups[r.cat]) groups[r.cat]=[];
+    groups[r.cat].push(r);
+  });
+  
+  let html='';
+  Object.entries(groups).sort((a,b)=>{
+    const sa=a[1].reduce((s,r)=>s+r.val,0);
+    const sb=b[1].reduce((s,r)=>s+r.val,0);
+    return sb-sa;
+  }).forEach(([cat,items])=>{
+    const subtotal=items.reduce((s,r)=>s+r.val,0);
+    html+=`<tr class="cat-group-header"><td colspan="5">${cat}</td><td style="text-align:right;font-weight:700;">${fmtBR(subtotal)}</td><td></td></tr>`;
+    items.forEach(r=>{
+      const sc = r.status==='pago'?'status-pago':r.status==='aberto'?'status-aberto':'status-vencido';
+      html+=`<tr>
+        <td style="padding-left:20px;color:var(--muted)">${r.cat}</td>
+        <td>${r.emissao}</td>
+        <td>${r.venc}</td>
+        <td>${r.forn}</td>
+        <td style="color:var(--muted)">${r.desc||'—'}</td>
+        <td style="text-align:right;font-variant-numeric:tabular-nums;">${fmtBR(r.val)}</td>
+        <td style="text-align:center;"><span class="${sc}">${r.status}</span></td>
+      </tr>`;
+    });
+  });
+  
+  html+=`<tr style="background:#f0f4ff;font-weight:700;border-top:2px solid var(--ink);">
+    <td colspan="5" style="padding:10px;font-size:13px;">TOTAL GERAL</td>
+    <td style="text-align:right;font-size:13px;padding:10px;">${fmtBR(51699.98)}</td>
+    <td></td>
+  </tr>`;
+  
+  body.innerHTML=html;
+}
+
+function swTab(t){
+  document.querySelectorAll('.mtab').forEach((el,i)=>el.classList.toggle('active',(i===0&&t==='dre')||(i===1&&t==='desp')));
+  document.getElementById('tab-dre').classList.toggle('active',t==='dre');
+  document.getElementById('tab-desp').classList.toggle('active',t==='desp');
+}
+
+buildDetail();
+</script>
+</body>
+</html>
