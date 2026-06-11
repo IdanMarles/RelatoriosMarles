@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Michpa 4 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+:root{--ink:#0f1117;--ink2:#2d3142;--muted:#7b8099;--line:#e2e5ef;--bg:#f8f9fc;--white:#fff;--blue:#1d4ed8;--blue-lt:#eff4ff;--red:#c8291a;--red-lt:#fff4f3;--green:#166534;--green-lt:#f0fdf4;--amber:#92400e;--amber-lt:#fffbeb;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.5}
+.page{max-width:980px;margin:0 auto;background:var(--white);padding:56px 60px 80px;box-shadow:0 0 60px rgba(0,0,0,.06)}
+
+/* HEADER */
+.rh{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:28px;border-bottom:2px solid var(--ink);margin-bottom:40px}
+.rb{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase}
+.rs{font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:4px}
+.rt{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:right;line-height:1.25}
+.rm{font-size:11px;color:var(--muted);text-align:right;margin-top:4px}
+
+/* KPIs */
+.k4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:28px}
+.kc{background:var(--white);padding:18px 16px;display:flex;flex-direction:column;gap:4px}
+.km{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.kv{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);line-height:1}
+.ksm{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);line-height:1}
+.ku{font-size:11px;color:var(--muted)}
+.kd{font-size:11px;color:var(--muted)}
+.kd span{color:var(--ink2);font-weight:500}
+
+/* PART / SEC */
+.pd{display:flex;align-items:center;gap:16px;margin:40px 0 28px}
+.pl{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--white);background:var(--ink);padding:6px 18px;white-space:nowrap}
+.pline{flex:1;height:2px;background:var(--ink)}
+.ps{font-size:12px;color:var(--muted);white-space:nowrap}
+.sec{font-family:'Playfair Display',serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+
+/* BAR CHART */
+.barchart{display:flex;align-items:flex-end;gap:6px;height:150px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.bc{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px}
+.bv{font-size:8px;font-weight:600;color:var(--ink);text-align:center}
+.bb{width:100%;border-radius:2px 2px 0 0}
+.bls{display:flex;margin-bottom:28px}
+.bl{flex:1;text-align:center;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:5px}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:28px}
+thead th{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tbody td{padding:9px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis}
+tbody tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600;color:var(--ink);background:#fafbfd}
+tbody tr:hover td{background:#f9fafb}
+.tr{text-align:right;font-variant-numeric:tabular-nums} .tc{text-align:center} .b{font-weight:600;color:var(--ink)}
+.tag{display:inline-block;padding:2px 7px;border-radius:2px;font-size:9px;font-weight:600}
+.tag-red{background:var(--red-lt);color:var(--red)} .tag-green{background:var(--green-lt);color:var(--green)}
+.tag-amber{background:var(--amber-lt);color:var(--amber)} .tag-blue{background:var(--blue-lt);color:var(--blue)}
+
+/* HBAR */
+.hbar{display:flex;flex-direction:column;gap:9px}
+.hbr{display:flex;flex-direction:column;gap:3px}
+.hbt{display:flex;justify-content:space-between;align-items:baseline}
+.hbn{font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+.hbv{font-size:11px;font-weight:600;color:var(--ink);text-align:right}
+.hbtr{height:5px;background:#f3f4f6;border-radius:3px;overflow:hidden}
+.hbf{height:100%;border-radius:3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+.card{border:1px solid var(--line);padding:18px 20px}
+.ct{font-size:11px;font-weight:600;color:var(--ink);margin-bottom:12px}
+
+/* ALERTS */
+.alerts{display:flex;flex-direction:column}
+.ar{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.ar:last-child{border-bottom:none}
+.ai{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.ig{background:var(--green-lt)} .ir{background:var(--red-lt)} .ia{background:var(--amber-lt)} .ib{background:var(--blue-lt)}
+.ab{flex:1;line-height:1.6}
+.at{font-weight:600;color:var(--ink);margin-bottom:2px;font-size:12px}
+.ad{font-size:11px;color:var(--muted)}
+.ad b{color:var(--ink2);font-weight:600}
+
+/* INTERACTIVE TABLE */
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:16px}
+.tab{padding:9px 18px;font-size:11px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--muted);transition:all .15s}
+.tab:hover{color:var(--ink)} .tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.scrl{overflow-x:auto;margin-bottom:8px}
+.scrl::-webkit-scrollbar{height:5px}
+.scrl::-webkit-scrollbar-thumb{background:#c0c8d8;border-radius:3px}
+.ttbl{border-collapse:collapse;min-width:1300px;width:100%}
+.ttbl th{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);padding:8px 7px;text-align:right;border-bottom:2px solid var(--ink);background:var(--white);white-space:nowrap;position:sticky;top:0;z-index:10}
+.ttbl th.lft{text-align:left;position:sticky;left:0;background:var(--white);z-index:20}
+.ttbl th.acm{background:#f0f4ff;color:var(--blue);border-left:2px solid var(--blue-lt)}
+.rc td{padding:9px 7px;border-bottom:1px solid var(--line);font-weight:600;font-size:11px;background:#fafbfd;color:var(--ink);text-align:right;white-space:nowrap}
+.rc td.lft{text-align:left;position:sticky;left:0;background:#fafbfd;z-index:5;min-width:180px;max-width:240px;white-space:normal}
+.rc{cursor:pointer;user-select:none} .rc:hover td{background:#f3f4f6} .rc:hover td.lft{background:#f3f4f6}
+.rt2 td{padding:8px 7px;border-bottom:1px solid #f0f1f5;font-size:11px;color:var(--ink2);background:var(--white);text-align:right;white-space:nowrap}
+.rt2 td.lft{text-align:left;position:sticky;left:0;background:var(--white);z-index:5;padding-left:20px;min-width:180px;max-width:240px;white-space:normal}
+.rt2{cursor:pointer;user-select:none} .rt2:hover td{background:#f9fafb} .rt2:hover td.lft{background:#f9fafb}
+.rf td{padding:6px 7px;border-bottom:1px solid #f5f6f9;font-size:10px;color:var(--muted);background:#fdfeff;text-align:right;white-space:nowrap}
+.rf td.lft{text-align:left;position:sticky;left:0;background:#fdfeff;z-index:5;padding-left:36px;min-width:180px;max-width:240px;white-space:normal}
+.fcc{font-size:9px;color:#adb5cc;display:block;margin-top:1px}
+.rtot td{padding:10px 7px;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);font-weight:700;font-size:12px;background:#f0f4ff;color:var(--ink);text-align:right;white-space:nowrap}
+.rtot td.lft{text-align:left;position:sticky;left:0;background:#f0f4ff;z-index:5}
+.acmc{background:#f8faff!important;font-weight:700;border-left:1px solid var(--blue-lt)}
+.cbst{background:#f0fdf4!important} .cwst{background:#fff9f9!important}
+.ei{display:inline-block;width:12px;height:12px;line-height:12px;text-align:center;font-size:9px;margin-right:5px;color:var(--muted);transition:transform .15s;flex-shrink:0}
+.expanded .ei{transform:rotate(90deg)}
+.nc{display:flex;align-items:flex-start}
+.hdn{display:none}
+.neg{color:var(--green);font-weight:500} .pos{color:var(--ink)}
+.legend{display:flex;gap:14px;font-size:10px;color:var(--muted);margin-bottom:12px;align-items:center;flex-wrap:wrap}
+.ld{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+
+.footer{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:28px}
+@media print{
+  body{background:#fff}.page{box-shadow:none;padding:32px 40px}
+  .tabs{display:none}.hdn{display:table-row!important}
+  .scrl{overflow:visible}.ttbl{min-width:unset}
+  .ttbl th.lft,.rc td.lft,.rt2 td.lft,.rf td.lft,.rtot td.lft{position:static}
+  .sec{page-break-after:avoid}.pd{page-break-after:avoid;page-break-before:always}
+}
+
+.mtabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:24px;flex-wrap:wrap;}
+.mtab{padding:10px 20px;font-size:12px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--muted);transition:all .15s;user-select:none;}
+.mtab:hover{color:var(--ink);}
+.mtab.active{color:var(--blue);border-bottom-color:var(--blue);}
+.cat-summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:24px;}
+.cat-summary-card{padding:14px 16px;border:1px solid var(--line);border-left:3px solid #e2e5ef;}
+.cat-summary-card .name{font-size:10px;color:var(--muted);margin-bottom:4px;}
+.cat-summary-card .val{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);}
+.cat-summary-card .pct{font-size:10px;color:var(--muted);margin-top:2px;}
+.tx-table{width:100%;border-collapse:collapse;table-layout:fixed;margin-bottom:28px;}
+.tx-table th{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);}
+.tx-table td{padding:10px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink2);vertical-align:middle;}
+.tx-table tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600;color:var(--ink);background:#fafbfd;}
+.tx-table tr:hover td{background:#f9fafb;}
+.tx-table tr:last-child:hover td{background:#fafbfd;}
+.date-badge{display:inline-block;font-size:10px;color:var(--muted);background:#f3f4f6;padding:2px 7px;border-radius:2px;font-variant-numeric:tabular-nums;}
+.cat-group-header td{background:#fafbfd;font-weight:600;font-size:12px;color:var(--ink);border-bottom:1px solid var(--line);padding:10px 10px;cursor:pointer;user-select:none;}
+.cat-group-header:hover td{background:#f3f4f6;}
+</style>
+</head>
+<body>
+<style id="navstyle">
+.topnav{position:sticky;top:0;z-index:999;background:#fff;border-bottom:3px solid #0f1117;display:flex;gap:0;box-shadow:0 2px 8px rgba(0,0,0,.07);font-family:'DM Sans',sans-serif;}
+.topnav a{padding:14px 24px;font-size:12px;font-weight:600;color:#7b8099;text-decoration:none;border-bottom:3px solid transparent;margin-bottom:-3px;white-space:nowrap;transition:color .15s;}
+.topnav a:hover{color:#0f1117;background:#f9fafb;}
+.topnav a.active{color:#1d4ed8;border-bottom-color:#1d4ed8;}
+</style>
+<div class="topnav">
+  <a href="michpa_zero.html">Michpa Zero</a>
+  <a href="donativos.html">Donativos</a>
+  <a href="michpa_3.html" >Michpa 3</a>
+  <a href="michpa_4.html" class='active'>Michpa 4</a>
+</div>
+
+<div style="position:fixed;bottom:24px;left:24px;z-index:9999;">
+  <a href="index.html" style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:#0f1117;color:#fff;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;text-decoration:none;border-radius:2px;box-shadow:0 4px 16px rgba(0,0,0,.2);">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>Hub
+  </a>
+</div>
+
+<div class="page">
+<div class="rh">
+  <div><div class="rb">Michpa 4</div><div class="rs">Despesas Pessoais · 2026</div></div>
+  <div><div class="rt">Controle de Gastos<br>Michpa 4 · 2026</div><div class="rm">Janeiro · Fevereiro · Março · Abril · Maio · Uso interno</div></div>
+</div>
+
+<div class="k4">
+  <div class="kc"><div class="km">Janeiro</div><div class="kv">R$ 17.3k</div><div class="ku">total do mês</div></div>
+  <div class="kc"><div class="km">Fevereiro</div><div class="kv">R$ 30.9k</div><div class="ku">total do mês</div></div>
+  <div class="kc"><div class="km">Março</div><div class="kv">R$ 94.4k</div><div class="ku">total do mês</div></div>
+  <div class="kc"><div class="km">Abril</div><div class="kv">R$ 123.7k</div><div class="ku">total do mês</div></div>
+</div>
+<div class="k3" style="margin-bottom:32px;">
+  <div class="kc"><div class="km">Maio</div><div class="kv">R$ 67.0k</div><div class="ku">total do mês</div></div>
+  <div class="kc"><div class="km">Acumulado Jan–Mai</div><div class="kv">R$ 333.4k</div><div class="ku">total 5 meses</div></div>
+  <div class="kc"><div class="km">Maior Mês</div><div class="kv">Abr</div><div class="ku">R$ 123.7k</div></div>
+</div>
+
+<div class="sec">Distribuição Acumulada por Categoria — Jan–Mai</div>
+<div class="card" style="margin-bottom:32px;"><div class="hbar"><div class="hbr"><div class="hbt"><span class="hbn">🎉 Eventos</span><span class="hbv">R$ 112.5k <span style="color:var(--muted);font-size:10px;font-weight:400;">33.7%</span></span></div><div class="hbtr"><div class="hbf" style="width:100.0%;background:#c8291a;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">📚 Educação</span><span class="hbv">R$ 77.8k <span style="color:var(--muted);font-size:10px;font-weight:400;">23.3%</span></span></div><div class="hbtr"><div class="hbf" style="width:69.1%;background:#0891b2;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">👥 Pessoal / Funcionários</span><span class="hbv">R$ 41.1k <span style="color:var(--muted);font-size:10px;font-weight:400;">12.3%</span></span></div><div class="hbtr"><div class="hbf" style="width:36.6%;background:#7c3aed;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">✈️ Viagem</span><span class="hbv">R$ 28.6k <span style="color:var(--muted);font-size:10px;font-weight:400;">8.6%</span></span></div><div class="hbtr"><div class="hbf" style="width:25.4%;background:#7c3aed;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">🏥 Saúde</span><span class="hbv">R$ 27.7k <span style="color:var(--muted);font-size:10px;font-weight:400;">8.3%</span></span></div><div class="hbtr"><div class="hbf" style="width:24.6%;background:#059669;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">📈 Investimentos</span><span class="hbv">R$ 25.5k <span style="color:var(--muted);font-size:10px;font-weight:400;">7.7%</span></span></div><div class="hbtr"><div class="hbf" style="width:22.7%;background:#1d4ed8;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">🏠 Casa</span><span class="hbv">R$ 8.8k <span style="color:var(--muted);font-size:10px;font-weight:400;">2.6%</span></span></div><div class="hbtr"><div class="hbf" style="width:7.8%;background:#059669;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">💝 Donativos</span><span class="hbv">R$ 8.0k <span style="color:var(--muted);font-size:10px;font-weight:400;">2.4%</span></span></div><div class="hbtr"><div class="hbf" style="width:7.1%;background:#b45309;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">📱 Telefone e Assinatura</span><span class="hbv">R$ 2.3k <span style="color:var(--muted);font-size:10px;font-weight:400;">0.7%</span></span></div><div class="hbtr"><div class="hbf" style="width:2.1%;background:#0284c7;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">🚗 Transporte</span><span class="hbv">R$ 657 <span style="color:var(--muted);font-size:10px;font-weight:400;">0.2%</span></span></div><div class="hbtr"><div class="hbf" style="width:0.6%;background:#6b7280;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">📦 Diversos</span><span class="hbv">R$ 410 <span style="color:var(--muted);font-size:10px;font-weight:400;">0.1%</span></span></div><div class="hbtr"><div class="hbf" style="width:0.4%;background:#9ca3af;"></div></div></div>
+<div class="hbr"><div class="hbt"><span class="hbn">🛒 Alimentação</span><span class="hbv">R$ 100 <span style="color:var(--muted);font-size:10px;font-weight:400;">0.0%</span></span></div><div class="hbtr"><div class="hbf" style="width:0.1%;background:#dc2626;"></div></div></div>
+</div></div>
+
+<div class="pd"><div class="pl">Detalhe</div><div class="pline"></div><div class="ps">Lançamentos por Mês</div></div>
+<div class="mtabs"><div class="mtab active" onclick="showMonth('jan')">Jan<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 17.3k</span></div><div class="mtab" onclick="showMonth('fev')">Fev<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 30.9k</span></div><div class="mtab" onclick="showMonth('mar')">Mar<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 94.4k</span></div><div class="mtab" onclick="showMonth('abr')">Abr<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 123.7k</span></div><div class="mtab" onclick="showMonth('mai')">Mai<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 67.0k</span></div></div>
+<div id="month-content"></div>
+
+<div class="footer">
+  <span>Michpa 4 · Janeiro–Maio 2026 · Uso interno</span>
+</div>
+</div>
+
+<script>
+const DATA={"jan":{"total":17311.91,"cats":{"Telefone e Assinatura":{"total":436.32,"items":[{"date":"05/01","desc":"Celular","val":436.32}]},"Transporte":{"total":32.2,"items":[{"date":"10/01","desc":"Veloe / Alelo","val":32.2}]},"Investimentos":{"total":10290.69,"items":[{"date":"12/01","desc":"Arrend. de Saldo (invest)","val":-0.01},{"date":"12/01","desc":"Investimento M3+M4","val":10290.7}]},"Pessoal / Funcionários":{"total":5202.7,"items":[{"date":"12/01","desc":"Vitor Ciello","val":4002.7},{"date":"15/01","desc":"Heliseo Rosa Pinho","val":1200.0}]},"Saúde":{"total":1350.0,"items":[{"date":"15/01","desc":"Samy Roisen","val":1350.0}]}}},"fev":{"total":30928.48,"cats":{"Telefone e Assinatura":{"total":418.44,"items":[{"date":"05/02","desc":"Celular","val":418.44}]},"Diversos":{"total":220.0,"items":[{"date":"10/02","desc":"M4 Desp. Part.","val":160.0},{"date":"23/02","desc":"Diversos","val":60.0}]},"Transporte":{"total":167.34,"items":[{"date":"10/02","desc":"Veloe / Alelo","val":167.34}]},"Educação":{"total":3500.0,"items":[{"date":"10/02","desc":"CES U Mentoria","val":3500.0}]},"Pessoal / Funcionários":{"total":4004.97,"items":[{"date":"10/02","desc":"Vitor Ciello","val":4004.97}]},"Investimentos":{"total":15247.63,"items":[{"date":"10/02","desc":"Investimento Alexander + Mi","val":15247.63}]},"Saúde":{"total":7370.1,"items":[{"date":"11/02","desc":"Samy Roisen","val":2250.4},{"date":"26/02","desc":"Remédios + Aqui","val":5119.7}]}}},"mar":{"total":94446.38,"cats":{"Educação":{"total":28500.0,"items":[{"date":"02/03","desc":"Escola 4 — Suzanne Dich","val":18791.08},{"date":"05/03","desc":"CES U Mentoria","val":3500.0},{"date":"12/03","desc":"Escola 4 Suzanne Dich","val":6208.92}]},"Saúde":{"total":8086.23,"items":[{"date":"03/03","desc":"Clínica Toporovsky","val":840.43},{"date":"03/03","desc":"Força Dinâmica M4","val":920.6},{"date":"09/03","desc":"Samy Roisen","val":1350.2},{"date":"09/03","desc":"FSM Health","val":4975.0}]},"Alimentação":{"total":100.0,"items":[{"date":"04/03","desc":"Lanche Papaya","val":100.0}]},"Pessoal / Funcionários":{"total":6249.09,"items":[{"date":"04/03","desc":"Geiza + Patric","val":286.0},{"date":"09/03","desc":"Vitor Del Ciello","val":4001.11},{"date":"17/03","desc":"Assessoria Nathalia Gildin","val":1961.98}]},"Telefone e Assinatura":{"total":517.73,"items":[{"date":"05/03","desc":"Celular","val":517.73}]},"Transporte":{"total":82.0,"items":[{"date":"10/03","desc":"Alelo / Veloe","val":27.0},{"date":"25/03","desc":"Lava Rápido / Carro","val":55.0}]},"Donativos":{"total":900.0,"items":[{"date":"10/03","desc":"Elieser Zur","val":300.0},{"date":"11/03","desc":"Donativo","val":200.0},{"date":"16/03","desc":"Donativos","val":300.0},{"date":"23/03","desc":"Donativo","val":100.0}]},"Eventos":{"total":41260.33,"items":[{"date":"17/03","desc":"Marcia Cohen / Doces","val":8860.0},{"date":"18/03","desc":"Flor e Cor Tamy","val":26395.33},{"date":"20/03","desc":"Vídeo / No de Gravata","val":6005.0}]},"Casa":{"total":8751.0,"items":[{"date":"30/03","desc":"Pessoal / Casa Ale","val":8751.0}]}}},"abr":{"total":123679.88,"cats":{"Saúde":{"total":5633.36,"items":[{"date":"01/04","desc":"Dr. Leão Gabay","val":850.0},{"date":"15/04","desc":"Kignel","val":1140.79},{"date":"15/04","desc":"Força Dinâmica Treinamento","val":1840.92},{"date":"17/04","desc":"Dr. Jaime Gil","val":1801.65}]},"Telefone e Assinatura":{"total":535.11,"items":[{"date":"05/04","desc":"Celular","val":535.11}]},"Pessoal / Funcionários":{"total":12679.55,"items":[{"date":"07/04","desc":"Victor Del Ciello","val":4000.55},{"date":"30/04","desc":"Desp. Funcionários","val":8679.0}]},"Transporte":{"total":100.9,"items":[{"date":"10/04","desc":"Veloe / Alelo","val":67.0},{"date":"20/04","desc":"Multas Alexandre","val":33.9}]},"Eventos":{"total":43718.0,"items":[{"date":"10/04","desc":"Vídeo / No de Gravata","val":3500.0},{"date":"23/04","desc":"Buffet J. Haifaz","val":10218.0},{"date":"23/04","desc":"Buffet Casamento 4 Kos","val":30000.0}]},"Viagem":{"total":15050.0,"items":[{"date":"10/04","desc":"Hyatt Hotel","val":15050.0}]},"Educação":{"total":45772.96,"items":[{"date":"10/04","desc":"Escola Shlomo Lani","val":21668.0},{"date":"17/04","desc":"Yehuda / Curso","val":3500.0},{"date":"27/04","desc":"Yehuda Curso","val":3604.96},{"date":"29/04","desc":"Escola Suzanne D. Sisro","val":17000.0}]},"Diversos":{"total":190.0,"items":[{"date":"14/04","desc":"Passaporte Efraim","val":190.0}]}}},"mai":{"total":67007.63,"cats":{"Telefone e Assinatura":{"total":439.07,"items":[{"date":"05/05","desc":"Celular","val":439.07}]},"Viagem":{"total":13500.0,"items":[{"date":"06/05","desc":"Hyatt Hotel","val":13500.0}]},"Saúde":{"total":5222.51,"items":[{"date":"07/05","desc":"Samy Roisen","val":900.0},{"date":"08/05","desc":"Força Dinâmica","val":1380.0},{"date":"08/05","desc":"Jaime Gil","val":1800.0},{"date":"25/05","desc":"Kignel","val":1142.51}]},"Transporte":{"total":274.8,"items":[{"date":"10/05","desc":"Alelo / Veloe","val":274.8}]},"Pessoal / Funcionários":{"total":12990.25,"items":[{"date":"12/05","desc":"Vitor Del Ciello","val":4010.5},{"date":"21/05","desc":"Patricia Funcionária Ale","val":187.55},{"date":"29/05","desc":"Funcionários Alexandre","val":8792.2}]},"Eventos":{"total":27495.0,"items":[{"date":"12/05","desc":"Jescenor Som","val":5500.0},{"date":"12/05","desc":"Shana Yaffi","val":8269.0},{"date":"12/05","desc":"Shana Yaffie","val":13726.0}]},"Donativos":{"total":7086.0,"items":[{"date":"26/05","desc":"Israel Levy","val":2258.0},{"date":"27/05","desc":"Israel Levy","val":4828.0}]}}}};
+const MK=["jan", "fev", "mar", "abr", "mai"];const ML=["Jan", "Fev", "Mar", "Abr", "Mai"];
+const ICONS={"Pessoal / Funcion\u00e1rios": "\ud83d\udc65", "Investimentos": "\ud83d\udcc8", "Eventos": "\ud83c\udf89", "Educa\u00e7\u00e3o": "\ud83d\udcda", "Sa\u00fade": "\ud83c\udfe5", "Donativos": "\ud83d\udc9d", "Seguros": "\ud83d\udee1\ufe0f", "Energia e G\u00e1s": "\u26a1", "Condom\u00ednio": "\ud83c\udfe2", "Cart\u00e3o de Cr\u00e9dito": "\ud83d\udcb3", "Telefone e Assinatura": "\ud83d\udcf1", "Impostos e Taxas": "\ud83d\udccb", "Alimenta\u00e7\u00e3o": "\ud83d\uded2", "Transporte": "\ud83d\ude97", "Viagem": "\u2708\ufe0f", "Casa": "\ud83c\udfe0", "Diversos": "\ud83d\udce6"};const COLORS={"Pessoal / Funcion\u00e1rios": "#7c3aed", "Investimentos": "#1d4ed8", "Eventos": "#c8291a", "Educa\u00e7\u00e3o": "#0891b2", "Sa\u00fade": "#059669", "Donativos": "#b45309", "Seguros": "#d97706", "Energia e G\u00e1s": "#f59e0b", "Condom\u00ednio": "#3b82f6", "Cart\u00e3o de Cr\u00e9dito": "#6366f1", "Telefone e Assinatura": "#0284c7", "Impostos e Taxas": "#92400e", "Alimenta\u00e7\u00e3o": "#dc2626", "Transporte": "#6b7280", "Viagem": "#7c3aed", "Casa": "#059669", "Diversos": "#9ca3af"};
+const expanded={};let curMonth='jan';
+
+function fmtBR(v){
+  if(!v||v===0) return '—';
+  return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function buildMonth(m){
+  const md=DATA[m];if(!md) return '';
+  const total=md.total;
+  const cats=Object.entries(md.cats).sort((a,b)=>b[1].total-a[1].total);
+  let html='<div class="cat-summary-grid">';
+  cats.forEach(([cat,cd])=>{
+    const icon=ICONS[cat]||'📌';const color=COLORS[cat]||'#6b7280';
+    const pct=(cd.total/total*100).toFixed(0);
+    html+=`<div class="cat-summary-card" style="border-left-color:${color}"><div class="name">${icon} ${cat}</div><div class="val">${fmtBR(cd.total)}</div><div class="pct">${pct}% · ${cd.items.length} lançamento${cd.items.length>1?'s':''}</div></div>`;
+  });
+  html+='</div>';
+  html+=`<table class="tx-table"><thead><tr>
+    <th style="width:12%">Data</th><th style="width:30%">Categoria</th>
+    <th style="width:34%">Descrição</th><th style="width:24%;text-align:right;">Valor</th>
+  </tr></thead><tbody>`;
+  cats.forEach(([cat,cd])=>{
+    const cid=m+'-'+cat;const isE=!(expanded[cid]===false);
+    const icon=ICONS[cat]||'📌';const color=COLORS[cat]||'#6b7280';
+    html+=`<tr class="cat-group-header" onclick="tog('${cid}')"><td colspan="3"><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:9px;color:var(--muted);transition:transform .15s;transform:${isE?'rotate(90deg)':'none'}">▶</span><div style="width:8px;height:8px;border-radius:2px;background:${color};flex-shrink:0;"></div>${icon} ${cat}<span style="font-size:11px;color:var(--muted);font-weight:400;">${cd.items.length} lançamento${cd.items.length>1?'s':''}</span></div></td><td style="text-align:right;"><strong>${fmtBR(cd.total)}</strong></td></tr>`;
+    if(isE){cd.items.forEach(r=>{
+      html+=`<tr><td><span class="date-badge">${r.date}</span></td><td style="color:var(--muted);font-size:11px;">${icon} ${cat}</td><td>${r.desc}</td><td style="text-align:right;font-variant-numeric:tabular-nums;">${fmtBR(r.val)}</td></tr>`;
+    });}
+  });
+  html+=`<tr><td colspan="3"><strong>TOTAL DO MÊS</strong></td><td style="text-align:right;"><strong>${fmtBR(total)}</strong></td></tr></tbody></table>`;
+  return html;
+}
+
+function showMonth(m){
+  curMonth=m;
+  MK.forEach((mk,i)=>document.querySelectorAll('.mtab')[i].classList.toggle('active',mk===m));
+  document.getElementById('month-content').innerHTML=buildMonth(m);
+}
+function tog(id){
+  event.stopPropagation();expanded[id]=expanded[id]===false?true:false;showMonth(curMonth);
+}
+showMonth('jan');
+</script>
+</body>
+</html>
