@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convites Naomi & Yossi — Controle de envio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root{--bg:#FBF8F1;--card:#FFF;--gold:#B08D3F;--gold-soft:#E9D9B4;--ink:#2A2723;--muted:#8A8273;--line:#E6DDCB;--sent:#6F7D54;--sent-bg:#F0F2E6;--need:#B5732E;--need-bg:#FBF0E4;--err:#B23B3B}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+  .wrap{max-width:780px;margin:0 auto;padding:0 16px 90px}
+  header{text-align:center;padding:28px 0 12px}
+  .eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  header h1{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;line-height:1.05;margin:5px 0 2px}
+  .date{font-size:13px;color:var(--muted)}
+  .rule{width:54px;height:1px;background:var(--gold);margin:12px auto 0;opacity:.7}
+  .status{text-align:center;font-size:12px;color:var(--muted);margin-top:8px}
+  .status.err{color:var(--err)}
+  .status.ok{color:var(--sent)}
+  .banner{background:#FFF6E0;border:1px solid #E9D9B4;border-radius:12px;padding:14px 16px;margin:14px 0;font-size:13.5px;color:#6b5a2e}
+  .banner code{background:#fff;padding:1px 6px;border-radius:5px;border:1px solid #E9D9B4}
+  .tabs{display:flex;gap:6px;justify-content:center;margin:16px 0 4px;flex-wrap:wrap}
+  .tab{font-family:inherit;font-size:13px;font-weight:600;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:99px;padding:9px 16px;cursor:pointer}
+  .tab.active{background:var(--gold);color:#fff;border-color:var(--gold)}
+  .tab span{opacity:.7;font-weight:500}
+  .panel{position:sticky;top:0;z-index:5;background:rgba(251,248,241,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:11px 0;margin-bottom:10px}
+  .prow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .progress{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+  .bar{flex:1;height:7px;background:var(--gold-soft);border-radius:99px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .35s}
+  .count{font-size:13px;font-weight:600;color:var(--gold);white-space:nowrap}
+  .count small{color:var(--muted);font-weight:500}
+  input,select{font-family:inherit;font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+  #search{flex:1 1 180px}
+  select{cursor:pointer}
+  .btn{font-family:inherit;font-size:12.5px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px;cursor:pointer}
+  .btn:hover{color:var(--ink);border-color:var(--gold)}
+  .btn.gold{background:var(--gold);color:#fff;border-color:var(--gold)}
+  .btn.gold:hover{background:#9a7833}
+  .hint{font-size:11.5px;color:var(--muted);margin-top:6px;flex:1 1 100%}
+  #addForm{display:none;gap:8px;margin-top:8px}
+  #addForm.open{display:flex;flex-wrap:wrap}
+  #addForm input{flex:1 1 160px}
+  ul{list-style:none;margin-top:4px}
+  li{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+  li.sent{background:var(--sent-bg);border-color:#DCE2CB}
+  li.need{background:var(--need-bg);border-color:#EAD7BF}
+  .who{flex:1;min-width:0}
+  .name{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;line-height:1.15}
+  li.sent .name{color:var(--sent)}
+  .phone{font-size:12px;color:var(--muted)}
+  .phone .edit{color:var(--gold);cursor:pointer;margin-left:8px;text-decoration:underline}
+  .rename{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;color:var(--gold);cursor:pointer;text-decoration:underline;margin-left:10px;vertical-align:middle;white-space:nowrap}
+  .nameedit{font-family:'Inter',sans-serif;font-size:15px;padding:7px 10px;width:min(360px,60vw)}
+  .nbtn{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;margin-left:6px;padding:8px 12px;border-radius:9px;cursor:pointer;background:var(--gold);color:#fff;border:1px solid var(--gold)}
+  .nbtn.ghost{background:#fff;color:var(--muted);border:1px solid var(--line)}
+  .send{font-family:inherit;font-size:13.5px;font-weight:600;text-decoration:none;white-space:nowrap;background:var(--gold);color:#fff;border:none;border-radius:10px;padding:10px 16px;cursor:pointer}
+  .send:hover{background:#9a7833}
+  .pill{font-size:12px;font-weight:600;color:var(--sent);background:#fff;border:1px solid #CBD3B4;border-radius:99px;padding:8px 12px;cursor:pointer;white-space:nowrap}
+  .addnum{display:flex;gap:6px;align-items:center}
+  .addnum input{width:140px;padding:7px 9px;font-size:13px}
+  .addnum button{font-size:12.5px;font-weight:600;color:var(--need);background:#fff;border:1px solid #EAD7BF;border-radius:9px;padding:8px 11px;cursor:pointer}
+  .tag{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--need);font-weight:600;margin-left:8px}
+  .empty{text-align:center;color:var(--muted);padding:40px 0;font-size:14px}
+  @media(max-width:540px){header h1{font-size:36px}.name{font-size:19px}.addnum input{width:110px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Lista de convidados</div>
+    <h1>Naomi &amp; Yossi</h1>
+    <div class="date">Domingo, 26 de julho de 2026 · Grand Hyatt São Paulo</div>
+    <div class="rule"></div>
+    <div class="status" id="status">Conectando…</div>
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="todos">Todos <span id="t-todos"></span></button>
+      <button class="tab" data-tab="casal">Somente casal <span id="t-casal"></span></button>
+      <button class="tab" data-tab="familia">Com familiares <span id="t-familia"></span></button>
+    </div>
+  </header>
+
+  <div id="config" class="banner" style="display:none">
+    <b>Falta configurar a conexão.</b> Abra este arquivo e preencha, no topo do script,
+    <code>SUPABASE_URL</code> e <code>SUPABASE_ANON_KEY</code> (painel Supabase → Project Settings → API).
+    Rode também o arquivo <code>supabase_convidados.sql</code> uma vez.
+  </div>
+
+  <div class="panel">
+    <div class="progress">
+      <span class="count" id="count">— / — enviados <small id="needcount"></small></span>
+      <div class="bar"><i id="barfill"></i></div>
+    </div>
+    <div class="prow">
+      <input type="text" id="search" placeholder="Buscar…" autocomplete="off">
+      <select id="filter">
+        <option value="pending">Pendentes (com número)</option>
+        <option value="sent">Enviados</option>
+        <option value="nonum">Sem número</option>
+        <option value="all">Todos os status</option>
+      </select>
+      <button class="btn gold" id="addToggle">+ Convidado</button>
+      <button class="btn" id="refresh">Atualizar</button>
+    </div>
+    <div class="prow" id="addForm">
+      <input type="text" id="newName" placeholder="Nome (ex.: Sr e Sra Fulano)">
+      <input type="text" id="newNum" placeholder="Telefone (ex.: 11 99999-8888)">
+      <select id="newGrupo"><option value="casal">Casal/individual</option><option value="familia">Com familiares</option></select>
+      <button class="btn gold" id="addSave">Adicionar</button>
+    </div>
+    <div class="prow" style="margin-top:8px">
+      <input type="url" id="imgurl" placeholder="(opcional) link público da imagem do convite" style="flex:1 1 100%">
+    </div>
+    <div class="prow" style="margin-top:8px">
+      <button class="btn" id="exportCsv">Exportar enviados (CSV)</button>
+    </div>
+    <div class="hint">O controle fica salvo no banco (Supabase) e vale em qualquer navegador/aparelho com o login do hub. Marcou aqui, aparece em todos.</div>
+  </div>
+
+  <ul id="list"></ul>
+  <div class="empty" id="empty" style="display:none">Nenhum convidado nesta lista.</div>
+</div>
+
+<script>
+// ============================================================
+//  CONFIGURE AQUI (painel Supabase > Project Settings > API)
+//  São dados PÚBLICOS do front-end (a chave anon é feita pra isso).
+// ============================================================
+const SUPABASE_URL = "https://ihlrzanoirwbhftaytbh.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlobHJ6YW5vaXJ3YmhmdGF5dGJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxMjQ4MTEsImV4cCI6MjA5NDcwMDgxMX0.GuVTLZV-Xlc7YbSslex9Q8lcta0ZBgHfLynFaqOHV5M";
+// ============================================================
+
+const SEED = [{"nome": "Sr e Sra Efraim Laniado", "num": "5511933861808", "grupo": "casal"}, {"nome": "Sr e Sra Aharon Michaan", "num": "5511959798451", "grupo": "casal"}, {"nome": "Aharon Nasser", "num": "", "grupo": "casal"}, {"nome": "Ahuva Moses", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Alan Guindi", "num": "5511993262940", "grupo": "casal"}, {"nome": "Sr e Sra Alberto Glock", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Alberto Khafif", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Alberto Roitman", "num": "5511991026925", "grupo": "casal"}, {"nome": "Sr e Sra Alberto Safra", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Alex e Daniela e Belinha e Sarah", "num": "5511995852599", "grupo": "familia"}, {"nome": "Sr e Sra Alex Fucs", "num": "5511999528861", "grupo": "casal"}, {"nome": "Sr Alexandre Matone e família", "num": "5511959690005", "grupo": "familia"}, {"nome": "Alexandre Petresco", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Alexandre Rabinovich", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Allen e Silvia", "num": "5511965728163", "grupo": "casal"}, {"nome": "Sr e Sra Alon Hamoui", "num": "5511981364633", "grupo": "casal"}, {"nome": "Sra Altair", "num": "5511976744651", "grupo": "casal"}, {"nome": "Srta Amanda Harari", "num": "5511942323555", "grupo": "casal"}, {"nome": "Sr e Sra Amauri Lavitez e Moshe Chaim", "num": "5511992187204", "grupo": "casal"}, {"nome": "Ana Zalcberg", "num": "5511971306708", "grupo": "casal"}, {"nome": "Anat Sisro", "num": "5511991065803", "grupo": "casal"}, {"nome": "Sr Andre Cardon", "num": "5511983754680", "grupo": "casal"}, {"nome": "Sr e Sra Andre Danila", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Andre Grimberg", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra André Shamay", "num": "5511944498722", "grupo": "casal"}, {"nome": "Sr e Sra Arale Reichmann", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Ari e Sheina e Naomi e Mushky", "num": "5511965590952", "grupo": "familia"}, {"nome": "Sr e Sra Ari Perl e família", "num": "", "grupo": "familia"}, {"nome": "Sr e Sra Ari Sobel", "num": "5511975864010", "grupo": "casal"}, {"nome": "Sr e Sra Arie Bleich", "num": "5511963480375", "grupo": "casal"}, {"nome": "Sr e Sra Ariel Fridman", "num": "5511992779243", "grupo": "casal"}, {"nome": "Sr e Sra Ariel Sisro", "num": "5511976920893", "grupo": "casal"}, {"nome": "Ary Moscowitch", "num": "", "grupo": "casal"}, {"nome": "Avi Hamoui", "num": "", "grupo": "casal"}, {"nome": "Eliahu Hamoui", "num": "", "grupo": "casal"}, {"nome": "Avi Weiss", "num": "", "grupo": "casal"}, {"nome": "Avishalom Benayon", "num": "", "grupo": "casal"}, {"nome": "Aviva Azar e família", "num": "5511992340451", "grupo": "familia"}, {"nome": "Moshe Haim e Aviva", "num": "5511990052292", "grupo": "casal"}, {"nome": "Sr e Sra Avraham Dichi", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Avraham Goldfeld", "num": "", "grupo": "casal"}, {"nome": "Avraham Hecht", "num": "", "grupo": "casal"}, {"nome": "Ayala Laniado", "num": "", "grupo": "casal"}, {"nome": "Ayelet Mizrahi", "num": "5511976707749", "grupo": "casal"}, {"nome": "Bassie Wajchenberg", "num": "5511943019927", "grupo": "casal"}, {"nome": "Sr e Sra Levy Weitman", "num": "16154912678", "grupo": "casal"}, {"nome": "Sr e Sra Beni Cohen", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Benjamin Souccar", "num": "5511945385858", "grupo": "casal"}, {"nome": "Sr e Sra Benny Gammerman e família", "num": "", "grupo": "familia"}, {"nome": "Beny Bedosa", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Berti Cohen", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Alberto Azrak", "num": "5511999975330", "grupo": "casal"}, {"nome": "Beto e Rafael Hakim", "num": "", "grupo": "casal"}, {"nome": "Beto Kobeini", "num": "", "grupo": "casal"}, {"nome": "Beto Valt", "num": "", "grupo": "casal"}, {"nome": "Bnaya Pecha", "num": "", "grupo": "casal"}, {"nome": "Bracha Hakuk", "num": "5511963956445", "grupo": "casal"}, {"nome": "Sr e Sra Bruno Krasilchik", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Bruno Rubinsky", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Bruno Singal", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Bryan Feldman", "num": "", "grupo": "casal"}, {"nome": "Avraham Besser", "num": "", "grupo": "casal"}, {"nome": "Sr Carlos Zeitoune", "num": "5511980751528", "grupo": "casal"}, {"nome": "Sr e Sra Carly Khafif", "num": "5511982725360", "grupo": "casal"}, {"nome": "Celia Ruth Sisro", "num": "5511992573522", "grupo": "casal"}, {"nome": "Sr e Sra Celso Callencauti", "num": "5511992965146", "grupo": "casal"}, {"nome": "Sr e Sra Cesar Azar", "num": "972509988806", "grupo": "casal"}, {"nome": "Sr e Sra Chaim Farkash e família", "num": "", "grupo": "familia"}, {"nome": "Sra Cheila Judkowitz", "num": "5511962490590", "grupo": "casal"}, {"nome": "Sr e Sra Toivi Weitman", "num": "5511989157081", "grupo": "casal"}, {"nome": "Sr e Sra Chesky Rosemberg", "num": "", "grupo": "casal"}, {"nome": "Sr Clement Benatar e família", "num": "5511994930076", "grupo": "familia"}, {"nome": "Sr e Sra Dani Fish", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Dani Sonnenfeld", "num": "5511973700847", "grupo": "casal"}, {"nome": "Sr e Sra Dani Zalcberg", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Daniel Furmanovitch", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Daniel Laniado", "num": "5511996879797", "grupo": "casal"}, {"nome": "Daniel Levy", "num": "", "grupo": "casal"}, {"nome": "Daniel Matone", "num": "", "grupo": "casal"}, {"nome": "Daniel Muller", "num": "", "grupo": "casal"}, {"nome": "Daniel Rozenblatt", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Daniel Volfchuk", "num": "5511992825774", "grupo": "casal"}, {"nome": "Sr e Sra David Barzilai", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra David Cohen", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra David Dayan", "num": "5511996387773", "grupo": "casal"}, {"nome": "Sr e Sra David Dichi", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra David e Evelyn e Ishay", "num": "5511976897360", "grupo": "familia"}, {"nome": "Sr e Sra David e Shelly e família", "num": "5511996877755", "grupo": "familia"}, {"nome": "Sr e Sra David Epstein", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra David Esses", "num": "5511993836600", "grupo": "casal"}, {"nome": "Sr e Sra David Matone", "num": "5511963782957", "grupo": "casal"}, {"nome": "Sr e Sra David Michanie", "num": "5511969981218", "grupo": "casal"}, {"nome": "Sr e Sra David Mozes", "num": "5511987592955", "grupo": "casal"}, {"nome": "Sr e Sra David Perl e família", "num": "5511975154500", "grupo": "familia"}, {"nome": "Sr e Sra David Silva", "num": "5511993102247", "grupo": "casal"}, {"nome": "David Srour", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra David Tawil", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Daniel Alouan", "num": "5511994305327", "grupo": "casal"}, {"nome": "Sr e Sra Dede Grabaz", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Denis Szejnfeld", "num": "5511989128768", "grupo": "casal"}, {"nome": "Sr e Sra Bension Waksman", "num": "5511991723288", "grupo": "casal"}, {"nome": "Sr e Sra Ovadia Horn", "num": "5511993264183", "grupo": "casal"}, {"nome": "Diny Waimberguer", "num": "5511945151410", "grupo": "casal"}, {"nome": "Sr Marcos", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Rodrigo", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Dudi e Andrea e família", "num": "5511946068881", "grupo": "familia"}, {"nome": "Sr e Sra Dudi Olech e família", "num": "", "grupo": "familia"}, {"nome": "Dudi Safra", "num": "", "grupo": "casal"}, {"nome": "Dvir Tzippel", "num": "", "grupo": "casal"}, {"nome": "Edgar e Refa Shalom", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Edmond Michaan", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Eduardo Katz", "num": "5511996350613", "grupo": "casal"}, {"nome": "Sr e Sra Eduardo Lapidus", "num": "", "grupo": "casal"}, {"nome": "Efraim Itkin", "num": "", "grupo": "casal"}, {"nome": "Efrat Sisro", "num": "5511989250470", "grupo": "casal"}, {"nome": "Elazar Hakuk", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Elhanan Goldfeld", "num": "", "grupo": "casal"}, {"nome": "Eli Frenkel", "num": "", "grupo": "casal"}, {"nome": "Elia Zajac", "num": "", "grupo": "casal"}, {"nome": "Sr Eliahu Mordoch", "num": "", "grupo": "casal"}, {"nome": "Eliahu Passy", "num": "", "grupo": "casal"}, {"nome": "Eliahu Saban", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Elias Sisro", "num": "5511976240541", "grupo": "casal"}, {"nome": "Sr e Sra Elico Hakim", "num": "5511991003733", "grupo": "casal"}, {"nome": "Sr e Sra Eliezer Besser", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Eliezer Bleich", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Elimelech Mandelbaum", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Elis Yalouz", "num": "", "grupo": "casal"}, {"nome": "Elky Havlin", "num": "", "grupo": "casal"}, {"nome": "Sra Dorit Frenkel", "num": "", "grupo": "casal"}, {"nome": "Estela Heimann", "num": "", "grupo": "casal"}, {"nome": "Ester Lustig", "num": "5511947368204", "grupo": "casal"}, {"nome": "Ester Serrulha", "num": "5511939025304", "grupo": "casal"}, {"nome": "Esther Elman", "num": "5511932155619", "grupo": "casal"}, {"nome": "Esthy Gazale", "num": "5511944552302", "grupo": "casal"}, {"nome": "Eva Zellerkraut", "num": "5511974752528", "grupo": "casal"}, {"nome": "Sr e Sra Ezra Harari", "num": "5511941407833", "grupo": "casal"}, {"nome": "Sr e Sra Fábio Koren", "num": "5511947931343", "grupo": "casal"}, {"nome": "Sr e Sra Fabio Menache", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Fabio Rozenfeld", "num": "5511961800990", "grupo": "casal"}, {"nome": "Grabarz e família", "num": "", "grupo": "familia"}, {"nome": "Fanny Calencauti", "num": "", "grupo": "casal"}, {"nome": "Felipe Kaufman", "num": "", "grupo": "casal"}, {"nome": "Felipe Rovner", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Freddy e Jenny e família", "num": "5511996148288", "grupo": "familia"}, {"nome": "Sr e Sra Freddy Harari", "num": "", "grupo": "casal"}, {"nome": "Gabriel Benatar", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Gabriel Candi", "num": "5511999802780", "grupo": "casal"}, {"nome": "Sr e Sra Gabriel Gedanken", "num": "5511994711531", "grupo": "casal"}, {"nome": "Gabriel Kattan", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Gabriel Katz", "num": "5511972049728", "grupo": "casal"}, {"nome": "Gabriel Soltz Grinspan", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Gavin Katz", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Gerson Farberas", "num": "5511983836338", "grupo": "casal"}, {"nome": "Gigi Souccar", "num": "5511982657842", "grupo": "casal"}, {"nome": "Sr e Sra Alberto Arbeter", "num": "5511992721131", "grupo": "casal"}, {"nome": "Sr e Sra Guilherme Antwarg", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Guilherme Skujis", "num": "", "grupo": "casal"}, {"nome": "Haim Ozer Salomon", "num": "", "grupo": "casal"}, {"nome": "Hana Beila Goldfeld", "num": "", "grupo": "casal"}, {"nome": "Hannah Benbassat", "num": "5511975223889", "grupo": "casal"}, {"nome": "Hannah Bortman", "num": "", "grupo": "casal"}, {"nome": "Hannah Elkis", "num": "5511933681592", "grupo": "casal"}, {"nome": "Hannah Pessy Frenkel", "num": "5511956571520", "grupo": "casal"}, {"nome": "Hannah Kalifa", "num": "5511947181335", "grupo": "casal"}, {"nome": "Hava Choueke", "num": "5511910203412", "grupo": "casal"}, {"nome": "Havi Landau", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Henry Hallack", "num": "5511994757100", "grupo": "casal"}, {"nome": "Sr e Sra Henry Krivat", "num": "5511976510216", "grupo": "casal"}, {"nome": "Sr e Sra Henry Ourfali", "num": "5511991003733", "grupo": "casal"}, {"nome": "Hezki Perl", "num": "", "grupo": "casal"}, {"nome": "Hodaya Gazale", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Iael Zajac", "num": "5511999193221", "grupo": "casal"}, {"nome": "Idan e Tzipy e Eliahu", "num": "5511945365282", "grupo": "familia"}, {"nome": "Sr e Sra Inon Pecha", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Irineu Fomigoni", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Isaac Hazan", "num": "5511976520745", "grupo": "casal"}, {"nome": "Sr e Sra Isaac Peres", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Isaac Sutton", "num": "5511981203863", "grupo": "casal"}, {"nome": "Sr e Sra Isaque Kafif", "num": "5511994452259", "grupo": "casal"}, {"nome": "Sr e Sra Isaque Kafif", "num": "5511999912233", "grupo": "casal"}, {"nome": "Sr e Sra Isaque Scheibar", "num": "", "grupo": "casal"}, {"nome": "Ishay Michanie", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Israel Cherem", "num": "", "grupo": "casal"}, {"nome": "Israel Harari", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Israel Kacowitz", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Israel Meir Besser", "num": "", "grupo": "casal"}, {"nome": "Israel Choueke", "num": "", "grupo": "casal"}, {"nome": "Sr Issac Azar e família", "num": "5511999409999", "grupo": "familia"}, {"nome": "Issachar Golovaty", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Isser e Becky e família", "num": "5511992190480", "grupo": "familia"}, {"nome": "Sr e Sra Isser Korik", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Itche Pasternak", "num": "5511988631416", "grupo": "casal"}, {"nome": "Sr e Sra Izy e Odelia e família", "num": "", "grupo": "familia"}, {"nome": "Sr e Sra Izy Michaan", "num": "5511999724425", "grupo": "casal"}, {"nome": "Sr e Sra Jaime Landau", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Jaime Rabinovitch", "num": "5511999007056", "grupo": "casal"}, {"nome": "Sr e Sra Jaques Cohen", "num": "5511944330613", "grupo": "casal"}, {"nome": "Sr e Sra Jaques Mouadeb", "num": "5511996133733", "grupo": "casal"}, {"nome": "Sr e Sra Jaques Stern", "num": "5511985420161", "grupo": "casal"}, {"nome": "Sr e Sra Jaquito (Jaques Chouveke", "num": "5511941641800", "grupo": "casal"}, {"nome": "Sr e Sra Jimmy Shneiderman", "num": "5511983294444", "grupo": "casal"}, {"nome": "Sr e Sra Jo Chouveke", "num": "5511972979535", "grupo": "casal"}, {"nome": "Sr e Sra Jo Hallack", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Joe e Sharon e família", "num": "5511993859494", "grupo": "familia"}, {"nome": "Sr e Sra Joe Horn", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Joe Shayo", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Joel Shneider", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Joey Kattan", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Jose Roberto Benbassat", "num": "5511997879706", "grupo": "casal"}, {"nome": "Sr e Sra Jose Schachnowitz", "num": "", "grupo": "casal"}, {"nome": "Judith Chama", "num": "", "grupo": "casal"}, {"nome": "Judith Dana", "num": "5511992331148", "grupo": "casal"}, {"nome": "Sr e Sra Kenny Klein", "num": "5511965729571", "grupo": "casal"}, {"nome": "Sr e Sra Kobi Olech e família", "num": "", "grupo": "familia"}, {"nome": "Sr e Sra Laercio Moloryn", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Laurent Korich e Salo", "num": "", "grupo": "casal"}, {"nome": "Lea Gueventer", "num": "5511944969999", "grupo": "casal"}, {"nome": "Sra Lea Korich", "num": "5511994416222", "grupo": "casal"}, {"nome": "Meir Beniste e Leah Azulay", "num": "5511960341598", "grupo": "casal"}, {"nome": "Sr e Sra Leão Seruya", "num": "5511976569056", "grupo": "casal"}, {"nome": "Sr Leon Shohet e família", "num": "5511999485877", "grupo": "familia"}, {"nome": "Sr e Sra Leonardo Kaplan", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Leonardo Smitas", "num": "5511999333963", "grupo": "casal"}, {"nome": "Sr e Sra Leonardo Zajac", "num": "5511985551230", "grupo": "casal"}, {"nome": "Sr e Sra Levy Mandelbaum", "num": "", "grupo": "casal"}, {"nome": "Liat Bedosa", "num": "5511991787787", "grupo": "casal"}, {"nome": "Sr e Sra Gabriel Sisro", "num": "5511976079274", "grupo": "casal"}, {"nome": "Liat Moas", "num": "5511947026253", "grupo": "casal"}, {"nome": "Sr e Sra Michaan", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Luciano Neuman", "num": "5511995006557", "grupo": "casal"}, {"nome": "Sra Lucienne Chalom e família", "num": "5511944645035", "grupo": "familia"}, {"nome": "Sr e Sra Luiz Birinboim", "num": "", "grupo": "casal"}, {"nome": "Sr Marcelo Azar e família", "num": "5511991301306", "grupo": "familia"}, {"nome": "Sr e Sra Marcelo Gorenstein", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Marcelo Gwertz", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Marcos Dana", "num": "5511976932161", "grupo": "casal"}, {"nome": "Sr e Sra Marcos Korik", "num": "", "grupo": "casal"}, {"nome": "Marcos Meisler", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Marcos Susskind", "num": "", "grupo": "casal"}, {"nome": "Sra Marli Zalcberg", "num": "", "grupo": "casal"}, {"nome": "Matias Epstein", "num": "", "grupo": "casal"}, {"nome": "Sra Matunia Korik", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Maurice Kattan", "num": "5511981117755", "grupo": "casal"}, {"nome": "Maurício Horn", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Mauricio Picciotto", "num": "5511991121174", "grupo": "casal"}, {"nome": "Sr e Sra Max Beniste e família", "num": "5511992986960", "grupo": "familia"}, {"nome": "Sr e Sra Max Buchsenspaner", "num": "5511996867844", "grupo": "casal"}, {"nome": "Sr e Sra Mayer Barzilai", "num": "5511999871538", "grupo": "casal"}, {"nome": "Meir Avraham Sisro", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Meir Lawites", "num": "5513478219078", "grupo": "casal"}, {"nome": "Meir Mizrahi", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Marcos Serrulha", "num": "5511976522400", "grupo": "casal"}, {"nome": "Melissa Broncher", "num": "5511976735848", "grupo": "casal"}, {"nome": "Menahem Khafif", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Mendy Mandelbaum", "num": "", "grupo": "casal"}, {"nome": "Michael Shani", "num": "", "grupo": "casal"}, {"nome": "Michal Faour", "num": "", "grupo": "casal"}, {"nome": "Michal Laniado", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Michel e Estela", "num": "5511992955435", "grupo": "casal"}, {"nome": "Michel Levi", "num": "", "grupo": "casal"}, {"nome": "Michel Paves", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Michoel Kullock", "num": "", "grupo": "casal"}, {"nome": "Sr Mike Cohen", "num": "", "grupo": "casal"}, {"nome": "Sr Milton Zalcberg", "num": "", "grupo": "casal"}, {"nome": "Srta Mirele Bergel", "num": "5511950341818", "grupo": "casal"}, {"nome": "Miri Ashush", "num": "5511991143024", "grupo": "casal"}, {"nome": "Sr e Sra Dani Hamoui", "num": "5511980801855", "grupo": "casal"}, {"nome": "Miriam Chama", "num": "", "grupo": "casal"}, {"nome": "Miriam Cohen", "num": "5511991548333", "grupo": "casal"}, {"nome": "Miriam e Joey", "num": "5517863858889", "grupo": "casal"}, {"nome": "Sr e Sra David Roimcher", "num": "5511943341800", "grupo": "casal"}, {"nome": "Sr e Sra Moishe Fried", "num": "5511976758102", "grupo": "casal"}, {"nome": "Sr e Sra Moishe Paim", "num": "5511965456727", "grupo": "casal"}, {"nome": "Monica Falak", "num": "", "grupo": "casal"}, {"nome": "Sra Monique Shohet e Leila", "num": "5511999764624", "grupo": "casal"}, {"nome": "Sr e Sra Morris Hakim", "num": "5511994459333", "grupo": "casal"}, {"nome": "Moshe Amit", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Moshe Benamour", "num": "", "grupo": "casal"}, {"nome": "Moshe Benbassat", "num": "", "grupo": "casal"}, {"nome": "Moshe Elharar", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Moshe Frenkel", "num": "", "grupo": "casal"}, {"nome": "Moshe Fucs", "num": "", "grupo": "casal"}, {"nome": "Moshe Furmanovich", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Moshe Goldsmith", "num": "972507581292", "grupo": "casal"}, {"nome": "Sr e Sra Moshe Horn", "num": "5511997238114", "grupo": "casal"}, {"nome": "Sr e Sra Moshe Kassab", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Moshe Khafif", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Moshe Piccioto", "num": "", "grupo": "casal"}, {"nome": "Moshe Pinto", "num": "", "grupo": "casal"}, {"nome": "Moshe Soffer", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Moshe Sutton", "num": "5511982244418", "grupo": "casal"}, {"nome": "Sr e Sra Mótale Kleiman", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Moti Sonnenfeld", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Motl Czertog", "num": "5511962886168", "grupo": "casal"}, {"nome": "Moty Reichmann", "num": "", "grupo": "casal"}, {"nome": "Naomi Cattan", "num": "5511996196420", "grupo": "casal"}, {"nome": "Naomi Segal", "num": "5511994737531", "grupo": "casal"}, {"nome": "Naomi Sutton", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Nathan Peres e família", "num": "5511993746885", "grupo": "familia"}, {"nome": "Sr e Sra Naty Klein", "num": "5511965723445", "grupo": "casal"}, {"nome": "Sr e Sra Naty Olech e família", "num": "", "grupo": "familia"}, {"nome": "Nava Harari", "num": "5511939066719", "grupo": "casal"}, {"nome": "Sr Nessim Azar e família", "num": "5511976660579", "grupo": "familia"}, {"nome": "Sr Nessim C Azar e família", "num": "5511992830217", "grupo": "familia"}, {"nome": "Norma Kattan", "num": "5511994692353", "grupo": "casal"}, {"nome": "Olga Telio", "num": "5521995990788", "grupo": "casal"}, {"nome": "Omer Shalom", "num": "", "grupo": "casal"}, {"nome": "Ori Sasson Fridlin", "num": "", "grupo": "casal"}, {"nome": "Orovida Serruya", "num": "5511989363247", "grupo": "casal"}, {"nome": "Papi e Mami", "num": "5511999853623", "grupo": "casal"}, {"nome": "Sr Paulo Buchsenspaner e família", "num": "972587866653", "grupo": "familia"}, {"nome": "Sr e Sra Paulo Manah", "num": "5511993842448", "grupo": "casal"}, {"nome": "Sr e Sra Paulo Vandor", "num": "5511985113758", "grupo": "casal"}, {"nome": "Sr e Sra Pessach", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Pierre Benedyct", "num": "", "grupo": "casal"}, {"nome": "Pinchas Sarshalom", "num": "", "grupo": "casal"}, {"nome": "Rabanim Kriat Malachi", "num": "", "grupo": "casal"}, {"nome": "Rachel De Piccioto", "num": "5511945522088", "grupo": "casal"}, {"nome": "Sra Rachel Fredlander", "num": "", "grupo": "casal"}, {"nome": "Rachel Granatowitch", "num": "5511960168080", "grupo": "casal"}, {"nome": "Rachel Naomi Dana", "num": "", "grupo": "casal"}, {"nome": "Rachel Rosenbaum", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Rafa Rabinovitch", "num": "5511989523392", "grupo": "casal"}, {"nome": "Rafael Holzhaker", "num": "", "grupo": "casal"}, {"nome": "Rafael Levi", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Rafael Mansur", "num": "5511976222275", "grupo": "casal"}, {"nome": "Rafael Piccioto", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Rafael Ribak", "num": "", "grupo": "casal"}, {"nome": "Rafael Shakrouka", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Rafi Horn", "num": "5511981995024", "grupo": "casal"}, {"nome": "Sr e Sra Rafi Shayo", "num": "5511999429013", "grupo": "casal"}, {"nome": "Sr e Sra Ralph Michaan", "num": "", "grupo": "casal"}, {"nome": "Sr Raphael C Azar e família", "num": "972505932301", "grupo": "familia"}, {"nome": "R Alberto Cohen e Sra", "num": "", "grupo": "casal"}, {"nome": "R Alberto Safra e Sra", "num": "", "grupo": "casal"}, {"nome": "R Shabsi Alpern e Sra", "num": "", "grupo": "casal"}, {"nome": "R Ari Friedman e Sra", "num": "5511993604995", "grupo": "casal"}, {"nome": "R Ariel Marcus e Sra", "num": "5511973975323", "grupo": "casal"}, {"nome": "R Ariel Michanie e Sra", "num": "5511989621826", "grupo": "casal"}, {"nome": "R Avraham Fallak e Sra", "num": "", "grupo": "casal"}, {"nome": "R Avraham Faour e Sra", "num": "", "grupo": "casal"}, {"nome": "R Avraham Golovaty e Sra", "num": "", "grupo": "casal"}, {"nome": "R Avraham Hallack e Sra", "num": "972587871532", "grupo": "casal"}, {"nome": "R Avraham Tawil e Sra", "num": "", "grupo": "casal"}, {"nome": "R Beny Bijo e Sra", "num": "5511988332416", "grupo": "casal"}, {"nome": "R Binyamin Karaguilla e Sra", "num": "", "grupo": "casal"}, {"nome": "R Chaim David Rubinstein e Sra", "num": "", "grupo": "casal"}, {"nome": "R Haim Dichi e Sra", "num": "", "grupo": "casal"}, {"nome": "R Haim Passy e Sra", "num": "", "grupo": "casal"}, {"nome": "R Dan Yallouz e Sra", "num": "", "grupo": "casal"}, {"nome": "R Dani Roitman e Sra", "num": "5511991615487", "grupo": "casal"}, {"nome": "R Daniel Behar", "num": "", "grupo": "casal"}, {"nome": "R Daniel Faour e Sra", "num": "5511996387473", "grupo": "casal"}, {"nome": "R David Orlean", "num": "", "grupo": "casal"}, {"nome": "R David Weitman e Sra", "num": "", "grupo": "casal"}, {"nome": "R Efraim Birnbojn e Sra", "num": "5511982124852", "grupo": "casal"}, {"nome": "R Efraim Laniado e Sra", "num": "", "grupo": "casal"}, {"nome": "R Eli Kassab e Sra", "num": "", "grupo": "casal"}, {"nome": "R Eliezer Besser", "num": "", "grupo": "casal"}, {"nome": "R Eliyakim Korik", "num": "", "grupo": "casal"}, {"nome": "R Michael Faintuch e Sra", "num": "", "grupo": "casal"}, {"nome": "R Ilan Ende e Sra", "num": "5511999869097", "grupo": "casal"}, {"nome": "R Ilan Mordoch e Sra", "num": "", "grupo": "casal"}, {"nome": "R Isaac Dichi e Sra", "num": "5511973385250", "grupo": "casal"}, {"nome": "R Isaac Sutton e Efraim e Sra", "num": "", "grupo": "casal"}, {"nome": "R Ishay Laniado e Sra", "num": "5511985058282", "grupo": "casal"}, {"nome": "R Jojo Chouveke e Sra", "num": "5511999806022", "grupo": "casal"}, {"nome": "R Marcelo Borer e Sra", "num": "5511991331107", "grupo": "casal"}, {"nome": "R Meir Behar e Sra", "num": "5511993037117", "grupo": "casal"}, {"nome": "R Meir Illowitz e Sra", "num": "551130821562", "grupo": "casal"}, {"nome": "R Mendy Koncepolsky e Sra", "num": "", "grupo": "casal"}, {"nome": "R Mendy Rosenberg e Sra", "num": "", "grupo": "casal"}, {"nome": "R Michel Harari e Sra", "num": "", "grupo": "casal"}, {"nome": "R Moishe Teitelbaum", "num": "5511971201817", "grupo": "casal"}, {"nome": "R Moshe Dayan e Sra", "num": "", "grupo": "casal"}, {"nome": "R Moshe Igal e Sra", "num": "", "grupo": "casal"}, {"nome": "R Motl Malowany e família", "num": "5511980701770", "grupo": "familia"}, {"nome": "R Raphael Hakuk e Sra", "num": "5511982172464", "grupo": "casal"}, {"nome": "R Raphael Shammah e Sra", "num": "5511994744226", "grupo": "casal"}, {"nome": "R Raymond Aboulafia e Sra", "num": "", "grupo": "casal"}, {"nome": "R Refael Kleiman", "num": "", "grupo": "casal"}, {"nome": "R Shalom Benamor e Sra", "num": "5511991000447", "grupo": "casal"}, {"nome": "R Shalom Gourarie e Sra", "num": "", "grupo": "casal"}, {"nome": "R Shamai Ende e Sra", "num": "", "grupo": "casal"}, {"nome": "R Shaul Kalili e Sra", "num": "", "grupo": "casal"}, {"nome": "R Shie Pasternak", "num": "", "grupo": "casal"}, {"nome": "R Shlomo Laniado e Sra", "num": "", "grupo": "casal"}, {"nome": "R Shlomo Safra e Yael e Sra", "num": "5511966995550", "grupo": "casal"}, {"nome": "R Shlomo Tawil e Sra", "num": "", "grupo": "casal"}, {"nome": "R Shmuel Besser e Sra", "num": "", "grupo": "casal"}, {"nome": "R Yaacov Hallak e Sra", "num": "5511994733595", "grupo": "casal"}, {"nome": "R Yehoshua Levi e Sra", "num": "", "grupo": "casal"}, {"nome": "R Yehoshua Weisz e Sra", "num": "5511990051714", "grupo": "casal"}, {"nome": "R Yeshaya Noiman e Sra", "num": "", "grupo": "casal"}, {"nome": "R Yonatan Sisro e Sra", "num": "", "grupo": "casal"}, {"nome": "R Yossef Cohen e Sra", "num": "5511975492075", "grupo": "casal"}, {"nome": "R Yossef Sassoun e Sra", "num": "", "grupo": "casal"}, {"nome": "R Yossef Sisro e Meir e Sra", "num": "5511983897479", "grupo": "casal"}, {"nome": "R Yossi Michanie e Sra", "num": "", "grupo": "casal"}, {"nome": "R Ytzhak Dovid Horowitz e Sra", "num": "5511996073515", "grupo": "casal"}, {"nome": "R Zalman Tzfasman e Sra", "num": "5511992673307", "grupo": "casal"}, {"nome": "Sr e Sra Renato Dryzun", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Renato Kutner", "num": "5511993274458", "grupo": "casal"}, {"nome": "Sr e Sra Ricardo Markowitz", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Richard Pluznik", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Ricky Klein e família", "num": "", "grupo": "familia"}, {"nome": "R Moshe Tamim e Sra", "num": "5511993895528", "grupo": "casal"}, {"nome": "Rivky e Yudith Faintuch", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Roberto Grossman", "num": "5511982849000", "grupo": "casal"}, {"nome": "Sr e Sra Roberto Leon", "num": "972533986073", "grupo": "casal"}, {"nome": "Sr e Sra Roby e Tami e família", "num": "", "grupo": "familia"}, {"nome": "Rochel Lea", "num": "5511992556192", "grupo": "casal"}, {"nome": "Sr e Sra Rodrigo Drics", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Rodrigo Weinberg", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Roger Kattan", "num": "5511991771010", "grupo": "casal"}, {"nome": "Sr e Sra Roni Eskinazi", "num": "5511999992127", "grupo": "casal"}, {"nome": "Sr Roni Bisker", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Rony Chalom", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Rony Susskind", "num": "5511999837007", "grupo": "casal"}, {"nome": "Roy Jacob", "num": "", "grupo": "casal"}, {"nome": "Ruth Dichi", "num": "5511971777901", "grupo": "casal"}, {"nome": "Ruth Safdie", "num": "5511973423994", "grupo": "casal"}, {"nome": "Ruth Salem", "num": "5511971384225", "grupo": "casal"}, {"nome": "Ruthy Gazale", "num": "5511998772302", "grupo": "casal"}, {"nome": "Sr e Sra Salim Mansur", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Salo Motoryn", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Salomao Gil", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Samy Hakim", "num": "5511999838470", "grupo": "casal"}, {"nome": "Sr Sammy Buchsenspaner e família", "num": "5511979990355", "grupo": "familia"}, {"nome": "Sr e Sra Samuel Chammah", "num": "", "grupo": "casal"}, {"nome": "Samuel, Rafael e Daniel Rosenbaum", "num": "", "grupo": "casal"}, {"nome": "Sr Samy Hazan", "num": "5511999943241", "grupo": "casal"}, {"nome": "Sra Sara Majtlis e família", "num": "5511933600411", "grupo": "familia"}, {"nome": "Sara Sendrowitch", "num": "", "grupo": "casal"}, {"nome": "Sarah Harari", "num": "5511930384477", "grupo": "casal"}, {"nome": "Sarah Laniado", "num": "", "grupo": "casal"}, {"nome": "R Milan Shammah e Sra", "num": "5511945527051", "grupo": "casal"}, {"nome": "Sr e Sra Saul Menaged", "num": "5511973516374", "grupo": "casal"}, {"nome": "Sr e Sra Semi Dayan", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Sergio Goldstein", "num": "5511983354450", "grupo": "casal"}, {"nome": "Sr Shalom Buchsenspaner e família", "num": "5511996866026", "grupo": "familia"}, {"nome": "Sr e Sra Shalom Gazaly", "num": "5521999772302", "grupo": "casal"}, {"nome": "Sr e Sra Shay Cohen", "num": "", "grupo": "casal"}, {"nome": "Shaya Krybus", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Shimonovitch", "num": "5511964865544", "grupo": "casal"}, {"nome": "Sr e Sra Shlomi Sharffi", "num": "5511993278731", "grupo": "casal"}, {"nome": "Shlomo e Yaakov Tawil", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Shlomo Harari", "num": "5511992622872", "grupo": "casal"}, {"nome": "Sr e Sra Shlomo Tawil", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Sidnei Stamfater", "num": "5511994799229", "grupo": "casal"}, {"nome": "Sr e Sra Sidney Angulo", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Sidney Schachnovitch", "num": "5511991448211", "grupo": "casal"}, {"nome": "Sr e Sra Silvio Korich", "num": "", "grupo": "casal"}, {"nome": "Simon Sillam", "num": "", "grupo": "casal"}, {"nome": "Sofia Piccioto", "num": "5511996596070", "grupo": "casal"}, {"nome": "Sr e Sra Solly Horn", "num": "5511989693739", "grupo": "casal"}, {"nome": "Sr e Sra Soly Gindy", "num": "5511991852621", "grupo": "casal"}, {"nome": "Stella Vovó", "num": "5511999006655", "grupo": "casal"}, {"nome": "Tali Holzhacker", "num": "5511948813099", "grupo": "casal"}, {"nome": "Tamara Wachenberg", "num": "5511914711370", "grupo": "casal"}, {"nome": "Tamar Birbojn", "num": "", "grupo": "casal"}, {"nome": "Tania Horn", "num": "5511988073876", "grupo": "casal"}, {"nome": "Sr e Sra Tedy Safdie", "num": "5511988552117", "grupo": "casal"}, {"nome": "Sr e Sra Joe Telio", "num": "5511976749954", "grupo": "casal"}, {"nome": "Sr e Sra Tiberio Katz", "num": "5511999377827", "grupo": "casal"}, {"nome": "Sr e Sra Tuvia Semek", "num": "", "grupo": "casal"}, {"nome": "Tzipy Shimonowits", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Tzvi Buchsenspaner", "num": "5511971997373", "grupo": "casal"}, {"nome": "Sr e Sra Tzvika Landau e Chavi e Miriam", "num": "5511984571983", "grupo": "familia"}, {"nome": "Miriam Landau", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Uriel Frenkel", "num": "", "grupo": "casal"}, {"nome": "Sra Victoria Shohet", "num": "5511993299113", "grupo": "casal"}, {"nome": "Sr e Sra Vitor Cohen", "num": "5511991629348", "grupo": "casal"}, {"nome": "Sr e Sra Vitor Elman e Hana Tova", "num": "5511955554083", "grupo": "casal"}, {"nome": "Sr e Sra Vitor Fridlin", "num": "5511994266364", "grupo": "casal"}, {"nome": "Sr e Sra Vitor Nasser", "num": "5511972037536", "grupo": "casal"}, {"nome": "Sr e Sra Vitor Safdie", "num": "5511956578818", "grupo": "casal"}, {"nome": "Yaacov e Dany Harari", "num": "", "grupo": "casal"}, {"nome": "Pinchas Grankiewicz Yael Ashush", "num": "5511976023232", "grupo": "casal"}, {"nome": "Yael Dayan", "num": "", "grupo": "casal"}, {"nome": "Yael Maioufka", "num": "5511937403586", "grupo": "casal"}, {"nome": "Yafa Cohen", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yair Barcessat", "num": "", "grupo": "casal"}, {"nome": "Amiga D .Yara", "num": "", "grupo": "casal"}, {"nome": "Amiga D. Yara", "num": "", "grupo": "casal"}, {"nome": "Sra Yara Azar", "num": "5511998798781", "grupo": "casal"}, {"nome": "Sr e Sra Yedidia Michaan", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yehoshua Alexander", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yoel Domb", "num": "", "grupo": "casal"}, {"nome": "Yonatan Weinberger", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yonathan Furmanovitch", "num": "5511983989856", "grupo": "casal"}, {"nome": "Sr e Sra Yoni Borer", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yoni Mizrahi", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yoni Motoryn", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yoni Stern", "num": "5511985420028", "grupo": "casal"}, {"nome": "Sr e Sra Yosef Kacovitch", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yosef Kulikowsky", "num": "", "grupo": "casal"}, {"nome": "Yossef Kattan", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yossef Salomon", "num": "5511993322151", "grupo": "casal"}, {"nome": "Sr e Sra Yossi Mandelbaum", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yossi Vital", "num": "", "grupo": "casal"}, {"nome": "Sr e Sra Yossi Zajac", "num": "5511992810700", "grupo": "casal"}, {"nome": "Sr e Sra Ytzhak Wajner", "num": "5511982072373", "grupo": "casal"}, {"nome": "Sr e Sra Zalmi e Esther e família", "num": "", "grupo": "familia"}, {"nome": "Sr e Sra Zeev Harari", "num": "5511988748076", "grupo": "casal"}, {"nome": "Sra Zelda e Olga Waissman", "num": "5511989651001", "grupo": "casal"}, {"nome": "Sr e Sra Zevi", "num": "5511992579874", "grupo": "casal"}];
+let db=null, rows=[], activeTab="todos", editingNameId=null;
+
+const $=id=>document.getElementById(id);
+function setStatus(t,cls){ const s=$("status"); s.textContent=t; s.className="status"+(cls?" "+cls:""); }
+function norm(s){ return (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase(); }
+function normNum(raw){ let s=(raw||"").trim(); if(!s) return ""; let d=s.replace(/\D/g,""); if(s[0]==="+") return d; if(d.length<10) return ""; if(d.startsWith("972")) return d; if(d.length===13&&d.startsWith("55")) return d; if(d.length===11||d.length===10) return "55"+d; return d; }
+function fmt(d){ if(d.startsWith("55")&&d.length===13) return "+55 "+d.slice(2,4)+" "+d.slice(4,9)+"-"+d.slice(9); return "+"+d; }
+function mensagem(nome){ const img=$("imgurl").value.trim(); let m='בס"ד\n\n'+nome+', é com imensa alegria que compartilhamos o convite para o casamento de Naomi & Yossi! \uD83E\uDD0D\n\n\uD83D\uDCC5 Domingo, 26 de julho de 2026, às 15h\n\uD83D\uDCCD Grand Hyatt São Paulo — Av. das Nações Unidas, 13.301, Vila Leopoldina\n\n'+"Se D'us quiser, contamos com a sua presença para celebrar conosco!\n\nCom carinho,\nFamílias Azar e Korich"; if(img) m+='\n\n\uD83D\uDDBC\uFE0F Convite: '+img; return m; }
+function waLink(num,nome){ return "https://wa.me/"+num+"?text="+encodeURIComponent(mensagem(nome)); }
+
+async function init(){
+  if(SUPABASE_URL.startsWith("COLE_AQUI")||SUPABASE_ANON_KEY.startsWith("COLE_AQUI")){
+    $("config").style.display="block"; setStatus("Não configurado","err"); return;
+  }
+  try{
+    db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    setStatus("Conectando…");
+    const {count,error}=await db.from("convidados").select("*",{count:"exact",head:true});
+    if(error) throw error;
+    if(count===0){ setStatus("Carregando lista pela primeira vez…"); await seed(); }
+    await fetchAll();
+    subscribe();
+    setStatus("Conectado ✓","ok");
+  }catch(e){ console.error(e); setStatus("Erro de conexão: "+(e.message||e),"err"); }
+}
+async function seed(){
+  const payload=SEED.map((g,i)=>({ext_id:"g"+i, nome:g.nome, numero:g.num||"", grupo:g.grupo}));
+  const {error}=await db.from("convidados").upsert(payload,{onConflict:"ext_id"});
+  if(error) throw error;
+}
+async function fetchAll(){
+  const {data,error}=await db.from("convidados").select("*").order("ext_id",{nullsFirst:false});
+  if(error){ setStatus("Erro ao carregar: "+error.message,"err"); return; }
+  rows=data||[]; render();
+}
+let realtimeTimer=null;
+function subscribe(){
+  try{
+    db.channel("convidados-rt").on("postgres_changes",{event:"*",schema:"public",table:"convidados"},()=>{
+      clearTimeout(realtimeTimer); realtimeTimer=setTimeout(fetchAll,400);
+    }).subscribe();
+  }catch(e){}
+}
+
+async function setEnviado(row,val){
+  row.enviado=val; row.enviado_em=val?new Date().toISOString():null; render();
+  const {error}=await db.from("convidados").update({enviado:val,enviado_em:row.enviado_em}).eq("id",row.id);
+  if(error){ alert("Não consegui salvar no banco: "+error.message); row.enviado=!val; render(); }
+}
+async function setNumero(row,val){
+  const {error}=await db.from("convidados").update({numero:val}).eq("id",row.id);
+  if(error){ alert("Erro ao salvar número: "+error.message); return; }
+  row.numero=val; render();
+}
+async function setNome(row,val){
+  val=(val||"").trim(); if(!val){ editingNameId=null; render(); return; }
+  const ant=row.nome; row.nome=val; editingNameId=null; render();
+  const {error}=await db.from("convidados").update({nome:val}).eq("id",row.id);
+  if(error){ alert("Erro ao salvar nome: "+error.message); row.nome=ant; render(); }
+}
+async function addGuest(nome,numero,grupo){
+  const {data,error}=await db.from("convidados").insert({nome,numero,grupo}).select();
+  if(error){ alert("Erro ao adicionar: "+error.message); return; }
+  rows.push(data[0]); render();
+}
+
+function counts(){
+  $("t-todos").textContent="("+rows.length+")";
+  $("t-casal").textContent="("+rows.filter(r=>r.grupo!=="familia").length+")";
+  $("t-familia").textContent="("+rows.filter(r=>r.grupo==="familia").length+")";
+}
+function progress(){
+  let gs=rows;
+  if(activeTab==="casal") gs=gs.filter(r=>r.grupo!=="familia");
+  else if(activeTab==="familia") gs=gs.filter(r=>r.grupo==="familia");
+  const withNum=gs.filter(r=>r.numero);
+  const n=withNum.filter(r=>r.enviado).length, total=withNum.length, noNum=gs.length-withNum.length;
+  $("count").innerHTML=n+" / "+total+" enviados";
+  $("needcount").textContent= noNum? "· "+noNum+" sem número":"";
+  $("barfill").style.width=(total? n/total*100:0)+"%";
+}
+function render(){
+  const q=norm($("search").value), f=$("filter").value, list=$("list"); list.innerHTML=""; let shown=0;
+  rows.forEach(r=>{
+    if(activeTab==="casal" && r.grupo==="familia") return;
+    if(activeTab==="familia" && r.grupo!=="familia") return;
+    const num=r.numero, isSent=r.enviado;
+    if(f==="pending" && (!num||isSent)) return;
+    if(f==="sent" && !isSent) return;
+    if(f==="nonum" && num) return;
+    if(q && !norm(r.nome).includes(q) && !(num&&num.includes(q))) return;
+    shown++;
+    const li=document.createElement("li");
+    if(isSent) li.className="sent"; else if(!num) li.className="need";
+    const who=document.createElement("div"); who.className="who";
+    const nm=document.createElement("div"); nm.className="name";
+    if(editingNameId===r.id){
+      const inp=document.createElement("input"); inp.className="nameedit"; inp.value=r.nome;
+      const sv=document.createElement("button"); sv.className="nbtn"; sv.textContent="Salvar";
+      const cc=document.createElement("button"); cc.className="nbtn ghost"; cc.textContent="Cancelar";
+      sv.onclick=()=>setNome(r,inp.value);
+      cc.onclick=()=>{ editingNameId=null; render(); };
+      inp.addEventListener("keydown",e=>{ if(e.key==="Enter") sv.click(); if(e.key==="Escape") cc.click(); });
+      nm.appendChild(inp); nm.appendChild(sv); nm.appendChild(cc);
+      who.appendChild(nm);
+      setTimeout(()=>{ inp.focus(); inp.select(); },0);
+    } else {
+      const span=document.createElement("span"); span.textContent=r.nome; nm.appendChild(span);
+      const ed=document.createElement("span"); ed.className="rename"; ed.textContent="renomear";
+      ed.onclick=()=>{ editingNameId=r.id; render(); };
+      nm.appendChild(ed); who.appendChild(nm);
+    }
+    const ph=document.createElement("div"); ph.className="phone";
+    if(num){ ph.innerHTML=fmt(num)+' <span class="edit">editar</span>'; ph.querySelector(".edit").onclick=()=>{ const v=normNum(prompt("Telefone:",num)||""); if(v) setNumero(r,v); }; }
+    else { ph.innerHTML='<span class="tag">sem número</span>'; }
+    who.appendChild(ph); li.appendChild(who);
+    if(num && isSent){ const p=document.createElement("button"); p.className="pill"; p.textContent="✓ Enviado"; p.onclick=()=>setEnviado(r,false); li.appendChild(p); }
+    else if(num){ const a=document.createElement("a"); a.className="send"; a.textContent="Enviar"; a.href=waLink(num,r.nome); a.target="_blank"; a.rel="noopener"; a.onclick=()=>setEnviado(r,true); li.appendChild(a); }
+    else { const box=document.createElement("div"); box.className="addnum"; const inp=document.createElement("input"); inp.placeholder="11 99999-8888"; const b=document.createElement("button"); b.textContent="Salvar"; b.onclick=()=>{ const v=normNum(inp.value); if(v) setNumero(r,v); else alert("Número inválido."); }; inp.addEventListener("keydown",e=>{ if(e.key==="Enter") b.click(); }); box.appendChild(inp); box.appendChild(b); li.appendChild(box); }
+    list.appendChild(li);
+  });
+  $("empty").style.display=shown?"none":"block";
+  counts(); progress();
+}
+
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active")); t.classList.add("active"); activeTab=t.dataset.tab; render(); });
+$("search").addEventListener("input",render);
+$("filter").addEventListener("change",render);
+$("refresh").onclick=fetchAll;
+$("addToggle").onclick=()=>$("addForm").classList.toggle("open");
+$("addSave").onclick=()=>{ const nome=$("newName").value.trim(); if(!nome){ alert("Informe o nome."); return; } addGuest(nome, normNum($("newNum").value), $("newGrupo").value); $("newName").value=""; $("newNum").value=""; $("addForm").classList.remove("open"); };
+$("exportCsv").onclick=()=>{ const r2=[["Nome","Numero","Grupo"]].concat(rows.filter(r=>r.enviado).map(r=>[r.nome,"+"+r.numero,r.grupo])); const csv=r2.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(",")).join("\n"); const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="enviados_naomi_yossi.csv"; a.click(); };
+
+init();
+</script>
+</body>
+</html>
