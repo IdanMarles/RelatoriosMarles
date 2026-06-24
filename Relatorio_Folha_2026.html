@@ -106,6 +106,10 @@ details{margin-top:6px}summary{cursor:pointer;font-weight:600;color:var(--navy);
    <div class="desc">Número de funcionários de cada seção em todos os meses, com a variação (Δ) ao lado de cada mês e o saldo do ano (Jan→Maio). Ordenado pelo maior quadro em maio.</div>
    <div style="overflow:auto"><table class="atotal" id="headTable"></table></div>
   </div>
+  <div class="card"><h2><span class="tag">Custo por seção</span> Mês a mês (<span id="costMetricWord">competência</span>)</h2>
+   <div class="desc">Custo de cada seção em todos os meses, com a variação (Δ) ao lado de cada mês e o acumulado Jan→Maio. Acompanha o seletor Competência/Caixa no topo. Ordenado pelo maior custo em maio.</div>
+   <div style="overflow:auto"><table class="atotal" id="costTable"></table></div>
+  </div>
  </section>
 
  <section class="tab" data-tab="geral">
@@ -234,7 +238,25 @@ function secHeadTable(){
  body+=`<td>${dl(tf(last)-tf(M[0]),true)}</td></tr></tbody>`;
  document.getElementById('headTable').innerHTML=head+body;}
 
-document.getElementById('toggle').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;metric=b.dataset.m;[...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));renderKpis();compChart();renderSec();});
+function secCostTable(){
+ const last=M[M.length-1];
+ const secs=[...DATA.sections].sort((a,b)=>DATA.bySection[b][last][metric]-DATA.bySection[a][last][metric]);
+ let head='<thead><tr><th>Seção</th>';
+ M.forEach((m,i)=>{head+=`<th class="mcol">${m}</th>`+(i>0?'<th>Δ</th>':'');});
+ head+='<th>Jan→Mai</th></tr></thead>';
+ let body='<tbody>';
+ secs.forEach(s=>{const c=m=>DATA.bySection[s][m][metric];
+  body+=`<tr><td title="${s}">${s.length>34?s.slice(0,34)+'…':s}</td>`;
+  M.forEach((m,i)=>{body+=`<td class="mcol">${BRL.format(c(m))}</td>`+(i>0?`<td>${dl(dlt(c(m),c(M[i-1])))}</td>`:'');});
+  body+=`<td>${dl(dlt(c(last),c(M[0])))}</td></tr>`;});
+ const tc=m=>comp(m)[metric];
+ body+=`<tr class="total"><td>TOTAL</td>`;
+ M.forEach((m,i)=>{body+=`<td class="mcol">${BRL.format(tc(m))}</td>`+(i>0?`<td>${dl(dlt(tc(m),tc(M[i-1])))}</td>`:'');});
+ body+=`<td>${dl(dlt(tc(last),tc(M[0])))}</td></tr></tbody>`;
+ document.getElementById('costTable').innerHTML=head+body;
+ document.getElementById('costMetricWord').textContent=metric==='comp'?'competência':'caixa';}
+
+document.getElementById('toggle').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;metric=b.dataset.m;[...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));renderKpis();compChart();renderSec();secCostTable();});
 document.getElementById('monthChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;selMonth=b.dataset.mo;chips();badge();renderKpis();renderSec();});
 document.querySelector('#secTable thead').addEventListener('click',e=>{const th=e.target.closest('th');if(!th)return;const k=th.dataset.k;if(k===sortKey)sortDir*=-1;else{sortKey=k;sortDir=k==='sec'?1:-1;}renderSec();});
 document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const t=b.dataset.t;
@@ -242,5 +264,5 @@ document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.cl
  document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('on',s.dataset.tab===t));
  setTimeout(()=>{[lineCh,compCh,headCh,secCh].forEach(c=>{try{c&&c.resize()}catch(e){}});},30);});
 
-badge();chips();renderKpis();lineChart();compChart();headChart();renderSec();totTable();secHeadTable();
+badge();chips();renderKpis();lineChart();compChart();headChart();renderSec();totTable();secHeadTable();secCostTable();
 </script></body></html>
