@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Folha de Pagamento 2026 · Marles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--navy:#1F3864;--navy2:#3C5A8A;--ink:#1A2336;--muted:#6B7488;--bg:#EEF1F6;--surface:#fff;
+ --line:#E3E8F0;--soft:#F5F7FB;--green:#1E7B34;--red:#C0392B;--comp:#1F3864;--caixa:#D08A33}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.45;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{background:linear-gradient(135deg,var(--navy),#152844);color:#fff;padding:24px 0 0;position:sticky;top:0;z-index:50;box-shadow:0 2px 14px rgba(20,40,68,.18)}
+.htop{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+.eyebrow{font:600 11px/1 'Inter';letter-spacing:.18em;text-transform:uppercase;color:#9DB4D4;margin-bottom:8px}
+h1{font:700 25px/1.1 'Space Grotesk';letter-spacing:-.01em;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.focus{font:600 13px 'Inter';background:rgba(208,138,51,.9);color:#fff;padding:4px 12px;border-radius:20px;letter-spacing:.01em}
+.sub{color:#C2D0E5;font-size:13px;margin-top:6px;max-width:600px}
+.toggle{display:inline-flex;background:rgba(255,255,255,.12);border-radius:10px;padding:4px}
+.toggle button{border:0;background:transparent;color:#C2D0E5;font:600 13px 'Inter';padding:8px 16px;border-radius:7px;cursor:pointer;transition:.18s}
+.toggle button.on{background:#fff;color:var(--navy)}
+.tabs{display:flex;gap:4px;margin-top:18px}
+.tabs button{border:0;background:transparent;color:#C2D0E5;font:600 13.5px 'Inter';padding:12px 18px;cursor:pointer;border-bottom:3px solid transparent;transition:.15s}
+.tabs button.on{color:#fff;border-bottom-color:var(--caixa)}
+main{padding:24px 0 60px}
+.tab{display:none}.tab.on{display:block}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.kpi .lab{font-size:12px;color:var(--muted);font-weight:500}
+.kpi .val{font:700 24px/1.1 'Space Grotesk';margin:8px 0 4px}
+.kpi .delta{font-size:12.5px;font-weight:600}
+.up{color:var(--green)}.down{color:var(--red)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:22px}
+.card h2{font:600 16px 'Inter';display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.tag{font:600 10px 'Inter';letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--navy);padding:3px 8px;border-radius:6px}
+.desc{font-size:13px;color:var(--muted);margin-bottom:16px;max-width:720px}
+.chartbox{position:relative;height:330px}.chartbox.sm{height:300px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.chip{border:1px solid var(--line);background:var(--soft);color:var(--muted);font:600 13px 'Inter';padding:7px 16px;border-radius:20px;cursor:pointer}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-weight:600;color:var(--muted);cursor:pointer;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+thead th:hover{color:var(--navy)}
+th.s::after{content:" ↓";color:var(--navy)}th.su::after{content:" ↑";color:var(--navy)}
+tbody tr:hover{background:var(--soft)}
+tr.total{font-weight:700;border-top:2px solid var(--navy)}tr.total td{border-bottom:0}
+tr.hl td{background:#F0F4FA;font-weight:700}
+.tbl-scroll{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-bottom:20px}
+.note{background:#FBFCFE;border:1px solid var(--line);border-left:3px solid var(--caixa);border-radius:10px;padding:14px 16px;margin-bottom:12px;font-size:13.5px;color:#33405A}
+.note b{color:var(--ink)}.note.flag{border-left-color:var(--red)}
+.atotal th,.atotal td{font-size:12.5px;padding:8px 9px}
+.atotal .mcol{background:#FAFBFD}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:24px 0 10px}
+details{margin-top:6px}summary{cursor:pointer;font-weight:600;color:var(--navy);font-size:14px}
+@media(max-width:880px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="wrap">
+ <div class="htop">
+  <div><div class="eyebrow">Marles · Relatório de Folha</div>
+   <h1>Funcionários e Custo por Seção <span class="focus" id="focusBadge"></span></h1>
+   <div class="sub">Período de janeiro a maio de 2026. Custo de competência sem duplicar férias/13º.</div></div>
+  <div class="toggle" id="toggle"><button data-m="comp" class="on">Competência</button><button data-m="caixa">Caixa</button></div>
+ </div>
+ <div class="tabs" id="tabs">
+  <button data-t="geral" class="on">Visão Geral</button>
+  <button data-t="secao">Por Seção</button>
+  <button data-t="total">Análise Total</button>
+ </div>
+</div></header>
+<main class="wrap">
+ <section class="tab on" data-tab="geral">
+  <div class="kpis" id="kpis"></div>
+  <div class="card"><h2><span class="tag">Evolução</span> Custo mensal: competência vs caixa</h2>
+   <div class="desc">A competência distribui férias e 13º via provisão (linha suave). O caixa mostra o que saiu no mês — sobe em março (férias pagas) e maio (ajuste de DIRF).</div>
+   <div class="chartbox"><canvas id="lineChart"></canvas></div></div>
+  <div class="grid2">
+   <div class="card"><h2><span class="tag" id="compTag">Composição</span> De onde vem o custo</h2>
+    <div class="desc" id="compDesc"></div><div class="chartbox sm"><canvas id="compChart"></canvas></div></div>
+   <div class="card"><h2><span class="tag">Quadro</span> Funcionários por mês</h2>
+    <div class="desc">Número exato de funcionários em cada mês.</div><div class="chartbox sm"><canvas id="headChart"></canvas></div></div>
+  </div>
+ </section>
+
+ <section class="tab" data-tab="secao">
+  <div class="card"><h2><span class="tag">Por seção</span> Detalhe do mês</h2>
+   <div class="desc">Mês selecionado abaixo. Tabela com funcionários, custo (<span id="metricWord">competência</span>) e custo por funcionário; clique nos títulos para ordenar. O gráfico vem logo abaixo.</div>
+   <div class="chips" id="monthChips"></div>
+   <div class="tbl-scroll"><table id="secTable"><thead><tr>
+     <th data-k="sec">Seção</th><th data-k="func">Func.</th><th data-k="cost">Custo</th>
+     <th data-k="cpf">Custo/func</th><th data-k="dprev">Δ mês ant.</th><th data-k="dytd">Δ Jan→Mai</th>
+   </tr></thead><tbody></tbody></table></div>
+   <div class="chartbox" style="height:440px"><canvas id="secChart"></canvas></div>
+  </div>
+ </section>
+
+ <section class="tab" data-tab="total">
+  <div class="card"><h2><span class="tag">Análise total</span> Mês a mês com variações</h2>
+   <div class="desc">Todas as linhas de custo da empresa, com a variação (Δ) ao lado de cada mês e a variação acumulada Jan→Maio. Verde sobe / vermelho cai.</div>
+   <div style="overflow:auto"><table class="atotal" id="totTable"></table></div>
+  </div>
+ </section>
+
+ <section class="tab" data-tab="geral">
+  <div class="card"><h2><span class="tag">Notas</span> Como ler estes números</h2>
+   <div class="note"><b>Competência ≠ Caixa.</b> Competência = custo assumido no mês (inclui a provisão de férias/13º, que vira caixa no futuro). Caixa = o que efetivamente saiu.</div>
+   <div class="note"><b>Férias não contam duas vezes.</b> O pagamento de férias/13º baixa a provisão já acumulada — por isso não entra como custo novo na competência.</div>
+   <div class="note flag"><b>Maio tem ajuste de DIRF.</b> O INSS empresa de maio ficou ~2x acima do normal; o excesso estimado de <b>R$ 218,7 mil</b> foi retirado da competência. A confirmar com a contabilidade.</div>
+  </div>
+ </section>
+ <footer>Gerado a partir de Controle_Folha_2026.xlsx · Marles Indústria Têxtil · valores em R$</footer>
+</main>
+<script>
+const DATA={"months": ["Jan", "Fev", "Mar", "Abr", "Mai"], "sections": ["PRODUÇÃO - MOD - MALHARIA", "ADMINISTRAÇÃO", "PRODUÇÃO - MOD - ACABAMENTO", "PRODUÇÃO - MOD - TINTURARIA", "EXPEDIÇÃO", "PRODUÇÃO - MOI - MAN.GERAL MAQ. CIRCULAR", "COMERCIAL", "ESTAMPARIA - MOD", "PRODUÇÃO - MOI", "PRODUÇÃO - MOD - UTILIDADES CALDEIRA", "PRODUÇÃO - MOI - PCP", "PRODUÇÃO - MOD - REVISAO", "PRODUÇÃO - MOD = PREPARACAO", "PRODUÇÃO - MOD - UTILIDADES ETA", "PRODUÇÃO - MOD - LABORATORIO", "ESTAMPARIA", "PRODUÇÃO - MOI - ESTOQUE", "ESTRUTURA DE PRODUÇÃO - MOI", "IMPORTAÇÃO", "PRODUÇÃO - MOI - FROTA", "PRODUÇÃO - MOD - VAPORIZADOR", "PRODUÇÃO - MOI - ADM ESTAMPARIA E AMOSTRA", "PRODUÇÃO - MOI - TINTURARIA", "PRODUÇÃO - MOI - REVISAO E CONTROLE DE QUALIDADE", "MARKETING", "PRODUÇÃO - MOI - REVISÃO E CONTROLE DE QUALIDADE", "PRODUÇÃO - MOD"], "company": {"Jan": {"salHE": 568649.45, "feriasPg": 41314.19, "plr": 0.0, "benef": 93395.03, "fgts": 44413.07, "inssEmp": 160365.44, "encFer": 46063.26, "provFer": 325618.1, "prov13": 73490.28, "comp": 1265931.37, "caixa": 954200.44, "func": 217, "dirf": 0}, "Fev": {"salHE": 645711.9, "feriasPg": 20851.9, "plr": 0.0, "benef": 95629.79, "fgts": 51127.93, "inssEmp": 182962.9, "encFer": 3799.83, "provFer": 310566.69, "prov13": 77437.57, "comp": 1363436.78, "caixa": 1000084.25, "func": 225, "dirf": 0}, "Mar": {"salHE": 691298.15, "feriasPg": 188554.05, "plr": 33758.88, "benef": 93795.48, "fgts": 53547.34, "inssEmp": 192301.25, "encFer": 13245.75, "provFer": 287933.6, "prov13": 77992.19, "comp": 1396868.01, "caixa": 1266500.9, "func": 225, "dirf": 0}, "Abr": {"salHE": 551045.79, "feriasPg": 32078.32, "plr": 0.0, "benef": 91502.14, "fgts": 43211.38, "inssEmp": 156869.34, "encFer": 39999.31, "provFer": 301690.59, "prov13": 74949.33, "comp": 1219268.57, "caixa": 914706.28, "func": 224, "dirf": 0}, "Mai": {"salHE": 683371.28, "feriasPg": 49076.46, "plr": 164.0, "benef": 106324.87, "fgts": 53551.96, "inssEmp": 383788.93, "encFer": 15629.45, "provFer": 291653.24, "prov13": 77027.3, "comp": 1377038.77, "caixa": 1291906.95, "func": 225, "dirf": 218678.81}}, "bySection": {"ADMINISTRAÇÃO": {"Jan": {"func": 22, "comp": 158001.06, "caixa": 123773.08}, "Fev": {"func": 23, "comp": 166778.92, "caixa": 119095.12}, "Mar": {"func": 23, "comp": 172572.13, "caixa": 128095.55}, "Abr": {"func": 23, "comp": 165904.05, "caixa": 123268.49}, "Mai": {"func": 23, "comp": 169848.77, "caixa": 160514.78}}, "COMERCIAL": {"Jan": {"func": 9, "comp": 65596.39, "caixa": 47253.66}, "Fev": {"func": 9, "comp": 67895.47, "caixa": 46633.36}, "Mar": {"func": 10, "comp": 72272.19, "caixa": 50424.85}, "Abr": {"func": 11, "comp": 72216.26, "caixa": 51960.68}, "Mai": {"func": 9, "comp": 67423.34, "caixa": 54898.01}}, "ESTAMPARIA": {"Jan": {"func": 4, "comp": 30213.89, "caixa": 22354.48}, "Fev": {"func": 4, "comp": 32887.85, "caixa": 23862.71}, "Mar": {"func": 4, "comp": 31399.69, "caixa": 27603.51}, "Abr": {"func": 3, "comp": 27621.72, "caixa": 19550.46}, "Mai": {"func": 3, "comp": 28549.4, "caixa": 23546.8}}, "ESTAMPARIA - MOD": {"Jan": {"func": 13, "comp": 63301.2, "caixa": 43884.48}, "Fev": {"func": 13, "comp": 65531.64, "caixa": 44768.17}, "Mar": {"func": 13, "comp": 65071.54, "caixa": 65976.26}, "Abr": {"func": 13, "comp": 53923.77, "caixa": 36783.72}, "Mai": {"func": 13, "comp": 69284.74, "caixa": 62259.25}}, "ESTRUTURA DE PRODUÇÃO - MOI": {"Jan": {"func": 1, "comp": 25265.12, "caixa": 11781.61}, "Fev": {"func": 1, "comp": 18802.92, "caixa": 11781.61}, "Mar": {"func": 1, "comp": 18312.89, "caixa": 20506.47}, "Abr": {"func": 1, "comp": 10249.54, "caixa": 7799.45}, "Mai": {"func": 1, "comp": 16908.02, "caixa": 14220.9}}, "EXPEDIÇÃO": {"Jan": {"func": 19, "comp": 76224.4, "caixa": 58622.56}, "Fev": {"func": 22, "comp": 88954.22, "caixa": 66535.96}, "Mar": {"func": 22, "comp": 95723.25, "caixa": 82066.3}, "Abr": {"func": 21, "comp": 82247.26, "caixa": 67141.16}, "Mai": {"func": 26, "comp": 86302.32, "caixa": 83653.25}}, "IMPORTAÇÃO": {"Jan": {"func": 2, "comp": 12192.53, "caixa": 8963.02}, "Fev": {"func": 2, "comp": 17739.99, "caixa": 12817.02}, "Mar": {"func": 2, "comp": 18712.59, "caixa": 13832.53}, "Abr": {"func": 2, "comp": 18768.68, "caixa": 13275.54}, "Mai": {"func": 2, "comp": 19063.34, "caixa": 16231.69}}, "MARKETING": {"Jan": {"func": 1, "comp": 4357.47, "caixa": 3315.49}, "Fev": {"func": 1, "comp": 5344.87, "caixa": 3884.02}, "Mar": {"func": 1, "comp": 5429.72, "caixa": 4048.15}, "Abr": {"func": 1, "comp": 5514.45, "caixa": 3884.15}, "Mai": {"func": 1, "comp": 5815.74, "caixa": 4646.77}}, "PRODUÇÃO - MOD": {"Jan": {"func": 2, "comp": 4634.97, "caixa": 0.0}, "Fev": {"func": 2, "comp": 4634.97, "caixa": 0.0}, "Mar": {"func": 2, "comp": 4634.97, "caixa": 0.0}, "Abr": {"func": 2, "comp": 4634.97, "caixa": 0.0}, "Mai": {"func": 2, "comp": 4627.29, "caixa": 0.0}}, "PRODUÇÃO - MOD - ACABAMENTO": {"Jan": {"func": 23, "comp": 131661.63, "caixa": 101384.29}, "Fev": {"func": 23, "comp": 137277.06, "caixa": 103868.81}, "Mar": {"func": 22, "comp": 120613.21, "caixa": 136588.91}, "Abr": {"func": 23, "comp": 90168.14, "caixa": 74151.71}, "Mai": {"func": 23, "comp": 128831.37, "caixa": 125193.82}}, "PRODUÇÃO - MOD - LABORATORIO": {"Jan": {"func": 6, "comp": 28969.33, "caixa": 22072.46}, "Fev": {"func": 7, "comp": 29555.07, "caixa": 21729.06}, "Mar": {"func": 7, "comp": 32823.74, "caixa": 29582.41}, "Abr": {"func": 7, "comp": 27982.47, "caixa": 23453.95}, "Mai": {"func": 7, "comp": 33862.7, "caixa": 36759.66}}, "PRODUÇÃO - MOD - MALHARIA": {"Jan": {"func": 33, "comp": 149317.36, "caixa": 119458.8}, "Fev": {"func": 35, "comp": 170588.03, "caixa": 130439.61}, "Mar": {"func": 37, "comp": 173543.29, "caixa": 169087.73}, "Abr": {"func": 36, "comp": 164790.36, "caixa": 130859.19}, "Mai": {"func": 35, "comp": 176597.87, "caixa": 167264.26}}, "PRODUÇÃO - MOD - REVISAO": {"Jan": {"func": 8, "comp": 44617.74, "caixa": 35847.62}, "Fev": {"func": 8, "comp": 46135.56, "caixa": 37475.68}, "Mar": {"func": 7, "comp": 47552.96, "caixa": 56859.69}, "Abr": {"func": 9, "comp": 35952.94, "caixa": 25394.96}, "Mai": {"func": 9, "comp": 55899.87, "caixa": 53711.98}}, "PRODUÇÃO - MOD - TINTURARIA": {"Jan": {"func": 26, "comp": 126284.19, "caixa": 102886.39}, "Fev": {"func": 27, "comp": 135449.12, "caixa": 103874.38}, "Mar": {"func": 23, "comp": 124158.89, "caixa": 134824.67}, "Abr": {"func": 22, "comp": 81400.22, "caixa": 67228.32}, "Mai": {"func": 21, "comp": 114582.69, "caixa": 122498.02}}, "PRODUÇÃO - MOD - UTILIDADES CALDEIRA": {"Jan": {"func": 7, "comp": 53598.65, "caixa": 38878.48}, "Fev": {"func": 8, "comp": 52925.01, "caixa": 33332.2}, "Mar": {"func": 8, "comp": 49122.5, "caixa": 43592.23}, "Abr": {"func": 7, "comp": 48719.53, "caixa": 30183.8}, "Mai": {"func": 7, "comp": 46698.19, "caixa": 54291.38}}, "PRODUÇÃO - MOD - UTILIDADES ETA": {"Jan": {"func": 4, "comp": 24445.76, "caixa": 15587.3}, "Fev": {"func": 4, "comp": 24038.87, "caixa": 15576.39}, "Mar": {"func": 5, "comp": 40381.71, "caixa": 28361.94}, "Abr": {"func": 5, "comp": 34258.92, "caixa": 27042.98}, "Mai": {"func": 5, "comp": 37869.33, "caixa": 31450.32}}, "PRODUÇÃO - MOD - VAPORIZADOR": {"Jan": {"func": 1, "comp": 8006.45, "caixa": 5495.64}, "Fev": {"func": 1, "comp": 10120.96, "caixa": 7547.35}, "Mar": {"func": 2, "comp": 13147.74, "caixa": 12229.51}, "Abr": {"func": 2, "comp": 10410.41, "caixa": 7483.87}, "Mai": {"func": 2, "comp": 14688.03, "caixa": 13337.45}}, "PRODUÇÃO - MOD = PREPARACAO": {"Jan": {"func": 8, "comp": 37023.21, "caixa": 25433.44}, "Fev": {"func": 8, "comp": 36938.59, "caixa": 25877.23}, "Mar": {"func": 8, "comp": 47828.1, "caixa": 41957.14}, "Abr": {"func": 9, "comp": 32042.61, "caixa": 21786.96}, "Mai": {"func": 9, "comp": 46544.16, "caixa": 39983.18}}, "PRODUÇÃO - MOI": {"Jan": {"func": 7, "comp": 49026.34, "caixa": 30264.01}, "Fev": {"func": 7, "comp": 50865.88, "caixa": 31133.35}, "Mar": {"func": 8, "comp": 61026.18, "caixa": 46910.98}, "Abr": {"func": 8, "comp": 63693.87, "caixa": 41797.91}, "Mai": {"func": 8, "comp": 54476.18, "caixa": 49608.05}}, "PRODUÇÃO - MOI - ADM ESTAMPARIA E AMOSTRA": {"Jan": {"func": 2, "comp": 11801.39, "caixa": 8545.04}, "Fev": {"func": 2, "comp": 14340.35, "caixa": 14932.52}, "Mar": {"func": 1, "comp": 6348.21, "caixa": 4736.93}, "Abr": {"func": 1, "comp": 6453.95, "caixa": 4518.43}, "Mai": {"func": 1, "comp": 6479.17, "caixa": 5470.14}}, "PRODUÇÃO - MOI - ESTOQUE": {"Jan": {"func": 5, "comp": 21680.12, "caixa": 18386.07}, "Fev": {"func": 5, "comp": 25361.32, "caixa": 20867.93}, "Mar": {"func": 5, "comp": 21573.38, "caixa": 23091.01}, "Abr": {"func": 4, "comp": 22307.24, "caixa": 14508.52}, "Mai": {"func": 4, "comp": 17039.03, "caixa": 21241.64}}, "PRODUÇÃO - MOI - FROTA": {"Jan": {"func": 2, "comp": 12917.65, "caixa": 10755.11}, "Fev": {"func": 2, "comp": 14619.74, "caixa": 17852.38}, "Mar": {"func": 2, "comp": 14829.42, "caixa": 12024.64}, "Abr": {"func": 2, "comp": 15726.64, "caixa": 12343.62}, "Mai": {"func": 2, "comp": 16874.57, "caixa": 15230.61}}, "PRODUÇÃO - MOI - MAN.GERAL MAQ. CIRCULAR": {"Jan": {"func": 6, "comp": 59304.11, "caixa": 49426.24}, "Fev": {"func": 6, "comp": 78029.94, "caixa": 56988.37}, "Mar": {"func": 6, "comp": 90114.6, "caixa": 75034.0}, "Abr": {"func": 6, "comp": 80560.78, "caixa": 63807.73}, "Mai": {"func": 6, "comp": 85401.73, "caixa": 72991.74}}, "PRODUÇÃO - MOI - PCP": {"Jan": {"func": 2, "comp": 46603.49, "caixa": 33138.14}, "Fev": {"func": 2, "comp": 47035.24, "caixa": 32780.05}, "Mar": {"func": 2, "comp": 46366.38, "caixa": 36496.14}, "Abr": {"func": 2, "comp": 43922.09, "caixa": 30600.25}, "Mai": {"func": 2, "comp": 48621.44, "caixa": 39862.44}}, "PRODUÇÃO - MOI - REVISAO E CONTROLE DE QUALIDADE": {"Jan": {"func": 1, "comp": 8347.9, "caixa": 6099.8}, "Fev": {"func": 1, "comp": 7852.61, "caixa": 5660.12}, "Mar": {"func": 1, "comp": 8279.3, "caixa": 6156.68}, "Abr": {"func": 1, "comp": 8262.7, "caixa": 5881.92}, "Mai": {"func": 1, "comp": 8811.54, "caixa": 7212.93}}, "PRODUÇÃO - MOI - REVISÃO E CONTROLE DE QUALIDADE": {"Jan": {"func": 2, "comp": 3764.75, "caixa": 3352.2}, "Fev": {"func": 1, "comp": 4272.5, "caixa": 3541.63}, "Mar": {"func": 2, "comp": 5268.96, "caixa": 4583.02}, "Abr": {"func": 2, "comp": 5225.03, "caixa": 4238.28}, "Mai": {"func": 2, "comp": 6213.97, "caixa": 6137.99}}, "PRODUÇÃO - MOI - TINTURARIA": {"Jan": {"func": 1, "comp": 8774.27, "caixa": 7241.03}, "Fev": {"func": 1, "comp": 9460.08, "caixa": 7229.22}, "Mar": {"func": 1, "comp": 9760.47, "caixa": 11829.65}, "Abr": {"func": 1, "comp": 6309.97, "caixa": 5760.23}, "Mai": {"func": 1, "comp": 9723.97, "caixa": 9689.89}}}};
+const M=DATA.months, comp=m=>DATA.company[m];
+const BRL=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+const fMi=v=>'R$ '+(v/1e6).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:2})+' mi';
+const fK=v=>'R$ '+(v/1000).toFixed(0)+'k';
+const PCT=v=>(v>0?'+':'')+(v*100).toFixed(1)+'%';
+const dl=(d,abs)=>{if(d==null||!isFinite(d))return '';const c=d>0?'up':(d<0?'down':'');const t=abs?((d>0?'+':'')+d):PCT(d);return `<span class="${c}">${t}</span>`;};
+const dlt=(a,b)=>b?(a-b)/b:null;
+let metric='comp',selMonth=M[M.length-1],sortKey='cost',sortDir=-1;
+const COL={comp:'#1F3864',caixa:'#D08A33'};
+
+function badge(){document.getElementById('focusBadge').textContent='Mês em foco: '+selMonth;}
+function renderKpis(){
+ const last=selMonth,idx=M.indexOf(last),pm=idx>0?M[idx-1]:null,f=M[0],k=metric;
+ const cost=comp(last)[k],cost0=comp(f)[k],func=comp(last).func,func0=comp(f).func;
+ const cpf=cost/func,cpf0=cost0/func0,dprev=pm?dlt(cost,comp(pm)[k]):null;
+ const cards=[
+  ['Custo total · '+last,BRL.format(cost),dl(dlt(cost,cost0)),'vs Jan'],
+  ['Custo / funcionário',BRL.format(cpf),dl(dlt(cpf,cpf0)),'vs Jan'],
+  ['Funcionários',func,dl(func-func0,true),'vs Jan'],
+  ['Variação no mês',dprev!=null?PCT(dprev):'—','',pm?('vs '+pm):'']];
+ document.getElementById('kpis').innerHTML=cards.map(c=>`<div class="kpi"><div class="lab">${c[0]}</div><div class="val">${c[1]}</div><div class="delta">${c[2]} <span style="color:var(--muted);font-weight:500">${c[3]}</span></div></div>`).join('');
+}
+const barVal={id:'bv',afterDatasetsDraw(c){const m=c.getDatasetMeta(0),x=c.ctx;x.save();x.font="600 13px Inter";x.fillStyle="#1A2336";x.textAlign="center";m.data.forEach((b,i)=>{x.fillText(c.data.datasets[0].data[i],b.x,b.y-7)});x.restore();}};
+const stackTot={id:'st',afterDatasetsDraw(c){const x=c.ctx,mt=c.getDatasetMeta(c.data.datasets.length-1);x.save();x.font="700 11px Inter";x.fillStyle="#1A2336";x.textAlign="center";c.data.labels.forEach((l,i)=>{let t=0;c.data.datasets.forEach(d=>t+=d.data[i]||0);const top=mt.data[i];x.fillText(fMi(t),top.x,top.y-7)});x.restore();}};
+let lineCh,compCh,headCh,secCh;
+function lineChart(){lineCh=new Chart(lineChartEl(),{type:'line',data:{labels:M,datasets:[
+  {label:'Competência',data:M.map(m=>comp(m).comp),borderColor:COL.comp,backgroundColor:'#1F386422',borderWidth:2.5,tension:.3,fill:true,pointRadius:3},
+  {label:'Caixa',data:M.map(m=>comp(m).caixa),borderColor:COL.caixa,borderWidth:2.5,tension:.3,borderDash:[5,4],pointRadius:3}]},
+ options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+  plugins:{legend:{position:'top',align:'end',labels:{usePointStyle:true,boxWidth:8}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+BRL.format(c.parsed.y)}}},
+  scales:{y:{ticks:{callback:fMi},grid:{color:'#EEF1F6'}},x:{grid:{display:false}}}}});}
+function lineChartEl(){return document.getElementById('lineChart')}
+function compChart(){
+ const lay=metric==='comp'
+  ?[['Salários + HE','salHE','#1F3864'],['Benefícios','benef','#4E72A8'],['FGTS','fgts','#7BA05B'],['INSS empresa','inssN','#9DB4D4'],['Provisão férias','provFer','#D08A33'],['Provisão 13º','prov13','#E3B778']]
+  :[['Salários + HE','salHE','#1F3864'],['Férias/13º pagos','feriasPg','#7E57C2'],['PLR','plr','#26A69A'],['Benefícios','benef','#4E72A8'],['FGTS','fgts','#7BA05B'],['INSS empresa','inssEmp','#9DB4D4'],['Enc. s/ férias-13','encFer','#E3B778']];
+ const val=(m,k)=>{const c=comp(m);return k==='inssN'?c.inssEmp-c.dirf:c[k];};
+ const ds=lay.map(l=>({label:l[0],data:M.map(m=>val(m,l[1])),backgroundColor:l[2],borderWidth:0,stack:'s'}));
+ if(compCh)compCh.destroy();
+ compCh=new Chart(document.getElementById('compChart'),{type:'bar',data:{labels:M,datasets:ds},plugins:[stackTot],
+  options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:18}},
+   plugins:{legend:{position:'bottom',labels:{usePointStyle:true,boxWidth:8,font:{size:10.5}}},
+    tooltip:{callbacks:{label:c=>{let t=0;c.chart.data.datasets.forEach(d=>t+=d.data[c.dataIndex]||0);return c.dataset.label+': '+BRL.format(c.parsed.y)+'  ('+(c.parsed.y/t*100).toFixed(0)+'%)';}}}},
+   scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:fMi},grid:{color:'#EEF1F6'}}}}});
+ document.getElementById('compTag').textContent=metric==='comp'?'Competência':'Caixa';
+ document.getElementById('compDesc').textContent=metric==='comp'
+  ?'Cada barra soma o custo de competência do mês. INSS empresa de maio já está líquido do ajuste DIRF. Passe o mouse para ver valor e % de cada item.'
+  :'Cada barra soma o que foi pago no mês, incluindo férias/13º. Sem provisões. Passe o mouse para ver valor e %.';
+}
+function headChart(){headCh=new Chart(document.getElementById('headChart'),{type:'bar',data:{labels:M,datasets:[
+  {label:'Funcionários',data:M.map(m=>comp(m).func),backgroundColor:'#3C5A8A',borderRadius:5,maxBarThickness:46}]},plugins:[barVal],
+ options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:18}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' funcionários'}}},
+  scales:{y:{beginAtZero:false,suggestedMin:200,suggestedMax:230,grid:{color:'#EEF1F6'}},x:{grid:{display:false}}}}});}
+
+function secRows(){const idx=M.indexOf(selMonth),pm=idx>0?M[idx-1]:null;
+ return DATA.sections.map(s=>{const cur=DATA.bySection[s][selMonth],cost=cur[metric],func=cur.func;
+  const cp=pm?DATA.bySection[s][pm][metric]:null,cj=DATA.bySection[s][M[0]][metric];
+  return {sec:s,func,cost,cpf:func?cost/func:0,dprev:cp?dlt(cost,cp):null,dytd:cj?dlt(cost,cj):null};});}
+function renderSec(){let rows=secRows();
+ rows.sort((a,b)=>{let x=a[sortKey],y=b[sortKey];return sortKey==='sec'?sortDir*((''+x).localeCompare(''+y)):sortDir*((x||0)-(y||0));});
+ const tot=rows.reduce((o,r)=>{o.func+=r.func;o.cost+=r.cost;return o;},{func:0,cost:0});
+ document.querySelector('#secTable tbody').innerHTML=rows.map(r=>`<tr><td title="${r.sec}">${r.sec.length>32?r.sec.slice(0,32)+'…':r.sec}</td><td>${r.func}</td><td>${BRL.format(r.cost)}</td><td>${BRL.format(r.cpf)}</td><td>${dl(r.dprev)}</td><td>${dl(r.dytd)}</td></tr>`).join('')
+  +`<tr class="total"><td>TOTAL</td><td>${tot.func}</td><td>${BRL.format(tot.cost)}</td><td>${BRL.format(tot.cost/tot.func)}</td><td></td><td></td></tr>`;
+ document.querySelectorAll('#secTable th').forEach(th=>{th.className='';if(th.dataset.k===sortKey)th.className=sortDir<0?'s':'su';});
+ const top=[...rows].sort((a,b)=>b.cost-a.cost).slice(0,12);
+ if(secCh)secCh.destroy();
+ secCh=new Chart(document.getElementById('secChart'),{type:'bar',data:{labels:top.map(r=>r.sec.replace('PRODUÇÃO - ','').slice(0,26)),
+   datasets:[{label:metric==='comp'?'Competência':'Caixa',data:top.map(r=>r.cost),backgroundColor:metric==='comp'?COL.comp:COL.caixa,borderRadius:4}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>BRL.format(c.parsed.x)}}},
+   scales:{x:{ticks:{callback:fK},grid:{color:'#EEF1F6'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+ document.getElementById('metricWord').textContent=metric==='comp'?'competência':'caixa';}
+function chips(){document.getElementById('monthChips').innerHTML=M.map(m=>`<button class="chip ${m===selMonth?'on':''}" data-mo="${m}">${m}</button>`).join('');}
+
+function totTable(){
+ const enc=m=>comp(m).fgts+comp(m).inssEmp, prov=m=>comp(m).provFer+comp(m).prov13;
+ const lines=[
+  ['Funcionários',m=>comp(m).func,'int',false],
+  ['Folha recorrente (sal+HE)',m=>comp(m).salHE,'r',false],
+  ['(+) Benefícios',m=>comp(m).benef,'r',false],
+  ['(+) Encargos sobre a folha',enc,'r',false],
+  ['(+) Provisões (férias/13º)',prov,'r',false],
+  ['(−) Ajuste DIRF',m=>comp(m).dirf,'r',false],
+  ['(=) CUSTO DE COMPETÊNCIA',m=>comp(m).comp,'r',true],
+  ['(=) CUSTO DE CAIXA',m=>comp(m).caixa,'r',true],
+  ['Custo competência / func',m=>comp(m).comp/comp(m).func,'r',false]];
+ let head='<thead><tr><th>Linha</th>';
+ M.forEach((m,i)=>{head+=`<th class="mcol">${m}</th>`+(i>0?'<th>Δ</th>':'');});
+ head+='<th>Jan→Mai</th></tr></thead>';
+ let body='<tbody>';
+ lines.forEach(L=>{const isInt=L[2]==='int';
+  body+=`<tr class="${L[3]?'hl':''}"><td>${L[0]}</td>`;
+  M.forEach((m,i)=>{const v=L[1](m);body+=`<td class="mcol">${isInt?v:BRL.format(v)}</td>`;
+    if(i>0){const pv=L[1](M[i-1]);body+=`<td>${isInt?dl(v-pv,true):dl(dlt(v,pv))}</td>`;}});
+  const vN=L[1](M[M.length-1]),v0=L[1](M[0]);
+  body+=`<td>${isInt?dl(vN-v0,true):dl(dlt(vN,v0))}</td></tr>`;});
+ body+='</tbody>';
+ document.getElementById('totTable').innerHTML=head+body;}
+
+document.getElementById('toggle').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;metric=b.dataset.m;[...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));renderKpis();compChart();renderSec();});
+document.getElementById('monthChips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;selMonth=b.dataset.mo;chips();badge();renderKpis();renderSec();});
+document.querySelector('#secTable thead').addEventListener('click',e=>{const th=e.target.closest('th');if(!th)return;const k=th.dataset.k;if(k===sortKey)sortDir*=-1;else{sortKey=k;sortDir=k==='sec'?1:-1;}renderSec();});
+document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const t=b.dataset.t;
+ [...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));
+ document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('on',s.dataset.tab===t));
+ setTimeout(()=>{[lineCh,compCh,headCh,secCh].forEach(c=>{try{c&&c.resize()}catch(e){}});},30);});
+
+badge();chips();renderKpis();lineChart();compChart();headChart();renderSec();totTable();
+</script></body></html>
