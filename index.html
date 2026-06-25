@@ -12,134 +12,118 @@
 body { background:#f0f2f7; font-family:'DM Sans',sans-serif; min-height:100vh; color:#0f1117; }
 
 /* ── LOGIN ── */
-#loginScreen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
-.login-box { background:#fff; border:1px solid #e2e5ef; padding:48px 40px; max-width:380px; width:100%; box-shadow:0 4px 24px rgba(0,0,0,.06); }
-.login-brand { font-family:'Playfair Display',serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:#7b8099; margin-bottom:10px; text-align:center; }
-.login-title { font-family:'Playfair Display',serif; font-size:22px; color:#0f1117; margin-bottom:6px; text-align:center; }
-.login-sub { font-size:12px; color:#9ca3af; margin-bottom:32px; text-align:center; }
-.field { margin-bottom:12px; }
-.field label { display:block; font-size:11px; font-weight:600; color:#7b8099; margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px; }
-.field input { width:100%; padding:12px 14px; border:1px solid #e2e5ef; font-family:'DM Sans',sans-serif; font-size:13px; color:#0f1117; outline:none; transition:border .15s; }
-.field input:focus { border-color:#1d4ed8; }
-.btn-login { width:100%; padding:13px; background:#0f1117; color:#fff; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; border:none; cursor:pointer; margin-top:8px; transition:background .15s; }
-.btn-login:hover { background:#1d4ed8; }
-.btn-login:disabled { background:#9ca3af; cursor:not-allowed; }
-.err-msg { font-size:11px; color:#c8291a; margin-top:10px; text-align:center; min-height:16px; }
+#loginScreen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; background:#f0f2f7; }
+.login-box { background:#fff; border:1px solid #e2e5ef; padding:52px 44px; max-width:400px; width:100%; box-shadow:0 8px 40px rgba(0,0,0,.08); }
+.login-logo { font-family:'Playfair Display',serif; font-size:11px; letter-spacing:5px; text-transform:uppercase; color:#9ca3af; margin-bottom:32px; text-align:center; }
+.login-title { font-family:'Playfair Display',serif; font-size:24px; color:#0f1117; margin-bottom:8px; text-align:center; line-height:1.25; }
+.login-sub { font-size:12px; color:#9ca3af; margin-bottom:36px; text-align:center; }
+.field { margin-bottom:14px; }
+.field label { display:block; font-size:10px; font-weight:600; color:#7b8099; margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; }
+.field input { width:100%; padding:13px 16px; border:1.5px solid #e2e5ef; font-family:'DM Sans',sans-serif; font-size:13px; color:#0f1117; outline:none; transition:border .15s; border-radius:0; }
+.field input:focus { border-color:#0f1117; }
+.field input::placeholder { color:#c4c9d4; }
+.btn-enter { width:100%; padding:14px; background:#0f1117; color:#fff; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; border:none; cursor:pointer; margin-top:8px; letter-spacing:.5px; transition:background .15s; }
+.btn-enter:hover { background:#1d4ed8; }
+.btn-enter:disabled { background:#c4c9d4; cursor:not-allowed; }
+.err-msg { font-size:11px; color:#c8291a; margin-top:12px; text-align:center; min-height:16px; }
 
 /* ── HUB ── */
 #hubScreen { display:none; min-height:100vh; }
 
 /* TOPBAR */
-.topbar { background:#fff; border-bottom:1px solid #e2e5ef; display:flex; align-items:center; justify-content:space-between; padding:0 40px; height:56px; position:sticky; top:0; z-index:100; box-shadow:0 1px 8px rgba(0,0,0,.05); }
+.topbar { background:#fff; border-bottom:1px solid #e8eaf0; display:flex; align-items:center; justify-content:space-between; padding:0 48px; height:60px; position:sticky; top:0; z-index:100; box-shadow:0 1px 12px rgba(0,0,0,.05); }
 .topbar-brand { font-family:'Playfair Display',serif; font-size:13px; letter-spacing:3px; text-transform:uppercase; color:#0f1117; }
-.topbar-right { display:flex; align-items:center; gap:16px; }
+.topbar-right { display:flex; align-items:center; gap:20px; }
 .topbar-user { font-size:11px; color:#9ca3af; }
-.btn-admin { font-size:11px; font-weight:600; color:#1d4ed8; text-decoration:none; padding:6px 14px; border:1px solid #1d4ed8; transition:all .15s; }
+.btn-admin { font-size:11px; font-weight:600; color:#1d4ed8; text-decoration:none; padding:7px 16px; border:1.5px solid #1d4ed8; transition:all .15s; letter-spacing:.3px; }
 .btn-admin:hover { background:#1d4ed8; color:#fff; }
-.btn-logout { font-size:11px; font-weight:600; color:#7b8099; background:none; border:none; cursor:pointer; }
+.btn-logout { font-size:11px; font-weight:600; color:#9ca3af; background:none; border:none; cursor:pointer; letter-spacing:.3px; }
 .btn-logout:hover { color:#c8291a; }
 
 /* HUB CONTENT */
-.hub-wrap { max-width:960px; margin:0 auto; padding:48px 32px 80px; }
-.hub-title { font-family:'Playfair Display',serif; font-size:13px; letter-spacing:3px; text-transform:uppercase; color:#9ca3af; text-align:center; margin-bottom:8px; }
-.hub-heading { font-family:'Playfair Display',serif; font-size:30px; font-weight:700; color:#0f1117; text-align:center; margin-bottom:48px; }
+.hub-wrap { max-width:980px; margin:0 auto; padding:52px 32px 80px; }
+.hub-eyebrow { font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#9ca3af; text-align:center; margin-bottom:10px; }
+.hub-heading { font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:#0f1117; text-align:center; margin-bottom:56px; line-height:1.2; }
 
 /* COMPANY CARDS */
-.companies { display:flex; flex-direction:column; gap:24px; }
+.companies { display:flex; flex-direction:column; gap:20px; }
 
 .company-card {
   background:#fff;
-  border:1px solid #e2e5ef;
+  border:1px solid #e8eaf0;
   overflow:hidden;
-  box-shadow:0 2px 12px rgba(0,0,0,.04);
-  transition:box-shadow .2s;
+  box-shadow:0 2px 16px rgba(0,0,0,.04);
+  transition:box-shadow .2s, transform .2s;
 }
-.company-card:hover { box-shadow:0 4px 24px rgba(0,0,0,.08); }
+.company-card:hover { box-shadow:0 6px 32px rgba(0,0,0,.08); transform:translateY(-1px); }
 
 .company-header {
   display:flex;
   align-items:center;
-  gap:16px;
+  gap:20px;
   padding:24px 32px;
-  border-bottom:1px solid #f0f1f5;
+  border-bottom:1px solid #f0f2f7;
+  position:relative;
 }
-.company-accent {
+.company-stripe {
+  position:absolute;
+  left:0; top:0; bottom:0;
   width:4px;
-  height:48px;
-  border-radius:2px;
+}
+.company-icon-wrap {
+  width:44px; height:44px;
+  border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px;
   flex-shrink:0;
 }
 .company-info { flex:1; }
 .company-name {
   font-family:'Playfair Display',serif;
-  font-size:17px;
-  font-weight:700;
-  color:#0f1117;
+  font-size:16px; font-weight:700; color:#0f1117;
   margin-bottom:3px;
 }
-.company-desc { font-size:11px; color:#9ca3af; }
-.company-badge {
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  padding:4px 10px;
-  border-radius:2px;
+.company-meta { font-size:11px; color:#9ca3af; }
+.company-pill {
+  font-size:9px; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:5px 12px; border-radius:100px;
 }
 
-/* REPORT GRID inside card */
+/* REPORTS GRID */
 .reports-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
-  gap:1px;
-  background:#f0f1f5;
+  grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+  gap:0;
 }
 .report-item {
-  background:#fff;
-  padding:20px 24px;
+  padding:22px 28px;
   text-decoration:none;
   color:#0f1117;
   display:flex;
   flex-direction:column;
-  gap:6px;
+  gap:5px;
   transition:all .15s;
-  cursor:pointer;
+  border-right:1px solid #f0f2f7;
+  border-bottom:1px solid #f0f2f7;
   position:relative;
+  cursor:pointer;
 }
-.report-item:hover:not(.soon) {
-  background:#f5f8ff;
-  z-index:1;
-}
-.report-item.soon { opacity:.45; cursor:default; pointer-events:none; background:#fafbfd; }
-.report-dot { width:6px; height:6px; border-radius:50%; margin-bottom:2px; }
-.report-label { font-size:13px; font-weight:600; color:#0f1117; }
+.report-item:hover:not(.soon) { background:#f7f9ff; }
 .report-item:hover:not(.soon) .report-label { color:#1d4ed8; }
-.report-sub { font-size:10px; color:#9ca3af; line-height:1.4; }
-.report-arrow {
-  position:absolute;
-  right:16px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#d1d5db;
-  font-size:14px;
-  transition:all .15s;
-}
-.report-item:hover:not(.soon) .report-arrow { color:#1d4ed8; transform:translateY(-50%) translateX(2px); }
-.soon-tag {
-  display:inline-block;
-  font-size:8px;
-  font-weight:600;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  background:#f3f4f6;
-  color:#9ca3af;
-  padding:2px 6px;
-  border-radius:2px;
-  align-self:flex-start;
-}
+.report-item:hover:not(.soon) .report-arrow { opacity:1; transform:translateX(3px); }
+.report-item.soon { opacity:.4; cursor:default; pointer-events:none; }
 
-.loading-msg { text-align:center; padding:60px; color:#9ca3af; font-size:13px; }
-.hub-footer { text-align:center; margin-top:48px; font-size:10px; color:#c4c9d4; }
+.report-item-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+.report-color-dot { width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; }
+.report-arrow { color:#c4c9d4; font-size:16px; opacity:0; transition:all .15s; }
+.report-label { font-size:13px; font-weight:600; color:#0f1117; line-height:1.3; }
+.report-sub { font-size:10px; color:#9ca3af; line-height:1.4; }
+.report-total { font-size:11px; font-weight:600; color:#3b82f6; margin-top:4px; }
+.soon-tag { font-size:8px; font-weight:700; letter-spacing:1px; text-transform:uppercase; background:#f3f4f6; color:#9ca3af; padding:3px 7px; border-radius:100px; align-self:flex-start; margin-top:4px; }
+
+.loading-msg { text-align:center; padding:80px; color:#9ca3af; font-size:13px; }
+.hub-footer { text-align:center; margin-top:56px; font-size:10px; color:#c4c9d4; letter-spacing:1px; }
 </style>
 </head>
 <body>
@@ -147,12 +131,12 @@ body { background:#f0f2f7; font-family:'DM Sans',sans-serif; min-height:100vh; c
 <!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
-    <div class="login-brand">Marles Têxtil</div>
-    <div class="login-title">Relatórios Internos</div>
+    <div class="login-logo">Marles Têxtil</div>
+    <div class="login-title">Relatórios<br>Internos</div>
     <p class="login-sub">Acesso restrito · Uso interno</p>
     <div class="field"><label>E-mail</label><input type="email" id="loginEmail" placeholder="seu@email.com" onkeydown="if(event.key==='Enter')login()"></div>
     <div class="field"><label>Senha</label><input type="password" id="loginPwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()"></div>
-    <button class="btn-login" id="loginBtn" onclick="login()">Entrar</button>
+    <button class="btn-enter" id="loginBtn" onclick="login()">Entrar</button>
     <div class="err-msg" id="loginErr"></div>
   </div>
 </div>
@@ -169,12 +153,12 @@ body { background:#f0f2f7; font-family:'DM Sans',sans-serif; min-height:100vh; c
   </div>
 
   <div class="hub-wrap">
-    <div class="hub-title">Marles Têxtil · Matriz</div>
+    <div class="hub-eyebrow">Marles Têxtil · Matriz</div>
     <div class="hub-heading">Central de Relatórios</div>
     <div class="companies" id="companiesContainer">
       <div class="loading-msg">Carregando...</div>
     </div>
-    <div class="hub-footer">Marles Têxtil · Uso interno · <span id="footerYear"></span></div>
+    <div class="hub-footer">MARLES TÊXTIL · USO INTERNO · <span id="yr"></span></div>
   </div>
 </div>
 
@@ -183,15 +167,25 @@ const SURL = 'https://ihlrzanoirwbhftaytbh.supabase.co';
 const SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlobHJ6YW5vaXJ3YmhmdGF5dGJoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxMjQ4MTEsImV4cCI6MjA5NDcwMDgxMX0.GuVTLZV-Xlc7YbSslex9Q8lcta0ZBgHfLynFaqOHV5M';
 const sb = supabase.createClient(SURL, SKEY);
 
-document.getElementById('footerYear').textContent = new Date().getFullYear();
+document.getElementById('yr').textContent = new Date().getFullYear();
 
-// Accent colors per category (mapped by position or title keywords)
-function accentColor(title) {
+// Visual config per category
+function catStyle(title) {
   const t = title.toLowerCase();
-  if (t.includes('malha') || t.includes('gabi') || t.includes('tecidos')) return { bg:'#fef3f2', accent:'#c8291a', badge:'#fff0ef', badgeText:'#c8291a' };
-  if (t.includes('pessoal') || t.includes('michpa')) return { bg:'#f5f3ff', accent:'#7c3aed', badge:'#ede9fe', badgeText:'#7c3aed' };
-  if (t.includes('comercial')) return { bg:'#f0fdf4', accent:'#059669', badge:'#dcfce7', badgeText:'#059669' };
-  return { bg:'#eff6ff', accent:'#1d4ed8', badge:'#dbeafe', badgeText:'#1d4ed8' }; // default azul (Marles)
+  if (t.includes('malha') || t.includes('gabi') || t.includes('tecidos'))
+    return { stripe:'#c8291a', iconBg:'#fff0ef', pill:'#fff0ef', pillText:'#c8291a', dotBg:'#fff0ef' };
+  if (t.includes('pessoal') || t.includes('michpa'))
+    return { stripe:'#7c3aed', iconBg:'#f5f3ff', pill:'#ede9fe', pillText:'#7c3aed', dotBg:'#f5f3ff' };
+  if (t.includes('comercial'))
+    return { stripe:'#059669', iconBg:'#f0fdf4', pill:'#dcfce7', pillText:'#059669', dotBg:'#f0fdf4' };
+  if (t.includes('admin'))
+    return { stripe:'#d97706', iconBg:'#fffbeb', pill:'#fef3c7', pillText:'#b45309', dotBg:'#fffbeb' };
+  if (t.includes('analise') || t.includes('análise') || t.includes('folha'))
+    return { stripe:'#0891b2', iconBg:'#ecfeff', pill:'#cffafe', pillText:'#0e7490', dotBg:'#ecfeff' };
+  if (t.includes('margem') || t.includes('importado'))
+    return { stripe:'#f59e0b', iconBg:'#fffbeb', pill:'#fef3c7', pillText:'#92400e', dotBg:'#fffbeb' };
+  // default — Marles produção
+  return { stripe:'#1d4ed8', iconBg:'#eff6ff', pill:'#dbeafe', pillText:'#1d4ed8', dotBg:'#eff6ff' };
 }
 
 (async () => {
@@ -214,9 +208,9 @@ async function login() {
 async function showHub(user) {
   const { data: profile } = await sb.from('profiles').select('role').eq('id', user.id).single();
   const role = profile?.role || 'viewer';
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('hubScreen').style.display   = 'block';
-  document.getElementById('userEmail').textContent      = user.email;
+  document.getElementById('loginScreen').style.display  = 'none';
+  document.getElementById('hubScreen').style.display    = 'block';
+  document.getElementById('userEmail').textContent       = user.email;
   if (role === 'master') document.getElementById('adminLink').style.display = 'inline';
   await loadCompanies();
 }
@@ -231,46 +225,58 @@ async function loadCompanies() {
   if (!cats?.length) { container.innerHTML = '<div class="loading-msg">Nenhum relatório disponível.</div>'; return; }
 
   container.innerHTML = cats.map(cat => {
+    const style   = catStyle(cat.title);
     const reports = (cat.reports || []).filter(r => r.active).sort((a,b) => a.position - b.position);
-    const colors  = accentColor(cat.title);
+    const activeN = reports.filter(r => !r.coming_soon).length;
+    const pillTxt = activeN > 0 ? `${activeN} relatório${activeN > 1 ? 's' : ''}` : 'Em breve';
 
-    const reportItems = reports.map(r => {
+    const cards = reports.map(r => {
+      // Color dot background based on report color
+      const dotBg = r.color + '22';  // 13% opacity hex
       if (r.coming_soon) {
         return `<div class="report-item soon">
-          <div class="report-dot" style="background:${r.color}"></div>
+          <div class="report-item-top">
+            <div class="report-color-dot" style="background:${dotBg}">
+              <div style="width:8px;height:8px;border-radius:50%;background:${r.color};opacity:.4;"></div>
+            </div>
+          </div>
           <div class="report-label">${r.label}</div>
           <div class="report-sub">${r.description}</div>
           <span class="soon-tag">Em breve</span>
         </div>`;
       }
       return `<a class="report-item" href="${r.file_url}">
-        <div class="report-dot" style="background:${r.color}"></div>
+        <div class="report-item-top">
+          <div class="report-color-dot" style="background:${dotBg}">
+            <div style="width:8px;height:8px;border-radius:50%;background:${r.color};"></div>
+          </div>
+          <span class="report-arrow">›</span>
+        </div>
         <div class="report-label">${r.label}</div>
         <div class="report-sub">${r.description}</div>
-        <span class="report-arrow">›</span>
       </a>`;
     }).join('');
 
-    const activeCount  = reports.filter(r => !r.coming_soon).length;
-    const badgeText    = activeCount > 0 ? `${activeCount} relatório${activeCount > 1 ? 's' : ''}` : 'Em breve';
-
     return `<div class="company-card">
-      <div class="company-header" style="background:${colors.bg}">
-        <div class="company-accent" style="background:${colors.accent}"></div>
-        <div class="company-info">
-          <div class="company-name">${cat.icon} ${cat.title}</div>
-          <div class="company-desc">${cat.description}</div>
+      <div class="company-header">
+        <div class="company-stripe" style="background:${style.stripe}"></div>
+        <div class="company-icon-wrap" style="background:${style.iconBg}; margin-left:12px;">
+          ${cat.icon}
         </div>
-        <span class="company-badge" style="background:${colors.badge};color:${colors.badgeText}">${badgeText}</span>
+        <div class="company-info">
+          <div class="company-name">${cat.title}</div>
+          <div class="company-meta">${cat.description}</div>
+        </div>
+        <span class="company-pill" style="background:${style.pill};color:${style.pillText}">${pillTxt}</span>
       </div>
-      <div class="reports-grid">${reportItems}</div>
+      <div class="reports-grid">${cards}</div>
     </div>`;
   }).join('');
 }
 
 async function logout() {
   await sb.auth.signOut();
-  document.getElementById('hubScreen').style.display   = 'none';
+  document.getElementById('hubScreen').style.display  = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('loginEmail').value = '';
   document.getElementById('loginPwd').value   = '';
