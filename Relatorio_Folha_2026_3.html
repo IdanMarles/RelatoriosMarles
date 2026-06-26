@@ -96,7 +96,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:14px 0 10px}
  <div class="card"><h2><span class="tag">Notas</span> Como ler estes números</h2>
   <div class="note"><b>Competência recorrente.</b> Custo assumido no mês (inclui a provisão de férias/13º) e exclui o pagamento de férias/13º, que só baixa a provisão. É a base certa para analisar a empresa.</div>
   <div class="note"><b>Funcionário efetivo.</b> Ativo + Férias. Os ~18 afastados (INSS/aposentadoria) e os demitidos do mês ficam fora do quadro — eles quase não geram custo de salário (quem paga o afastado é o INSS).</div>
-  <div class="note"><b>Maio normalizado.</b> O INSS de maio veio ~2x acima do normal por um provável acerto de DIRF (~R$ 184 mil). Esse valor pontual foi retirado para não distorcer a análise. A confirmar com a contabilidade.</div></div>
+  <div class="note"><b>Maio já normalizado nestas tabelas.</b> O INSS de maio veio ~2x acima do normal por um provável acerto de DIRF (~R$ 184 mil). Esse valor pontual foi <b>excluído</b> dos encargos para não dar a impressão de que os encargos dispararam — eles aparecem aqui no patamar recorrente. A confirmar com a contabilidade.</div></div>
  <div class="hubwrap"><a class="hubbtn" href="https://idanmarles.github.io/RelatoriosMarles/">← Voltar ao hub de relatórios</a></div>
  <footer>Gerado a partir de Controle_Folha_2026.xlsx · Marles Indústria Têxtil · valores em R$</footer>
 </main>
@@ -159,10 +159,10 @@ function renderSec(){let rows=secRows();
  secCh=new Chart(document.getElementById('secChart'),{type:'bar',data:{labels:top.map(r=>r.sec.replace('PRODUÇÃO - ','').slice(0,26)),datasets:[{label:'Custo recorrente',data:top.map(r=>r.cost),backgroundColor:COL,borderRadius:4}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>BRL.format(c.parsed.x)}}},scales:{x:{ticks:{callback:fK},grid:{color:'#EEF1F6'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});}
 
-function tableFor(id,obj){const enc=m=>obj(m).fgts+obj(m).inssEmp,prov=m=>obj(m).provFer+obj(m).prov13;
+function tableFor(id,obj){const enc=m=>obj(m).fgts+obj(m).inssEmp-obj(m).dirf,prov=m=>obj(m).provFer+obj(m).prov13;
  const lines=[['Funcionários efetivos',m=>obj(m).func,'int',false],['Folha recorrente (sal+HE)',m=>obj(m).salHE,'r',false],
   ['(+) Benefícios',m=>obj(m).benef,'r',false],['(+) Encargos sobre a folha',enc,'r',false],['(+) Provisões (férias/13º)',prov,'r',false],
-  ['(−) Ajuste DIRF (pontual)',m=>obj(m).dirf,'r',false],['(=) CUSTO RECORRENTE',m=>obj(m).compRec,'r',true],['Custo recorrente / func',m=>obj(m).func?obj(m).compRec/obj(m).func:0,'r',false]];
+  ['(=) CUSTO RECORRENTE',m=>obj(m).compRec,'r',true],['Custo recorrente / func',m=>obj(m).func?obj(m).compRec/obj(m).func:0,'r',false]];
  let h='<thead><tr><th>Linha</th>';M.forEach((m,i)=>{h+=`<th class="mcol">${m}</th>`+(i>0?'<th>Δ</th>':'');});h+='<th>Jan→Mai</th></tr></thead>';
  let b='<tbody>';lines.forEach(L=>{const isI=L[2]==='int';b+=`<tr class="${L[3]?'hl':''}"><td>${L[0]}</td>`;
   M.forEach((m,i)=>{const v=L[1](m);b+=`<td class="mcol">${isI?v:BRL.format(v)}</td>`;if(i>0){const pv=L[1](M[i-1]);b+=`<td>${isI?dl(v-pv,true):dl(dlt(v,pv))}</td>`;}});
