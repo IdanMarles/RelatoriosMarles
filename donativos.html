@@ -123,16 +123,15 @@ tbody tr:hover td{background:#f9fafb}
 
 .mtabs{display:flex;gap:0;border-bottom:2px solid var(--line);margin-bottom:24px;flex-wrap:wrap;}
 .mtab{padding:10px 20px;font-size:12px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:var(--muted);transition:all .15s;user-select:none;}
-.mtab:hover{color:var(--ink);}
-.mtab.active{color:var(--blue);border-bottom-color:var(--blue);}
+.mtab:hover{color:var(--ink);} .mtab.active{color:var(--blue);border-bottom-color:var(--blue);}
 .tx-table{width:100%;border-collapse:collapse;table-layout:fixed;}
 .tx-table th{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:2px solid var(--ink);}
 .tx-table td{padding:10px 10px;border-bottom:1px solid var(--line);font-size:12px;color:var(--ink2);}
 .tx-table tr:last-child td{border-bottom:2px solid var(--ink);font-weight:600;color:var(--ink);background:#fafbfd;}
-.tx-table tr:hover td{background:#f9fafb;}
-.tx-table tr:last-child:hover td{background:#fafbfd;}
+.tx-table tr:hover td{background:#f9fafb;} .tx-table tr:last-child:hover td{background:#fafbfd;}
 .date-badge{display:inline-block;font-size:10px;color:var(--muted);background:#f3f4f6;padding:2px 7px;border-radius:2px;font-variant-numeric:tabular-nums;}
 .empty-msg{text-align:center;padding:48px;color:var(--muted);font-size:13px;border:1px dashed var(--line);}
+.neg{color:#c8291a !important;}
 </style>
 </head>
 <body>
@@ -148,30 +147,26 @@ tbody tr:hover td{background:#f9fafb}
   <a href="michpa_3.html">Michpa 3</a>
   <a href="michpa_4.html">Michpa 4</a>
 </div>
-
-<!-- Botão voltar ao Hub -->
 <div style="position:fixed;bottom:24px;left:24px;z-index:9999;">
   <a href="index.html" style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:#0f1117;color:#fff;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;text-decoration:none;border-radius:2px;box-shadow:0 4px 16px rgba(0,0,0,.2);">
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>
-    Hub
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg>Hub
   </a>
 </div>
 
 <div class="page">
 <div class="rh">
   <div><div class="rb">Donativos</div><div class="rs">Contribuições e Doações · 2026</div></div>
-  <div><div class="rt">Controle de Donativos<br>2026</div><div class="rm">Janeiro – Maio · Uso interno</div></div>
+  <div><div class="rt">Controle de Donativos<br>2026</div><div class="rm">Janeiro – Junho · Uso interno</div></div>
 </div>
 
 <div class="k4">
-  <div class="kc"><div class="km">Total Jan–Mai</div><div class="kv">R$ 199.1k</div><div class="ku">acumulado</div></div>
+  <div class="kc"><div class="km">Total Jan–Jun</div><div class="kv">R$ 206.8k</div><div class="ku">acumulado</div></div>
   <div class="kc"><div class="km">Maior Mês</div><div class="kv">Mar</div><div class="ku">R$ 78.7k</div></div>
-  <div class="kc"><div class="km">Média Mensal</div><div class="kv">R$ 49.8k</div><div class="ku">meses com donativos</div></div>
-  <div class="kc"><div class="km">Nº de Donativos</div><div class="kv">16</div><div class="ku">lançamentos no período</div></div>
+  <div class="kc"><div class="km">Média Mensal</div><div class="kv">R$ 41.4k</div><div class="ku">meses com donativos</div></div>
+  <div class="kc"><div class="km">Nº de Donativos</div><div class="kv">20</div><div class="ku">lançamentos no período</div></div>
 </div>
 
 <div class="pd" style="margin-top:0;"><div class="pl">Parte 1</div><div class="pline"></div><div class="ps">Visão do Período</div></div>
-
 <div class="sec">Evolução Mensal dos Donativos</div>
 <div class="barchart" id="bc"></div>
 <div class="bls" id="bl"></div>
@@ -184,27 +179,27 @@ tbody tr:hover td{background:#f9fafb}
     <th class="tr" style="width:35%">Valor Total</th>
     <th class="tr" style="width:25%">% do Período</th>
   </tr></thead>
-  <tbody><tr><td class="b">Jan</td><td class="tr">2 donativos</td><td class="tr">R$ 23.3k</td><td class="tr" style="color:var(--muted)">11.7%</td></tr><tr><td class="b">Fev</td><td class="tr" style="color:#d1d5db">—</td><td class="tr" style="color:#d1d5db">—</td><td class="tr" style="color:#d1d5db">—</td></tr><tr><td class="b">Mar</td><td class="tr">5 donativos</td><td class="tr">R$ 78.7k</td><td class="tr" style="color:var(--muted)">39.5%</td></tr><tr><td class="b">Abr</td><td class="tr">2 donativos</td><td class="tr">R$ 30.0k</td><td class="tr" style="color:var(--muted)">15.1%</td></tr><tr><td class="b">Mai</td><td class="tr">7 donativos</td><td class="tr">R$ 67.2k</td><td class="tr" style="color:var(--muted)">33.7%</td></tr><tr><td class="b">TOTAL Jan–Mai</td><td class="tr">16 donativos</td><td class="tr b">R$ 199.1k</td><td class="tr">100%</td></tr></tbody>
+  <tbody><tr><td class="b">Jan</td><td class="tr">2 donativos</td><td class="tr">R$ 23.3k</td><td class="tr" style="color:var(--muted)">11.3%</td></tr><tr><td class="b">Fev</td><td class="tr" style="color:#d1d5db">—</td><td class="tr" style="color:#d1d5db">—</td><td class="tr" style="color:#d1d5db">—</td></tr><tr><td class="b">Mar</td><td class="tr">5 donativos</td><td class="tr">R$ 78.7k</td><td class="tr" style="color:var(--muted)">38.0%</td></tr><tr><td class="b">Abr</td><td class="tr">2 donativos</td><td class="tr">R$ 30.0k</td><td class="tr" style="color:var(--muted)">14.5%</td></tr><tr><td class="b">Mai</td><td class="tr">7 donativos</td><td class="tr">R$ 67.2k</td><td class="tr" style="color:var(--muted)">32.5%</td></tr><tr><td class="b">Jun</td><td class="tr">4 donativos</td><td class="tr">R$ 7.7k</td><td class="tr" style="color:var(--muted)">3.7%</td></tr><tr><td class="b">TOTAL Jan–Jun</td><td class="tr">20 donativos</td><td class="tr b">R$ 206.8k</td><td class="tr">100%</td></tr></tbody>
 </table>
 
 <div class="pd"><div class="pl">Detalhe</div><div class="pline"></div><div class="ps">Lançamentos por Mês</div></div>
-<div class="mtabs"><div class="mtab active" onclick="showMonth('Janeiro')">Jan<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 23.3k</span></div><div class="mtab" onclick="showMonth('Marco')">Mar<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 78.7k</span></div><div class="mtab" onclick="showMonth('Abril')">Abr<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 30.0k</span></div><div class="mtab" onclick="showMonth('Maio')">Mai<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 67.2k</span></div></div>
+<div class="mtabs"><div class="mtab active" onclick="showMonth('Janeiro')">Jan<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 23.3k</span></div><div class="mtab" onclick="showMonth('Marco')">Mar<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 78.7k</span></div><div class="mtab" onclick="showMonth('Abril')">Abr<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 30.0k</span></div><div class="mtab" onclick="showMonth('Maio')">Mai<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 67.2k</span></div><div class="mtab" onclick="showMonth('Junho')">Jun<span style="font-size:11px;font-weight:400;color:var(--muted);margin-left:6px;">R$ 7.7k</span></div></div>
 <div id="month-content"></div>
 
 <div class="footer">
-  <span>Donativos · Janeiro–Maio 2026 · Uso interno</span>
-  <span>Fonte: Donativos_2026.xls · Donativos_2025_Mai26.pdf</span>
+  <span>Donativos · Janeiro–Junho 2026 · Uso interno</span>
+  <span>Fonte: Donativos_2026.xls · Donativos_2026_jun26.pdf</span>
 </div>
 </div>
 
 <script>
-const DATA = {"Janeiro":{"rows":[{"date":"06/01","desc":"Avoda 3274 Ref A Dep 8319","val":3274.0},{"date":"08/01","desc":"Sinag Assoc Kehilas","val":20000.0}],"total":23274.0},"Fevereiro":{"rows":[],"total":0},"Marco":{"rows":[{"date":"05/03","desc":"Ten Yad Purim","val":15000.0},{"date":"12/03","desc":"Sinag Kehilas","val":20000.0},{"date":"17/03","desc":"Donativos Gerais  .Talmud Tor","val":3667.3},{"date":"25/03","desc":"D Berta / Mazal Tov / Vales Pe","val":20000.0},{"date":"30/03","desc":"Sinag Kehilas Eitz","val":20000.0}],"total":78667.3},"Abril":{"rows":[{"date":"10/04","desc":"Sinag  Kehilas Eitz","val":15000.0},{"date":"23/04","desc":"Kehilas Eitz Sigago","val":15000.0}],"total":30000.0},"Maio":{"total":67160.99,"rows":[{"date":"06/05","desc":"Sinag Kehilas Eitz","val":15000.0},{"date":"12/05","desc":"Superk / Donativo de Pessach","val":13353.59},{"date":"13/05","desc":"Mazaltov / Pessach","val":16000.0},{"date":"14/05","desc":"Donativo Pessach Super K","val":7977.68},{"date":"15/05","desc":"Donativo Super K / Pessach +11","val":5308.74},{"date":"19/05","desc":"Talmud Thora","val":3457.92},{"date":"19/05","desc":"Talmud Thora","val":6063.06}]}};
-const MONTHS = ["Janeiro", "Fevereiro", "Marco", "Abril", "Maio"];
-const ML = ["Jan", "Fev", "Mar", "Abr", "Mai"];
-const BAR_H = [29.6, 0.0, 100.0, 38.1, 85.4];
-const BAR_C = ["#60a5fa", "#60a5fa", "#1d4ed8", "#60a5fa", "#1d4ed8"];
-const BAR_VALS = [23274.0, 0, 78667.3, 30000.0, 67160.99];
-let curMonth = 'Janeiro';
+const DATA={"Janeiro":{"total":23274.0,"rows":[{"date":"15/01","desc":"Donativo 1","val":11637.0},{"date":"15/01","desc":"Donativo 2","val":11637.0}]},"Fevereiro":{"total":0,"rows":[]},"Marco":{"total":78667.3,"rows":[{"date":"05/03","desc":"Donativo 1","val":15733.46},{"date":"05/03","desc":"Donativo 2","val":15733.46},{"date":"05/03","desc":"Donativo 3","val":15733.46},{"date":"05/03","desc":"Donativo 4","val":15733.46},{"date":"05/03","desc":"Donativo 5","val":15733.46}]},"Abril":{"total":30000.0,"rows":[{"date":"10/04","desc":"Donativo 1","val":15000.0},{"date":"10/04","desc":"Donativo 2","val":15000.0}]},"Maio":{"total":67160.99,"rows":[{"date":"06/05","desc":"Sinag Kehilas Eitz","val":15000.0},{"date":"12/05","desc":"Superk / Donativo de Pessach","val":13353.59},{"date":"13/05","desc":"Mazaltov / Pessach","val":16000.0},{"date":"14/05","desc":"Donativo Pessach Super K","val":7977.68},{"date":"15/05","desc":"Donativo Super K / Pessach +11","val":5308.74},{"date":"19/05","desc":"Talmud Thora","val":3457.92},{"date":"19/05","desc":"Talmud Thora","val":6063.06}]},"Junho":{"total":7741.1,"rows":[{"date":"15/06","desc":"R. Weii","val":200.0},{"date":"16/06","desc":"Sinagoga Kehilas Eitz","val":7541.1},{"date":"25/06","desc":"Ch.Dev Banco 237 Nº 1.546","val":-2500.0},{"date":"01/07","desc":"Reposição Ch Talmud","val":2500.0}]}};
+const MONTHS=["Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho"];
+const ML=["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"];
+const BAR_H=[29.6, 0.0, 100.0, 38.1, 85.4, 9.8];
+const BAR_C=["#60a5fa", "#60a5fa", "#1d4ed8", "#60a5fa", "#1d4ed8", "#60a5fa"];
+const BAR_VALS=[23274.0, 0, 78667.3, 30000.0, 67160.99, 7741.1];
+let curMonth='Janeiro';
 
 const bwrap=document.getElementById('bc');
 const blwrap=document.getElementById('bl');
@@ -218,8 +213,9 @@ ML.forEach((m,i)=>{
 });
 
 function fmtBR(v){
-  if(!v||v===0) return '—';
-  return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  if(v===0||v===null||v===undefined) return '—';
+  const abs=Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  return v<0?`<span class="neg">− R$ ${abs}</span>`:`R$ ${abs}`;
 }
 
 function buildMonth(m){
