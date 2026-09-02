@@ -56,6 +56,13 @@
                 -webkit-overflow-scrolling: touch; }
   .wrap table td, .wrap table th { font-size: 11px; padding: 7px 8px; }
 
+
+  /* tabelas simples dentro de .page (ex.: DRE da Gabi) */
+  .page table { display: block; overflow-x: auto; white-space: nowrap;
+                -webkit-overflow-scrolling: touch; }
+  .page table td, .page table th { font-size: 11px; padding: 7px 8px; }
+  .g2 { grid-template-columns: 1fr !important; }
+
   /* ---------- barras de distribuição / gráficos ---------- */
   .hbn { font-size: 11px !important; }
   .hbv { font-size: 11px !important; }
