@@ -315,12 +315,23 @@ async function loadCompanies() {
   }
 }
 
-// Ao voltar de um relatório (página restaurada da memória) ou ao retomar o app,
-// recarrega os cards para as etiquetas de novo/atualizado sumirem sozinhas
+// Ao voltar de um relatório (gesto de voltar, botão Hub ou retomada do app),
+// recarrega os cards para as etiquetas de novo/atualizado sumirem sozinhas.
+// Vários eventos são ouvidos porque cada celular/navegador dispara um diferente;
+// a trava de 1s evita recarregar em duplicidade quando mais de um dispara junto.
 function hubVisible() { return document.getElementById('hubScreen').style.display === 'block'; }
-window.addEventListener('pageshow', (e) => { if (e.persisted && hubVisible()) loadCompanies(); });
+let _lastHubReload = 0;
+function refreshHub() {
+  if (!hubVisible()) return;
+  const now = Date.now();
+  if (now - _lastHubReload < 1000) return;
+  _lastHubReload = now;
+  loadCompanies();
+}
+window.addEventListener('pageshow', refreshHub);
+window.addEventListener('focus', refreshHub);
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && hubVisible()) loadCompanies();
+  if (document.visibilityState === 'visible') refreshHub();
 });
 
 async function logout() {
