@@ -1,0 +1,81 @@
+/* ============================================================
+   Marles Têxtil — mobile.css
+   Folha compartilhada de adaptação mobile para todos os
+   relatórios do Hub. Um único arquivo: ajustes aqui refletem
+   em todos os relatórios que incluem
+   <link rel="stylesheet" href="mobile.css">
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+  /* ---------- container (michpas, donativos, malha e arte) ---------- */
+  .page { padding: 24px 16px 48px !important; box-shadow: none !important; }
+
+  /* ---------- container (DRE importados) ---------- */
+  .wrap { padding: 0 14px !important; }
+
+  /* ---------- cabeçalho editorial ---------- */
+  .rh { display: block !important; }
+  .rt { text-align: left !important; font-size: 19px !important; margin-top: 10px; }
+  .rm { font-size: 10px !important; letter-spacing: 1.5px !important; }
+  h1 { font-size: 26px !important; }
+
+  /* ---------- barra de navegação entre relatórios ---------- */
+  .topnav { overflow-x: auto !important; flex-wrap: nowrap !important;
+            -webkit-overflow-scrolling: touch; }
+  .topnav a { white-space: nowrap; padding: 12px 14px !important; font-size: 11px !important; }
+
+  /* ---------- cards de KPI: 4 colunas -> 2 ---------- */
+  .k4, .k3, .kpis { grid-template-columns: repeat(2, 1fr) !important; }
+  .kc { padding: 14px 12px !important; }
+  .kv { font-size: 17px !important; }
+  .km { font-size: 9px !important; }
+  .cat-summary-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* ---------- abas de mês: rolagem horizontal ---------- */
+  .mtabs { flex-wrap: nowrap !important; overflow-x: auto !important;
+           -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .mtabs::-webkit-scrollbar { display: none; }
+  .mtab { padding: 10px 12px !important; white-space: nowrap; flex-shrink: 0; }
+  .months { flex-wrap: nowrap !important; overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  .months button, .months .mbtn { white-space: nowrap; flex-shrink: 0; }
+
+  /* ---------- tabelas: rolagem lateral em vez de estourar ---------- */
+  .tx-table, .dre-table, .det-table, .cmp-table {
+    display: block !important; overflow-x: auto !important;
+    table-layout: auto !important; white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tx-table td, .tx-table th { font-size: 11px !important; padding: 8px 8px !important; }
+  /* descrições podem quebrar linha dentro da célula */
+  .tx-table td:nth-last-child(2) { white-space: normal; min-width: 140px; }
+
+  /* tabelas da DRE importados (tabelas sem classe dentro de .wrap) */
+  .wrap table { display: block; overflow-x: auto; white-space: nowrap;
+                -webkit-overflow-scrolling: touch; }
+  .wrap table td, .wrap table th { font-size: 11px; padding: 7px 8px; }
+
+  /* ---------- barras de distribuição / gráficos ---------- */
+  .hbn { font-size: 11px !important; }
+  .hbv { font-size: 11px !important; }
+  .barchart { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .chart { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .bar-fam { font-size: 10px !important; }
+
+  /* ---------- botão Hub flutuante: canto acessível, sem cobrir conteúdo ---------- */
+  .hub-btn, a[href="index.html"][style*="fixed"], a[href="./index.html"][style*="fixed"] {
+    top: auto !important; bottom: 16px !important; left: 16px !important;
+    padding: 10px 16px !important; font-size: 12px !important;
+    border-radius: 999px; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  }
+
+  /* ---------- rodapé ---------- */
+  .footer { font-size: 9px !important; }
+}
+
+/* telas muito pequenas */
+@media (max-width: 380px) {
+  .kv { font-size: 15px !important; }
+  .rt { font-size: 17px !important; }
+}
