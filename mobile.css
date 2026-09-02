@@ -61,6 +61,9 @@
   .page table { display: block; overflow-x: auto; white-space: nowrap;
                 -webkit-overflow-scrolling: touch; }
   .page table td, .page table th { font-size: 11px; padding: 7px 8px; }
+  /* primeira coluna (rótulos da DRE) quebra linha em vez de alargar a tabela */
+  .page table td:first-child, .page table th:first-child {
+    white-space: normal; min-width: 130px; }
   .g2 { grid-template-columns: 1fr !important; }
 
   /* ---------- barras de distribuição / gráficos ---------- */
